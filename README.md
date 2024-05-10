@@ -3,7 +3,7 @@ This repository should allow the user to reproduce an analysis of the extent of 
 
 # Background
 
-
+The *Cochlearia* species complex is a promising study system for the evolutionary genomics of adaptation due to the rapid acquisition of traits such as cold tolerance, salt tolerance, and heavy-metal tolerance, in a short evolutionary timescale ([Wolf et al., 2021](https://doi.org/10.7554/eLife.71572). This species complex thrive in cold Alpine and Arctic environments which contrasts greatly from the preferred and only Mediterranean habitat of its sole sister taxa *Ionopsidium* (Wolf et al., 2021). The genus *Cochlearia* consists of 16 accepted species and 4 subspecies, and started to rapidly diversify due to periodic climatic fluctuations that occurred during the Middle and Late Pleistocene (between 0.77-0.012 million years ago; Wolf et al., 2021). The genus *Cochlearia* displays a wide range of cytotypes and levels of ploidy, ranging from diploids to tetraploids to hexaploids to octaploids, which makes this species complex an interesting model species for the study of adaptations to whole genome duplication ([Bray et al., 2020](https://www.biorxiv.org/content/10.1101/2020.03.31.017939v1.full)). 
 
 # Installation of Software and Dependencies
 
