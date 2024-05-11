@@ -30,6 +30,16 @@ This software can be used to quantify relationships between taxa that are not ne
 Citation: Simon H Martin, Steven M Van Belleghem, Exploring Evolutionary Relationships Across the Genome Using Topology Weighting, Genetics, Volume 206, Issue 1, 1 May 2017, Pages 429–438, [https://doi.org/10.1534/genetics.116.194720](https://doi.org/10.1534/genetics.116.194720).
 
 
+## SplitsTree
+
+
+## Genome Analysis Toolkit (GATK)
+
+## R & Rstudio
+
+
+
+
 
 
 
