@@ -26,6 +26,38 @@ make
 ```
 In order to execute Dsuite commands (e.g. Dtrios), you can navigate to the Build folder and run the Dsuite executable with the following command `./Build/Dsuite` which shows the available commands. To execute the Dtrios command you can type `./Build/Dsuite Dtrios`.
 
+I executed Dsuite locally utilising the following commands:
+```
+./Build/Dsuite Dtrios -t ../Desktop/Individual_Project_files/Dsuite_files/TREE_FILE.nwk -o 120524_Dsuite_stats --ABBAclustering ../Desktop/Individual_Project_files/ld_pruned_110524_WG_allUKhex_allUKdips_someUKtets_copy.vcf ../Desktop/Individual_Project_files/Dsuite_files/SETs.txt 
+```
+
+The TREE_FILE.nwk was structured as following, where the Outgroup was the UK diploid species *Cochlearia pyrenaica*:
+```
+(Outgroup,(C_officinalis,(C_anglica,C_danica)));
+```
+The SETs.txt file was structured following the guidelines on the [Dsuite](https://github.com/millanek/Dsuite) Github page and is demonstrated below:
+```
+BNK21  Outgroup
+CHA_1  Outgroup
+CHA_2  Outgroup
+JOR_1  Outgroup
+...
+AAH_1  C_officinalis
+AAH_2  C_officinalis
+AAH_3  C_officinalis
+AAH_4  C_officinalis
+...
+BRE_1  C_danica
+CUM_1  C_danica
+DAR_1  C_danica
+DAR_3  C_danica
+...
+SKF_002  C_anglica
+SKF_003  C_anglica
+SKF_005  C_anglica
+SKF_009  C_anglica
+```
+
 ## Twisst (Topology weighting by iterative sampling of sub-trees)
 
 This software can be used to quantify relationships between taxa that are not necessarily monophyletic, and can be used to explore how relationships between taxa varies across the genome by using genomic single nucleotide polymorphism (SNP) windows.
