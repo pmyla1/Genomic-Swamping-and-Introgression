@@ -35,7 +35,7 @@ The TREE_FILE.nwk was structured as following, where the Outgroup was the UK dip
 ```
 (Outgroup,(C_officinalis,(C_anglica,C_danica)));
 ```
-The SETs.txt file was structured following the guidelines on the [Dsuite](https://github.com/millanek/Dsuite) Github page and is demonstrated below:
+The SETs.txt file was structured following the guidelines on the [Dsuite](https://github.com/millanek/Dsuite) Github page with the individual ID and the group ID separated by a tab, and is demonstrated below:
 ```
 BNK21  Outgroup
 CHA_1  Outgroup
@@ -67,6 +67,9 @@ Citation: Simon H Martin, Steven M Van Belleghem, Exploring Evolutionary Relatio
 
 ## SplitsTree
 
+SplitsTree was downloaded following the instructions on the [University of Tübingen Website](https://uni-tuebingen.de/fakultaeten/mathematisch-naturwissenschaftliche-fakultaet/fachbereiche/informatik/lehrstuehle/algorithms-in-bioinformatics/software/splitstree/). 
+
+This program was used to construct and visualize phylogenetic networks of the individuals and the populations in the ld pruned VCF file.
 
 ## Genome Analysis Toolkit (GATK)
 
