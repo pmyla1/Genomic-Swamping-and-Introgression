@@ -66,14 +66,18 @@ Citation: Simon H Martin, Steven M Van Belleghem, Exploring Evolutionary Relatio
 
 The twisst.py script was downloaded from [Simon Martin's github page](https://github.com/simonhmartin/twisst/blob/master/twisst.py) and the [ete3 toolkit](http://etetoolkit.org/download/) and [numpy](https://numpy.org/) were downloaded following instructions on their respective websites.
 
-The following commands were used to download ete3 locally:
+The following commands were used to download and install both ete3 and numpy locally:
 ```
 ##create the ete3 environment
 conda create -n ete3 python=3
 ##activate the ete3 environment
 conda activate ete3
-##install ete3toolkit
+##install ete3toolkit DIDNT WORK WITH CONDA SO USED PIP TO INSTALL
 conda install -c ete3toolkit ete3 ete_toolchain
+pip install ete3
+##also use pip to install numpy
+pip install numpy
+pip install six
 ##to check the ete3 toolkit has been installed correctly
 ete3 build check
 ```
