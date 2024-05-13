@@ -69,7 +69,7 @@ Citation: Simon H Martin, Steven M Van Belleghem, Exploring Evolutionary Relatio
 
 SplitsTree was downloaded following the instructions on the [University of Tübingen Website](https://uni-tuebingen.de/fakultaeten/mathematisch-naturwissenschaftliche-fakultaet/fachbereiche/informatik/lehrstuehle/algorithms-in-bioinformatics/software/splitstree/). 
 
-This program was used to construct and visualize phylogenetic networks of the individuals and the populations in the ld pruned VCF file.
+This program was used to construct and visualize phylogenetic networks of the individuals and the populations in the ld pruned VCF file. (UPDATED ON THE 13th MAY 2024 - ld_pruned_130524_allUKdips_allUKtets_allUKhex.vcf.gz).
 
 Editing the phylogenetic networks was performed using Microsoft Powerpoint and manually highlighting clades.  
 
