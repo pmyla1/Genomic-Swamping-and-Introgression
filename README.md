@@ -72,14 +72,16 @@ The following commands were used to download and install both ete3 and numpy loc
 conda create -n ete3 python=3
 ##activate the ete3 environment
 conda activate ete3
-##install ete3toolkit DIDNT WORK WITH CONDA SO USED PIP TO INSTALL
-conda install -c ete3toolkit ete3 ete_toolchain
+##use pip to install ete3 since conda didn't work initially
 pip install ete3
 ##also use pip to install numpy
 pip install numpy
 ##because of the errors when executing ete3 build check, install the packages required
 pip install six
 pip install pyqt5
+pip install lxml
+##for the final installation 
+conda install -c etetoolkit ete_toolchain
 ##to check the ete3 toolkit has been installed correctly
 ete3 build check
 ```
