@@ -77,7 +77,9 @@ conda install -c ete3toolkit ete3 ete_toolchain
 pip install ete3
 ##also use pip to install numpy
 pip install numpy
+##because of the errors when executing ete3 build check, install the packages required
 pip install six
+pip install pyqt5
 ##to check the ete3 toolkit has been installed correctly
 ete3 build check
 ```
