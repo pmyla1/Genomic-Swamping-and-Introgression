@@ -71,6 +71,8 @@ SplitsTree was downloaded following the instructions on the [University of Tübi
 
 This program was used to construct and visualize phylogenetic networks of the individuals and the populations in the ld pruned VCF file.
 
+Editing the phylogenetic networks was performed using Microsoft Powerpoint and manually highlighting clades.  
+
 ## Genome Analysis Toolkit (GATK)
 
 ## R & Rstudio
