@@ -94,6 +94,15 @@ This program was used to construct and visualize phylogenetic networks of the in
 
 Editing the phylogenetic networks was performed using Microsoft Powerpoint and manually highlighting clades.  
 
+## RAXML 
+
+Raxml was downloaded following the instructions on the [raxml-ng](https://github.com/amkozlov/raxml-ng?tab=readme-ov-file) Github page, by selecting the **Download OSX/macOS binary (x86 and ARM)** link on the page.
+
+To display the help messages you can execute the following command from the directory of the raxml-ng executable:
+```
+./raxml-ng -h 
+```
+
 ## Genome Analysis Toolkit (GATK)
 
 ## R & Rstudio
