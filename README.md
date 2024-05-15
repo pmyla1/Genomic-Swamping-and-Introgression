@@ -58,6 +58,26 @@ SKF_005  C_anglica
 SKF_009  C_anglica
 ```
 
+## 15/05/2024 Additional Dsuite commands and calculations
+
+Dsuite Dtrios was also executed on a newly LD pruned, filtered VCF file containing all UK hexaploids, including all *C. danica* and putative *C. anglica* samples, all UK diploids, some EU diploids, and approximately half of the UK and EU tetraploids.
+
+This time, the TREE_FILE.nwk was altered to change the relationships between the sequences
+
+```
+##utilise Dsuite
+cd ~/Dsuite/
+
+##execute Dtrios with a jackknife number of 50 (splits the SNPs into 50 blocks)
+./Build/Dsuite Dtrios -k 50 -t ../Desktop/Individual_Project_files/Dsuite_files/150524_experimental_TREE_FILE.nwk --ABBAclustering -o 150524_EU_UK_ld_pruned ../Desktop/Individual_Project_files/VCF_files/150524_ld_pruned_20PCTmis_maf005_EU_UK_pops.vcf.gz ../Desktop/Individual_project_files/Dsuite_files/150524_SETs.txt
+```
+
+The structure of the 150524_experimental_TREE_FILE.nwk can be found below, where *C. danica* replaces *C. officinalis*:
+
+```
+(Outgroup,(C_danica,(C_anglica,C_officinalis)));
+```
+
 ## Twisst (Topology weighting by iterative sampling of sub-trees)
 
 This software can be used to quantify relationships between taxa that are not necessarily monophyletic, and can be used to explore how relationships between taxa varies across the genome by using genomic single nucleotide polymorphism (SNP) windows.
