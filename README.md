@@ -92,7 +92,9 @@ SplitsTree was downloaded following the instructions on the [University of Tübi
 
 This program was used to construct and visualize phylogenetic networks of the individuals and the populations in the ld pruned VCF file. (UPDATED ON THE 13th MAY 2024 - ld_pruned_130524_allUKdips_allUKtets_allUKhex.vcf.gz).
 
-Editing the phylogenetic networks was performed using Microsoft Powerpoint and manually highlighting clades.  
+Editing the phylogenetic networks was performed using Microsoft Powerpoint and manually highlighting clades. 
+
+The 140524_adegenet_VCFs.R script was used to analyse the LD pruned and filtered VCF, utilising the glPcaFast() and vcf2genlightTetra() functions provided by Yant et al (2023). The VCF is loaded into Rstudio and is subsequently converted into a genlight object using the vcf2genlightTetra() function for polyploid data. Next, principal component analysis (PCA) can be performed on the genlight object, and subsequently, the genlight object can be converted into Nei's genetic distances using the stamppNeisD() function. Nei's genetic distances can be calculated for both the individual samples and the populations, and can be subsequently prepared for exporting into SplitsTree by the stamppPhylip() function provided by former student Anna (INSERT SURNAME, YEAR).   
 
 ## RAXML 
 
