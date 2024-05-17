@@ -1,13 +1,13 @@
 # Genomic-Swamping-and-Introgression
-This repository should allow the user to reproduce an analysis of the extent of introgression between the invasive hexaploid *Cochlearia danica* and native species *Cochlearia officianalis*, utilising tools such as Dsuite and Twisst. 
+This repository should allow the user to reproduce an analysis of the extent of **introgression** between the invasive hexaploid ***Cochlearia danica*** and native tetraploid species ***Cochlearia officianalis***, utilising tools such as **Dsuite** and **Twisst**. 
 
 # Background
 
-The *Cochlearia* species complex is a promising study system for the evolutionary genomics of adaptation due to the rapid acquisition of traits such as cold tolerance, salt tolerance, and heavy-metal tolerance, in a short evolutionary timescale ([Wolf et al., 2021](https://doi.org/10.7554/eLife.71572)). This species complex thrives in cold Alpine and Arctic environments which contrasts greatly from the preferred Mediterranean habitat of its sole sister taxa *Ionopsidium* (Wolf et al., 2021). The genus *Cochlearia* consists of 16 accepted species and 4 subspecies, and started to rapidly diversify due to periodic climatic fluctuations that occurred during the Middle and Late Pleistocene (between 0.77-0.012 million years ago; Wolf et al., 2021).
+The ***Cochlearia* species complex** is a promising study system for the **evolutionary genomics of adaptation** due to the rapid acquisition of traits such as **cold tolerance**, **salt tolerance**, and **heavy-metal tolerance**, in a short evolutionary timescale ([Wolf et al., 2021](https://doi.org/10.7554/eLife.71572)). This species complex **thrives** in cold **Alpine and Arctic** environments which contrasts greatly from the preferred **Mediterranean habitat** of its sole **sister taxa *Ionopsidium*** (Wolf et al., 2021). The genus *Cochlearia* consists of **16 accepted species** and **4 subspecies**, and started to **rapidly diversify** due to periodic **climatic fluctuations** that occurred during the **Middle** and **Late Pleistocene** (between **0.77-0.012** million years ago; Wolf et al., 2021).
 
-The genus *Cochlearia* displays a wide range of cytotypes and levels of ploidy, ranging from diploids to tetraploids to hexaploids to octaploids, which makes this species complex an interesting model species for the study of adaptations to whole genome duplication ([Bray et al., 2020](https://www.biorxiv.org/content/10.1101/2020.03.31.017939v1.full)). Since whole genome duplication and polyploidy are major effect mutations, many cellular, ionomic, and molecular processes are disrupted, especially those pertaining to sister chromatid segregation during meiosis, DNA repair, and recombination, amongst others ([Yant & Schmickl, 2021](https://pubmed.ncbi.nlm.nih.gov/33454987/)). Therefore, neopolyploids such as some *Cochlearia* species must overcome these initial challenges associated with sister chromatid segregation during meiosis, to enable reduced crossover numbers and to prevent chromosomal breakages during anaphase (Bray et al., 2020). Some of the genes found to be under selection in neopolyploids relative to their diploid counterparts are involved in biological processes such as DNA repair, recombination, sister chromatid segregation, amongst others, however, despite this process-level convergence there appears to be low orthologue-level convergence ([Bray et al., 2023](https://www.biorxiv.org/content/10.1101/2023.09.27.559727v1.full)). 
+The genus *Cochlearia* displays a **wide range of cytotypes** and levels of ploidy, ranging from **diploids** to tetraploids to hexaploids to **octaploids**, which makes this species complex an interesting **model species** for the study of **adaptations to whole genome duplication** ([Bray et al., 2020](https://www.biorxiv.org/content/10.1101/2020.03.31.017939v1.full)). Since whole genome duplication and polyploidy are **major effect mutations**, many **cellular**, **ionomic**, and **molecular** processes are **disrupted**, especially those pertaining to **sister chromatid segregation** during meiosis, **DNA repair**, and **recombination**, amongst others ([Yant & Schmickl, 2021](https://pubmed.ncbi.nlm.nih.gov/33454987/)). Therefore, **neopolyploids** must overcome these initial challenges associated with sister chromatid segregation during meiosis, to enable **reduced crossover numbers** and to **prevent chromosomal breakages** during anaphase (Bray et al., 2020). Some of the **genes** found to be **under selection in neopolyploids** relative to their diploid counterparts are involved in biological processes such as **DNA repair**, **recombination**, **sister chromatid segregation**, amongst others, however, despite this **process-level convergence** there appears to be **low orthologue-level convergenc** ([Bray et al., 2023](https://www.biorxiv.org/content/10.1101/2023.09.27.559727v1.full)). 
 
-*Cochlearia danica* is a highly invasive, salt tolerant species in the *Cochlearia* genus that is native to the Atlantic coasts of Europe in countries including Denmark, Belgium, the UK, Germany, Finland, Ireland, Norway, Russia, and Sweden amongst others (Fekete et al., 2018). Despite being native to the Atlantic coasts of Europe, *C. danica* has spread rapidly throughout Central Europe since the 1970s, especially along roadsides which is attributed to the widespread use of de-icing salts ([Fekete et al., 2018](http://dx.doi.org/10.23855/preslia.2018.023)). The rate of spread of *C. danica* along Central European roadsides was estimated to be approximately 62-65km/year, and the soil in which it grows and thrives is characterised by high salt content (Fekete et al., 2018). Interestingly, this species has been reported to undergo rapid and marked/remarkable changes in population size, and one Hungarian population was found to decrease in size by 99% between 2016 and 2017 (Fekete et al., 2018).
+*Cochlearia danica* is a **highly invasive, salt tolerant** species in the *Cochlearia* genus that is **native** to the **Atlantic coasts of Europe** in countries including Denmark, Belgium, the UK, Germany, Finland, Ireland, Norway, Russia, and Sweden amongst others (Fekete et al., 2018). Despite being native to the Atlantic coasts of Europe, *C. danica* has **spread rapidly throughout Central Europe** since the 1970s, especially **along roadsides** which is attributed to the **widespread use of de-icing salts** ([Fekete et al., 2018](http://dx.doi.org/10.23855/preslia.2018.023)). The **rate of spread** of *C. danica* along Central European roadsides was estimated to be **approximately 62-65km/year**, and the soil in which it grows and thrives is characterised by **high salt content** (Fekete et al., 2018). Interestingly, this species has been reported to undergo **rapid and marked/remarkable** changes in **population size**, and one Hungarian population was found to decrease in size by 99% between 2016 and 2017 (Fekete et al., 2018).
 
 
 # Installation of Software and Dependencies
@@ -84,7 +84,39 @@ To extract the individual samples names from the VCF file use bcftools and the f
 ```
 bcftools query -l 160524_ld_pruned_20PCTmis_maf005_allUKtets_allUKhex.vcf.gz > ./170524_allUKtets_allUKhets_samples.txt
 ```
+# Fastqc and Multiqc for sequencing quality control reports
 
+The Multiqc report for the additional *Cochlearia danica* and *Ionopsidium* sequencing data provided by Yant (2024) can be accessed via the following link [multiqc report](file:///Users/lukearcher/Desktop/170524_multiqc_new_danica/multiqc_report.html). 
+
+An example command for producing a fastqc sequencing quality control report can be found below:
+```
+###load the fastqc module for sequencing quality control
+module load fastqc-uoneasy/0.12.1-Java-11
+
+##change directory to where your fastq.gz files are stored
+cd /file/path/to/fastq.gz files
+
+##perform fastqc on the FLE_2 sequencing data/reads
+fastqc -o ../170524_fastqc/ ./FLE_2/*.fq.gz
+
+##repeat for the other populations
+
+##unload fastqc module
+module unload fastqc-uoneasy/0.12.1-Java-11
+```
+
+Subsequently, a multiqc report can be performed/executed on the directory containing the results from the fastqc reports, which will be .fastqc.gz files. The command required to produce the multiqc report can be found below.
+```
+##load multiqc module
+module load multiqc-uoneasy/1.14-foss-2023a
+
+##execute multiqc on the fastqc.zip data specifying -f (--force to overwrite existing reports) and -p to export the plots generated
+multiqc /gpfs01/home/pmyla1/170524_fastqc/.*fastqc.zip
+
+##unload multiqc module
+module unload multiqc-uoneasy/1.14-foss-2023a
+```
+The multiqc plots and reports can be found within the directory from which the commands were executed and include a directory for png, svg, or pdf versions of the plots.
 
 ## Twisst (Topology weighting by iterative sampling of sub-trees)
 
