@@ -118,6 +118,25 @@ module unload multiqc-uoneasy/1.14-foss-2023a
 ```
 The multiqc plots and reports can be found within the directory from which the commands were executed and include a directory for png, svg, or pdf versions of the plots.
 
+# Cutadapt (Trimming adapters from Illumina paired-end reads)
+
+Cutadapt and the 170524_cutadapters_fastqc_multiqc.sh script was used to trim the Nextera transposase adapter sequences from the fastq.gz sequencing files. 
+
+Example command:
+```
+##cut adapters from the end of the fastq.gz files with cutadapt
+##the read 1 Nextera transposase sequence is TCGTCGGCAGCGTCAGATGTGTATAAGAGACAG
+## the read 2 Nextera transposase adapter sequence is GTCTCGTGGGCTCGGAGATGTGTATAAGAGACAG
+module load cutadapt-uon/gcc12.3.0/4.6
+
+##first cut the nextera transposase read 1 sequence from FLE_2
+cutadapt -a TCGTCGGCAGCGTCAGATGTGTATAAGAGACAG -o 170524_cutadapt/170524_FLEET_2_EKDL240001890-1A_222TKYLT4_L1_1.fq.gz ./FLE_2/FLEET_2_EKDL240001890-1A_222TKYLT4_L1_1.fq.gz
+
+##then cut the nextera transposase read 2 sequence from FLE_2
+cutadapt -a GTCTCGTGGGCTCGGAGATGTGTATAAGAGACAG -o 170524_cutadapt/170524_FLEET_2_EKDL240001890-1A_222TKYLT4_L1_2.fq.gz ./FLE_2/FLEET_2_EKDL240001890-1A_222TKYLT4_L1_1.fq.gz
+
+```
+
 ## Twisst (Topology weighting by iterative sampling of sub-trees)
 
 This software can be used to quantify relationships between taxa that are not necessarily monophyletic, and can be used to explore how relationships between taxa varies across the genome by using genomic single nucleotide polymorphism (SNP) windows.
