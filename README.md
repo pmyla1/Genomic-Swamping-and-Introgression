@@ -78,6 +78,14 @@ The structure of the 150524_experimental_TREE_FILE.nwk can be found below, where
 (Outgroup,(C_danica,(C_anglica,C_officinalis)));
 ```
 
+# 17/05/24 
+
+To extract the individual samples names from the VCF file use bcftools and the following command:
+```
+bcftools query -l 160524_ld_pruned_20PCTmis_maf005_allUKtets_allUKhex.vcf.gz > ./170524_allUKtets_allUKhets_samples.txt
+```
+
+
 ## Twisst (Topology weighting by iterative sampling of sub-trees)
 
 This software can be used to quantify relationships between taxa that are not necessarily monophyletic, and can be used to explore how relationships between taxa varies across the genome by using genomic single nucleotide polymorphism (SNP) windows.
