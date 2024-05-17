@@ -86,7 +86,7 @@ bcftools query -l 160524_ld_pruned_20PCTmis_maf005_allUKtets_allUKhex.vcf.gz > .
 ```
 # Fastqc and Multiqc for sequencing quality control reports
 
-The Multiqc report for the additional *Cochlearia danica* and *Ionopsidium* sequencing data provided by Yant (2024) can be accessed via the following link [multiqc report](file:///Users/lukearcher/Desktop/170524_multiqc_new_danica/multiqc_report.html). 
+The Multiqc report for the additional *Cochlearia danica* and *Ionopsidium* sequencing data provided by Yant (2024) can be accessed via the following link [INSERT LINK HERE]. 
 
 An example command for producing a fastqc sequencing quality control report can be found below:
 ```
