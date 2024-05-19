@@ -120,7 +120,8 @@ The multiqc plots and reports can be found within the directory from which the c
 
 # Cutadapt (Trimming adapters from Illumina paired-end reads)
 
-Cutadapt and the 170524_cutadapters_fastqc_multiqc.sh script was used to trim the Nextera transposase adapter sequences from the fastq.gz sequencing files. 
+Cutadapt(Version 4.6) and the 170524_cutadapters_fastqc_multiqc.sh script was used to trim the Nextera transposase adapter sequences from the *C. danica* fastq.gz sequencing files. 
+Moreover, the Illumina universal adapters (5'-CTGTCTCTTATACACATCT-3') were trimmed from the *Ionopsidium* sequencing reads utilising Cutadapt version 4.6. 
 
 Example command:
 ```
@@ -136,6 +137,46 @@ cutadapt -a TCGTCGGCAGCGTCAGATGTGTATAAGAGACAG -o 170524_cutadapt/170524_FLEET_2_
 cutadapt -a GTCTCGTGGGCTCGGAGATGTGTATAAGAGACAG -o 170524_cutadapt/170524_FLEET_2_EKDL240001890-1A_222TKYLT4_L1_2.fq.gz ./FLE_2/FLEET_2_EKDL240001890-1A_222TKYLT4_L1_1.fq.gz
 
 ```
+
+# Alignment to C_excelsa_V5.fa reference - BWA 
+
+[BWA version 0.7.17](https://bio-bwa.sourceforge.net/bwa.shtml) and the `bwa index` and `bwa mem` commands were used to produce sam alignment files for the Illumina paired-end read data. Firstly, the reads were concatenated into a single fastq.gz file using a `cat` command (example shown below):
+
+```
+###concatenate the R1 and R2 reads for each population into one file for alignment
+cat ./170524_FLEET_2_EKDL240001890-1A_222TKYLT4_L1_1.fq.gz ./170524_FLEET_2_EKDL240001890-1A_222TKYLT4_L1_2.fq.gz > ./180524_merged_FLEET_2_EKDL240001890-1A_222TKYLT4.fq.gz
+```
+
+Subsequently, the C_excelsa_V5.fa reference was indexed using `bwa index`, to produce 5 different files with the `C_excelsa_V5' prefix. Example command shown below:
+
+```
+#index the C_excelsa_V5.fa
+bwa index ./C_excelsa_V5.fa
+```
+
+Next, the merged fastq.gz files were aligned to the C_excelsa_V5 reference utilising a `bwa mem` command with default options for all gap opening penalties, and specifying 16 threads. Example command for LWS_1:
+
+```
+##use bwa mem with 16 threads to produce a sam alignment file 
+bwa mem -t 16 /gpfs01/home/pmyla1/C_excelsa_V5_reference/C_excelsa_V5.fa ./180524_merged_LWS_EKDL240001890-1A_222TKYLT4.fq.gz  > ./180524_alignments/180524_LWS_EKDL240001890-1A_222TKYLT4_paired.sam
+```
+
+Finally, [Samtools (Version 1.18)](https://www.htslib.org/doc/samtools.html) was used to convert the sam files for each population into bam files, then sort, index, and assessed alignment quality with `samtools view`, `samtools sort`, `samtools index`, and `samtools flagstat`, respectively. Example commands shown below:
+
+```
+##convert Ime sam to bam with samtools view
+samtools view -@ 8 -b ./180524_Ime_paired.sam > ./180524_Ime_paired.bam
+
+##use samtools sort to produce a sorted Ime bam file
+samtools sort -@ 8 -o ./180524_Ime_paired.sorted.bam ./180524_Ime_paired.bam 
+
+#finally index the sorted Ime bam file with samtools index
+samtools index ./180524_Ime_paired.sorted.bam
+
+##now get a summary of the alignment with samtools flagstat
+samtools flagstat ./180524_Ime_paired.sorted.bam
+```
+
 
 ## Twisst (Topology weighting by iterative sampling of sub-trees)
 
