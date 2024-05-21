@@ -1,17 +1,20 @@
 #Script for conducting PCA on mixed ploidy VCF files
 #Tuomas Hämälä, April 2024, Modified by Luke Archer (May 2024).
 
-setwd("/Users/lukearcher/Desktop/Individual_Project_files/VCF_files/")
-library(vcfR)
-library(ggplot2)
-library(ggrepel)
+##Set your working directory to your path to the LD pruned VCF to use for Principal Component Analysis (PCA)
+setwd("/path/to/ld_pruned/vcf/")
+
+##load appropriate libraries for handling VCFs and plotting
+library(vcfR) ##for loading VCF
+library(ggplot2) ##for plotting
+library(ggrepel) ##repels points
 library(gridExtra) #for making multipanel plots
 
 ##load the different VCFs - firstly the ld pruned VCF with all UK tetraploids &&  
 ##all UK hexaploids (INCLUDING SPU)
 vcf <- read.vcfR("160524_ld_pruned_20PCTmis_maf005_allUKtets_allUKhex.vcf.gz")#Filtered and LD-pruned VCF file
 
-##now load the second VCF with all UK tetraploids and all hexaploids except SPU
+##now load the second VCF with all UK tetraploids and all hexaploids (EXCEPT SPU)
 vcf_2 <-read.vcfR("160524_ld_pruned_20PCTmis_maf005_NO_SPU.vcf.gz")
 
 #Transform the first VCF to numeric genotypes
@@ -62,7 +65,6 @@ df_2[df_2 == "0/1/1/1/1/1"] <- 5
 df_2[df_2 == "1/1/1/1/1/1"] <- 6
 df_2<- data.frame(apply(df_2,2,function(y)as.numeric(as.character(y))))
 
-
 ############
 ##MODIFIED BY LUKE ARCHER ON 16/05/2024 
 #REMOVE SAMPLES WITH > 20% MISSING DATA
@@ -72,11 +74,11 @@ df <- df[,mis <= 0.2]
 mis_2 <- apply(df_2,2,function(y)sum(is.na(y))/length(y))
 df_2 <- df_2[,mis <= 0.2]
 
-#Calculate allele frequencies
+#Calculate allele frequencies for first VCF (with SPU)
 x <- apply(df,2,max,na.rm=T)
 p <- apply(df,1,function(y)sum(y,na.rm=T)/sum(x[!is.na(y)]))
 
-#Calculate allele frequencies for 2nd vcf
+#Calculate allele frequencies for 2nd vcf (WITHOUT SPU)
 x2 <- apply(df_2,2,max,na.rm=T)
 p2 <- apply(df_2,1,function(y)sum(y,na.rm=T)/sum(x[!is.na(y)]))
 
@@ -89,7 +91,7 @@ p <- p[p >= 0.05 & p <= 0.95]
 df_2 <- df_2[p2 >= 0.05 & p2 <= 0.95,]
 p2 <- p2[p2 >= 0.05 & p2 <= 0.95]
 
-#Estimate a covariance matrix
+#Estimate a covariance matrix for the VCF with SPU
 n <- ncol(df)
 cov <- matrix(nrow=n,ncol=n)
 for(i in 1:n){
@@ -99,7 +101,7 @@ for(i in 1:n){
   }	
 }
 
-#Estimate a covariance matrix for the NO SPU vcf
+#Estimate a covariance matrix for the VCF without SPU
 n2 <- ncol(df_2)
 cov2 <- matrix(nrow=n2,ncol=n2)
 for(i in 1:n2){
@@ -109,21 +111,22 @@ for(i in 1:n2){
   }	
 }
 
-#Do PCA on the matrix and plot
+#Do PCA on the matrix (with SPU) and plot
 pc <- prcomp(cov,scale=T)
 xlab <- paste0("PC1 (",round(summary(pc)$importance[2]*100),"%)")
 ylab <- paste0("PC2 (",round(summary(pc)$importance[5]*100),"%)")
 pcs <- data.frame(PC1=pc$x[,1],PC2=pc$x[,2],id=colnames(df),ploidy=x)
 
-#Do PCA on the matrix and plot the NO SPU vcf
+#Do PCA on the matrix and plot the VCF without SPU
 pc2 <- prcomp(cov2,scale=T)
 xlab2 <- paste0("PC1 (",round(summary(pc2)$importance[2]*100),"%)")
 ylab2 <- paste0("PC2 (",round(summary(pc2)$importance[5]*100),"%)")
 pcs2 <- data.frame(PC1=pc2$x[,1],PC2=pc2$x[,2],id=colnames(df_2),ploidy=x2)
 
 ############
-##MODIFIED SLIGHTLY TO ADD AN ELLIPSE TO CIRCLE THE SAMPLES BY PLOIDY
-with_SPU<-ggplot(pcs, aes(PC1, PC2, color=as.factor(ploidy)))+
+##MODIFIED TO ADD AN ELLIPSE TO CIRCLE THE SAMPLES BY PLOIDY
+##WITH SPU            
+ggplot(pcs, aes(PC1, PC2, color=as.factor(ploidy)))+
   geom_point(size=7)+
   stat_ellipse()+
   labs(x=xlab, y=ylab, color="Ploidy")+
@@ -144,10 +147,9 @@ with_SPU<-ggplot(pcs, aes(PC1, PC2, color=as.factor(ploidy)))+
         aspect.ratio=1)
 #############
 
-
-################
+###############
 ##WITHOUT SPU
-without_spu<-ggplot(pcs2, aes(PC1, PC2, color=as.factor(ploidy)))+
+ggplot(pcs2, aes(PC1, PC2, color=as.factor(ploidy)))+
   geom_point(size=7)+
   stat_ellipse()+
   labs(x=xlab, y=ylab, color="Ploidy")+
@@ -166,7 +168,4 @@ without_spu<-ggplot(pcs2, aes(PC1, PC2, color=as.factor(ploidy)))+
         legend.title=element_text(size=12, color="black"),
         legend.key=element_blank(),
         aspect.ratio=1)
-
-#######
-##make a multipanel plot with grid.arrange()
-grid.arrange(with_SPU, without_spu,nrow=1)
+##############
