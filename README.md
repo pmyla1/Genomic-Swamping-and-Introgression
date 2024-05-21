@@ -230,6 +230,20 @@ To display the help messages you can execute the following command from the dire
 ./raxml-ng -h 
 ```
 
+## Picard version 3.3.0
+
+Picard version 3.3.0 can be installed following the instructions on the [Picard github page](https://github.com/broadinstitute/picard). 
+
+Picard was used to mark duplicate reads and to collect summary alignment metrics using the `MarkDuplicates` and `CollectSummaryAlignmentMetrics` commands, respectively. 
+
+Example commands for these processes can be found below:
+
+```
+
+```
+
+
+
 ## Genome Analysis Toolkit (GATK)
 
 ## R & Rstudio
