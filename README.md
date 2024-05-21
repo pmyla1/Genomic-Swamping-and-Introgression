@@ -145,7 +145,7 @@ cutadapt -a GTCTCGTGGGCTCGGAGATGTGTATAAGAGACAG -o 170524_cutadapt/170524_FLEET_2
 cat ./170524_FLEET_2_EKDL240001890-1A_222TKYLT4_L1_1.fq.gz ./170524_FLEET_2_EKDL240001890-1A_222TKYLT4_L1_2.fq.gz > ./180524_merged_FLEET_2_EKDL240001890-1A_222TKYLT4.fq.gz
 ```
 
-Subsequently, the C_excelsa_V5.fa reference was indexed using `bwa index`, to produce 5 different files with the `C_excelsa_V5' prefix. Example command shown below:
+Subsequently, the C_excelsa_V5.fa reference was indexed using `bwa index`, to produce 5 different files with the `C_excelsa_V5` prefix. Example command shown below:
 
 ```
 #index the C_excelsa_V5.fa
@@ -156,7 +156,7 @@ Next, the merged fastq.gz files were aligned to the C_excelsa_V5 reference utili
 
 ```
 ##use bwa mem with 16 threads to produce a sam alignment file 
-bwa mem -t 16 /gpfs01/home/pmyla1/C_excelsa_V5_reference/C_excelsa_V5.fa ./180524_merged_LWS_EKDL240001890-1A_222TKYLT4.fq.gz  > ./180524_alignments/180524_LWS_EKDL240001890-1A_222TKYLT4_paired.sam
+bwa mem -t 16 ~/C_excelsa_V5_reference/C_excelsa_V5.fa ./180524_merged_LWS_EKDL240001890-1A_222TKYLT4.fq.gz  > ./180524_alignments/180524_LWS_EKDL240001890-1A_222TKYLT4_paired.sam
 ```
 ## Samtools - Convert sam to bam
 
