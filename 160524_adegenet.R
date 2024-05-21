@@ -2,9 +2,10 @@
 ## Filip Kolar 2017, further edits by Sian Bray 2018 and Levi Yant 2022,3
 ## modified by Luke Archer (2024). 
 
-setwd("/Users/lukearcher/Desktop/Individual_Project_files/VCF_files/")
+##Set working directory to your path to the VCF file to be analysed
+setwd("/path/to/LD-pruned/VCF")
 
-
+##load libraries
 options(warn=1)
 
 library(adegenet)
@@ -14,8 +15,6 @@ library(pegas)
 library(StAMPP)
 library(ade4)
 library(MASS)
-
-
 
 ##################### 
 # MODIFIED FUNCTIONS for TETRAPLOIDS
@@ -67,8 +66,6 @@ vcfR2genlight.tetra <- function (x, n.cores = 1)
   adegenet::locNames(x) <- ID
   return(x)
 }
-
-
 
 ## -------------------------------------------------------
 ### This is a patch for MUCH MUCH faster PCA calculation on genlight objects
