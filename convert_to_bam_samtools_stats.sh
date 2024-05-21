@@ -12,13 +12,17 @@
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=pmyla1@exmail.nottingham.ac.uk
 
+#######################
+##This script was written by Luke Archer (2024) and utilises samtools (version 1.18) to convert the .sam alignment files produced by BWA_mem.sh into .bam alignment files (samtools view). The .bam files are subsequently converted into .sorted.bam files (samtools sort), and then the .sorted.bam files are indexed (samtools index), and summary statistics are calculated for the alignments (samtools flagstat). 
+####################
+
 ##################
 ##setup 
 source $HOME/.bash_profile
 #######
 
 ##change directory to the 180524_alignments
-cd /gpfs01/home/pmyla1/2024.Cochlearia.Illumina.cohort/170524_cutadapt/180524_merged_reads/180524_alignments/
+cd ~/2024.Cochlearia.Illumina.cohort/170524_cutadapt/180524_merged_reads/180524_alignments/
 
 ##load samtools view to convert the sam files to bam files
 module load samtools-uoneasy/1.18-GCC-12.3.0
