@@ -12,6 +12,10 @@
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=pmyla1@exmail.nottingham.ac.uk
 
+#############################
+##This script was written by Luke Archer (2024) and uses Picard ValidateSamFile (version 3.3.0) to validate the duplicate marked .sorted.bam files produced by Picard_MarkDuplicate.sh. The output is a "validated.txt" file which indicates that the .sorted.bam files do not have a read group associated with them, therefore GATK HaplotypeCaller cannot call haplotypes on these files.
+############################
+
 ##################
 ##setup 
 source $HOME/.bash_profile
