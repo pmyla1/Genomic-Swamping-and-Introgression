@@ -12,6 +12,10 @@
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=pmyla1@exmail.nottingham.ac.uk
 
+#######################
+##This script was used prior to 170524_cutadapters.sh and produces a preliminary FastQC (version 0.12.1) and MultiQC (version 1.14) report on the raw Illumina paired-end fastq.gz sequencing reads provided by Yant (2024).
+#####################
+
 ##################
 ##setup 
 source $HOME/.bash_profile
