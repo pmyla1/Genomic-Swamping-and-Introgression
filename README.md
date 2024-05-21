@@ -15,6 +15,8 @@ The genus *Cochlearia* displays a **wide range of cytotypes** and levels of ploi
 ## Dsuite
 [Dsuite](https://github.com/millanek/Dsuite) is a software program developed to quickly calculate Patterson's D (ABBA-BABA), and the f4-ratio statistics across many populations and/or species. 
 
+This software takes a VCF file and an explicitly stated phylogenetic tree in the Newick format as input and uses "parsimony informative" single nucleotide polymorphisms from a quartet of species to detect the occurrence of gene flow between species on internal branches of the tree. 
+
 Citation: Malinsky, M., Matschiner, M. and Svardal, H. (2021) Dsuite ‐ fast D‐statistics and related admixture evidence from VCF files. Molecular Ecology Resources 21, 584–595. doi:[https://doi.org/10.1111/1755-0998.13265](https://doi.org/10.1111/1755-0998.13265)
 
 To install the program on macOS run the following commands for the main program:
@@ -176,6 +178,9 @@ samtools index ./180524_Ime_paired.sorted.bam
 ##now get a summary of the alignment with samtools flagstat
 samtools flagstat ./180524_Ime_paired.sorted.bam
 ```
+
+
+
 
 
 ## Twisst (Topology weighting by iterative sampling of sub-trees)
