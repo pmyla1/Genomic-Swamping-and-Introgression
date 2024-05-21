@@ -162,8 +162,9 @@ Next, the merged fastq.gz files were aligned to the C_excelsa_V5 reference utili
 ##use bwa mem with 16 threads to produce a sam alignment file 
 bwa mem -t 16 /gpfs01/home/pmyla1/C_excelsa_V5_reference/C_excelsa_V5.fa ./180524_merged_LWS_EKDL240001890-1A_222TKYLT4.fq.gz  > ./180524_alignments/180524_LWS_EKDL240001890-1A_222TKYLT4_paired.sam
 ```
+## Samtools - Convert sam to bam
 
-Finally, [Samtools (Version 1.18)](https://www.htslib.org/doc/samtools.html) was used to convert the sam files for each population into bam files, then sort, index, and assessed alignment quality with `samtools view`, `samtools sort`, `samtools index`, and `samtools flagstat`, respectively. Example commands shown below:
+Finally, [Samtools (Version 1.18)](https://www.htslib.org/doc/samtools.html) was used to convert the sam files for each population into bam files. Subsequetly, the bam files were sorted, indexed, and assessed for the quality of the alignment with `samtools view`, `samtools sort`, `samtools index`, and `samtools flagstat`, respectively. Example commands shown below:
 
 ```
 ##convert Ime sam to bam with samtools view
