@@ -12,6 +12,10 @@
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=pmyla1@exmail.nottingham.ac.uk
 
+#############################
+##This script was written by Luke Archer (2024) and uses Picard CollectAlignmentSummaryMetrics (version 3.0.0) to produce summary statistics/metrics for the duplicate marked bam alignments produced by Picard_MarkDuplicate.sh.
+#########################
+
 ##################
 ##setup 
 source $HOME/.bash_profile
