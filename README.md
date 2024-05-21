@@ -228,14 +228,44 @@ To display the help messages you can execute the following command from the dire
 
 Picard version 3.3.0 can be installed following the instructions on the [Picard github page](https://github.com/broadinstitute/picard). 
 
-Picard was used to mark duplicate reads and to collect summary alignment metrics using the `MarkDuplicates` and `CollectSummaryAlignmentMetrics` commands, respectively. 
+Picard was used to mark duplicate reads and to collect summary alignment metrics using the `MarkDuplicates` and `CollectAlignmentSummaryMetrics` commands, respectively. 
 
 Example commands for these processes can be found below:
 
-```
+### MarkDuplicates
 
 ```
+##load the picard module to mark the duplicates in the bam alignment files
+module load picard-uoneasy/3.0.0-Java-17
 
+##change directory to the bam alignment files
+cd ~/2024.Cochlearia.Illumina.cohort/170524_cutadapt/180524_merged_reads/180524_alignments/190524_bam_files/
+
+##use MarkDuplicates to mark the duplicated reads in FLE_2 
+java -jar picard.jar MarkDuplicates \
+      I=./180524_FLE_2_paired.sorted.bam \
+      O=./190524_FLE_2_marked_duplicates.sorted.bam \
+      M=./190524_FLE_2_marked_duplicates_metrics.txt
+```
+
+### CollectAlignmentSummaryMetrics
+
+```
+##load the GATK module to grep the read groups from the duplicate marked BAM files
+module load gatk-uoneasy/4.4.0.0-GCCcore-12.3.0-Java-17
+
+##change directory to the bam alignment files
+cd ~/2024.Cochlearia.Illumina.cohort/170524_cutadapt/180524_merged_reads/180524_alignments/190524_bam_files/
+
+##make a new directory for the output
+mkdir ~/2024.Cochlearia.Illumina.cohort/200524_Alignment_Summary_Metrics/
+#############
+##calculate alignment summary metrics for FLE_2 duplicate marked bam
+    java -jar picard.jar CollectAlignmentSummaryMetrics \
+          R=~/C_excelsa_V5_reference/C_excelsa_V5.fa \
+          I=./190524_FLE_2_marked_duplicates.sorted.bam \
+          O=~/2024.Cochlearia.Illumina.cohort/200524_Alignment_Summary_Metrics/200524_FLE_2_aln_sum.txt
+```
 
 
 ## Genome Analysis Toolkit (GATK)
