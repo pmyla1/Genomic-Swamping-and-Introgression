@@ -12,6 +12,10 @@
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=pmyla1@exmail.nottingham.ac.uk
 
+####################
+##This script was written by Luke Archer (2024) and utilises Cutadapt (version 4.6) to trim the Nextera transposase adapters from the additional Cochlearia danica Illumina paired-end read sequencing data. Subsequently, a FastQC sequencing quality report (version 0.12.1) is produced for the additional sequencing data. Finally, the .fastqc.zip files produced by FastQC are used as input for MultiQC (version 1.14) which produces a quality control report for all sequencing data for all accessions/barcodes.
+###################
+
 ##################
 ##setup 
 source $HOME/.bash_profile
@@ -24,10 +28,13 @@ mkdir 170524_cutadapt/
 
 ##make a new directory for the trimmed fastqc output
 mkdir 170524_fastqc_trimmed_output/
+###############
+
 ##############
 ##cut adapters from the end of the fastq.gz files with cutadapt
 ##the read 1 nextera transposase sequence is TCGTCGGCAGCGTCAGATGTGTATAAGAGACAG
-## the read 2 nextera transposase adapter sequence is GTCTCGTGGGCTCGGAGATGTGTATAAGAGACAG
+##the read 2 nextera transposase adapter sequence is GTCTCGTGGGCTCGGAGATGTGTATAAGAGACAG
+
 module load cutadapt-uon/gcc12.3.0/4.6
 
 ##first cut the nextera transposase read 1 sequence from FLE_2
