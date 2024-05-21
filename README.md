@@ -79,16 +79,13 @@ The structure of the 150524_experimental_TREE_FILE.nwk can be found below, where
 ```
 (Outgroup,(C_danica,(C_anglica,C_officinalis)));
 ```
+# Data Generation (17/05/2024)
 
-# 17/05/24 
+Additional *C. danica* and *Ionopsidium* Illumina paired-end sequencing data was provided by Yant (2024). The fastq.gz files from each population folder were investigated for sequencing quality and the presence of adapters utilising Fastqc and Multiqc. 
 
-To extract the individual samples names from the VCF file use bcftools and the following command:
-```
-bcftools query -l 160524_ld_pruned_20PCTmis_maf005_allUKtets_allUKhex.vcf.gz > ./170524_allUKtets_allUKhets_samples.txt
-```
-# Fastqc and Multiqc for sequencing quality control reports
+## Fastqc and Multiqc for sequencing quality control reports
 
-The Multiqc report for the additional *Cochlearia danica* and *Ionopsidium* sequencing data provided by Yant (2024) can be accessed via the following link [INSERT LINK HERE]. 
+The Multiqc report for the additional *Cochlearia danica* and *Ionopsidium* Illumina paired-end sequencing data provided by Yant (2024) can be accessed via the following link [INSERT LINK HERE]. 
 
 An example command for producing a fastqc sequencing quality control report can be found below:
 ```
@@ -122,8 +119,7 @@ The multiqc plots and reports can be found within the directory from which the c
 
 # Cutadapt (Trimming adapters from Illumina paired-end reads)
 
-Cutadapt(Version 4.6) and the 170524_cutadapters_fastqc_multiqc.sh script was used to trim the Nextera transposase adapter sequences from the *C. danica* fastq.gz sequencing files. 
-Moreover, the Illumina universal adapters (5'-CTGTCTCTTATACACATCT-3') were trimmed from the *Ionopsidium* sequencing reads utilising Cutadapt version 4.6. 
+[Cutadapt Version 4.6](https://cutadapt.readthedocs.io/en/stable/guide.html) and the 170524_cutadapters_fastqc_multiqc.sh script was used to trim the Nextera transposase adapter sequences from the *C. danica* fastq.gz sequencing files. Moreover, the Illumina universal adapters (5'-CTGTCTCTTATACACATCT-3') were trimmed from the *Ionopsidium* sequencing reads. 
 
 Example command:
 ```
@@ -179,9 +175,6 @@ samtools index ./180524_Ime_paired.sorted.bam
 ##now get a summary of the alignment with samtools flagstat
 samtools flagstat ./180524_Ime_paired.sorted.bam
 ```
-
-
-
 
 
 ## Twisst (Topology weighting by iterative sampling of sub-trees)
