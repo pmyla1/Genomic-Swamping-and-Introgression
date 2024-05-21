@@ -12,6 +12,10 @@
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=pmyla1@exmail.nottingham.ac.uk
 
+###############################
+##This script was written by Luke Archer (2024) and uses Picard MarkDuplicates (version 3.3.0) to mark the duplicate reads in the .sorted.bam files produced by convert_to_bam_samtools_stats.sh, and produces duplicate-marked .sorted.bam files. 
+##############################
+
 ##################
 ##setup 
 source $HOME/.bash_profile
@@ -21,7 +25,7 @@ source $HOME/.bash_profile
 module load picard-uoneasy/3.0.0-Java-17
 
 ##change directory to the bam alignment files
-cd /gpfs01/home/pmyla1/2024.Cochlearia.Illumina.cohort/170524_cutadapt/180524_merged_reads/180524_alignments/190524_bam_files/
+cd ~/2024.Cochlearia.Illumina.cohort/170524_cutadapt/180524_merged_reads/180524_alignments/190524_bam_files/
 
 ##use MarkDuplicates to mark the duplicated reads in FLE_2 
 java -jar $EBROOTPICARD/picard.jar MarkDuplicates \
@@ -74,7 +78,8 @@ java -jar $EBROOTPICARD/picard.jar MarkDuplicates \
 
 ############
 ##now do the same for the Ionopsidium samples
-cd /gpfs01/home/pmyla1/2024.Cochlearia.Illumina.cohort/Ionopsidium_cutadapt/180524_Ionopsidium_merged_reads/180524_Ionopsidium_alignments/190524_bam_files/
+cd
+~/2024.Cochlearia.Illumina.cohort/Ionopsidium_cutadapt/180524_Ionopsidium_merged_reads/180524_Ionopsidium_alignments/190524_bam_files/
 ############
 ##use MarkDuplicate to mark the duplicated reads in SBA_1 
 java -jar $EBROOTPICARD/picard.jar MarkDuplicates \
