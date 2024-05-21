@@ -12,6 +12,10 @@
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=pmyla1@exmail.nottingham.ac.uk
 
+####################
+##This script uses GATK SelectVariants (Version 4.4.0) to select all UK hexaploids, including Cochlearia danica and Cochlearia anglica accessions, and all UK tetraploids (Cochlearia officinalis) samples/accessions for subsequent analysis in R. The subsetted UK tetraploid + UK hexaploid-only VCF produced by GATK SelectVariants is subsequently LD pruned using the prune_ld.c script written by Tuomas Hämälä (2023). 
+####################
+
 ##source bash profile
 source $HOME/.bash_profile
 
@@ -21,7 +25,7 @@ module load gatk-uoneasy/4.4.0.0-GCCcore-12.3.0-Java-17
 ###########
 ##use GATK to select all UK hexaploids and all UK tetraploids from reheadered.F4_133.ann.vcf.gz
 gatk SelectVariants \
- -V /gpfs01/home/pmyla1/reheadered.F4_133.ann.vcf.gz \
+ -V ~/reheadered.F4_133.ann.vcf.gz \
  --select-type-to-include SNP \
  --restrict-alleles-to BIALLELIC \
  -sn BRE_1 -sn CUM_1 -sn DAR_1 -sn DAR_3 -sn JON_001 -sn RYE_1 -sn SCO_1 -sn FRE_013 -sn FOR_1 \
@@ -33,16 +37,17 @@ gatk SelectVariants \
  -sn ALO_006 -sn ALO_007 -sn ALO_013 -sn ALO_017 -sn ELI_001 -sn ELI_002 -sn ELI_003 -sn ELI_004 \
  -sn ROT_004 -sn ROT_006 -sn ROT_007 -sn ROT_013 -sn GEO_2 -sn GEO_6 -sn LNL_001 -sn LNL_002 -sn LNL_003 -sn LNL-008 \
  -sn NEI_1 -sn NEI_3 -sn NEI_8 -sn NEI_9 -sn SCU_1 -sn SCU_14 -sn SCU_15 -sn SCU_16 -sn SCU_19 \
- -O /gpfs01/home/pmyla1/160524_data/160524_allUKtets_allUKhex.vcf.gz
+ -O ~/160524_data/160524_allUKtets_allUKhex.vcf.gz
 
 ##module unload
 module unload gatk-uoneasy/4.4.0.0-GCCcore-12.3.0-Java-17
 ##########
 
 ############
-cd /gpfs01/home/pmyla1/160524_data/
+cd ~/160524_data/
 
 module load samtools-uoneasy/1.18-GCC-12.3.0
+
 ##make a copy of the vcf and then unzip 
 cp ./160524_allUKtets_allUKhex.vcf.gz ./160524_allUKtets_allUKhex_copy.vcf.gz
 
@@ -55,7 +60,7 @@ module unload samtools-uoneasy/1.18-GCC-12.3.0
 ##now ld prune the VCF file using prune_ld.c
 module load gcc-uoneasy/13.2.0
 ##configure prune_ld
-gcc /gpfs01/home/pmyla1/scripts/prune_ld.c -o /gpfs01/home/pmyla1/160524_data/160524_prune_ld -lm
+gcc ~/scripts/prune_ld.c -o ~/160524_data/160524_prune_ld -lm
 
 #########
 cd /gpfs01/home/pmyla1/160524_data/
