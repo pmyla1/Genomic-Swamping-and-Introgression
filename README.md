@@ -224,9 +224,9 @@ To display the help messages you can execute the following command from the dire
 ./raxml-ng -h 
 ```
 
-## Picard version 3.3.0
+## Picard version 3.0.0
 
-Picard version 3.3.0 can be installed following the instructions on the [Picard github page](https://github.com/broadinstitute/picard). 
+Picard version 3.0.0 can be installed following the instructions on the [Picard github page](https://github.com/broadinstitute/picard). 
 
 Picard was used to mark duplicate reads and to collect summary alignment metrics using the `MarkDuplicates` and `CollectAlignmentSummaryMetrics` commands, respectively. 
 
@@ -267,6 +267,21 @@ mkdir ~/2024.Cochlearia.Illumina.cohort/200524_Alignment_Summary_Metrics/
           O=~/2024.Cochlearia.Illumina.cohort/200524_Alignment_Summary_Metrics/200524_FLE_2_aln_sum.txt
 ```
 
+## 22/05/2024 - Whole Pipeline from Data Generation to VCF
+
+The Illumina paired-end sequencing data provided by Yant (2024) were processed following the steps outlined in the [ngs_pipe](https://github.com/mattheatley/ngs_pipe/blob/main/README) README page written by Healey (2024). 
+
+Firstly, the adapters were trimmed from the reads with Trimmomatic (version 0.39), specifying the Nextera transposase adapter sequences to be trimmed from the reads`ILLUMINACLIP:NexteraPE-PE.fa:2:40:15`. A sliding window of 4 bases was specified with a minimum PHRED score threshold of 20, thus trimming reads with PHRED scores < 20 (`SLIDINGWINDOW:4:20`), and a minimum length of 25 (`MINLEN:25`). An example trimmomatic command for one population (HAM_1) can be found below:
+
+```
+##Trimmomatic - trims Nextera transposase adapters from the Illumina reads
+java -jar $EBROOTTRIMMOMATIC/trimmomatic-0.39.jar \
+        PE -phred33 ../HAM_1/HAM_1_EKDL240001890-1A_222TKYLT4_L1_1.fq.gz ../HAM_1/HAM_1_EKDL240001890-1A_222TKYLT4_L1_2.fq.gz \
+        ./HAM_1_EKDL240001890-1A_222TKYLT4_L1_1.trimmed.fq.gz ./HAM_1_EKDL240001890-1A_222TKYLT4_L1_1.orhpan.fq.gz \
+        ./HAM_1_EKDL240001890-1A_222TKYLT4_L1_2.trimmed.fq.gz ./HAM_1_EKDL240001890-1A_222TKYLT4_L1_2.orhpan.fq.gz \
+        SLIDINGWINDOW:4:20 MINLEN:25 ILLUMINACLIP:NexteraPE-PE.fa:2:40:15
+
+```
 
 ## Genome Analysis Toolkit (GATK)
 
