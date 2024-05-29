@@ -189,34 +189,6 @@ java -jar $EBROOTPICARD/picard.jar MarkDuplicates -I ./FLEET_2_${meta}.sorted.ba
 
 ```
 
-## Twisst (Topology weighting by iterative sampling of sub-trees)
-
-This software can be used to quantify relationships between taxa that are not necessarily monophyletic, and can be used to explore how relationships between taxa varies across the genome by using genomic single nucleotide polymorphism (SNP) windows.
-
-Citation: Simon H Martin, Steven M Van Belleghem, Exploring Evolutionary Relationships Across the Genome Using Topology Weighting, Genetics, Volume 206, Issue 1, 1 May 2017, Pages 429–438, [https://doi.org/10.1534/genetics.116.194720](https://doi.org/10.1534/genetics.116.194720).
-
-The twisst.py script was downloaded from [Simon Martin's github page](https://github.com/simonhmartin/twisst/blob/master/twisst.py) and the [ete3 toolkit](http://etetoolkit.org/download/) and [numpy](https://numpy.org/) were downloaded following instructions on their respective websites.
-
-The following commands were used to download and install both ete3 and numpy locally:
-```
-##create the ete3 environment
-conda create -n ete3 python=3
-##activate the ete3 environment
-conda activate ete3
-##use pip to install ete3 since conda didn't work initially
-pip install ete3
-##also use pip to install numpy
-pip install numpy
-##because of the errors when executing ete3 build check, install the packages required
-pip install six
-pip install pyqt5
-pip install lxml
-##for the final installation 
-conda install -c etetoolkit ete_toolchain
-##to check the ete3 toolkit has been installed correctly
-ete3 build check
-```
-
 ## SplitsTree
 
 SplitsTree was downloaded following the instructions on the [University of Tübingen Website](https://uni-tuebingen.de/fakultaeten/mathematisch-naturwissenschaftliche-fakultaet/fachbereiche/informatik/lehrstuehle/algorithms-in-bioinformatics/software/splitstree/). 
@@ -326,9 +298,50 @@ samtools flagstat ./bam_files/PAR_2_${metadata}.sorted.bam > ./bam_files/PAR_2_$
 
 ```
 
-## Genome Analysis Toolkit (GATK)
+# Stage 4: Marking and discarding duplicate reads with Picard MarkDuplicates
 
-## R & Rstudio
+Duplicate reads from the sorted bams were marked and discarded using Picard (version 3.0.0) MarkDuplicates, specifying `--REMOVE_DUPLICATES true`. An example MarkDuplicates command for one of the samples can be found below.
+
+```
+##make environmental variables for the output directory (OUTDIR) and the metadata (meta)
+OUTDIR=~/220524_alignments/bam_files/duplicate_marked_bams
+meta=EKDL240001890-1A_222TKYLT4
+
+##execute MarkDuplicates on FLEET_2
+java -jar $EBROOTPICARD/picard.jar MarkDuplicates -I ./FLEET_2_${meta}.sorted.bam -O $OUTDIR/FLEET_2_${meta}.marked_duplicates.bam -M $OUTDIR/FLEET_2_${meta}.marked_dup_metrics.txt --VALIDATION_STRINGENCY SILENT --ASSUME_SORTED true --REMOVE_DUPLICATES true
+
+```
+
+## Twisst (Topology weighting by iterative sampling of sub-trees)
+
+This software can be used to quantify relationships between taxa that are not necessarily monophyletic, and can be used to explore how relationships between taxa varies across the genome by using genomic single nucleotide polymorphism (SNP) windows.
+
+Citation: Simon H Martin, Steven M Van Belleghem, Exploring Evolutionary Relationships Across the Genome Using Topology Weighting, Genetics, Volume 206, Issue 1, 1 May 2017, Pages 429–438, [https://doi.org/10.1534/genetics.116.194720](https://doi.org/10.1534/genetics.116.194720).
+
+The twisst.py script was downloaded from [Simon Martin's github page](https://github.com/simonhmartin/twisst/blob/master/twisst.py) and the [ete3 toolkit](http://etetoolkit.org/download/) and [numpy](https://numpy.org/) were downloaded following instructions on their respective websites.
+
+The following commands were used to download and install both ete3 and numpy locally:
+```
+##create the ete3 environment
+conda create -n ete3 python=3
+##activate the ete3 environment
+conda activate ete3
+##use pip to install ete3 since conda didn't work initially
+pip install ete3
+##also use pip to install numpy
+pip install numpy
+##because of the errors when executing ete3 build check, install the packages required
+pip install six
+pip install pyqt5
+pip install lxml
+##for the final installation 
+conda install -c etetoolkit ete_toolchain
+##to check the ete3 toolkit has been installed correctly
+ete3 build check
+```
+
+
+
 
 
 
