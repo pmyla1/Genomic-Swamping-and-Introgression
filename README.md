@@ -175,7 +175,19 @@ samtools index ./180524_Ime_paired.sorted.bam
 ##now get a summary of the alignment with samtools flagstat
 samtools flagstat ./180524_Ime_paired.sorted.bam
 ```
+# Picard MarkDuplicates
 
+Duplicate reads from the sorted bams were marked and discarded using Picard (version 3.0.0) MarkDuplicates, specifying `--REMOVE_DUPLICATES true`. An example MarkDuplicates command for one of the samples can be found below.
+
+```
+##make environmental variables for the output directory (OUTDIR) and the metadata (meta)
+OUTDIR=~/220524_alignments/bam_files/duplicate_marked_bams
+meta=EKDL240001890-1A_222TKYLT4
+
+##execute MarkDuplicates on FLEET_2
+java -jar $EBROOTPICARD/picard.jar MarkDuplicates -I ./FLEET_2_${meta}.sorted.bam -O $OUTDIR/FLEET_2_${meta}.marked_duplicates.bam -M $OUTDIR/FLEET_2_${meta}.marked_dup_metrics.txt --VALIDATION_STRINGENCY SILENT --ASSUME_SORTED true --REMOVE_DUPLICATES true
+
+```
 
 ## Twisst (Topology weighting by iterative sampling of sub-trees)
 
@@ -215,14 +227,6 @@ Editing the phylogenetic networks was performed using Microsoft Powerpoint and m
 
 The 140524_adegenet_VCFs.R script was used to analyse the LD pruned and filtered VCF, utilising the glPcaFast() and vcf2genlightTetra() functions provided by Yant et al (2023). The VCF is loaded into Rstudio and is subsequently converted into a genlight object using the vcf2genlightTetra() function for polyploid data. Next, principal component analysis (PCA) can be performed on the genlight object, and subsequently, the genlight object can be converted into Nei's genetic distances using the stamppNeisD() function. Nei's genetic distances can be calculated for both the individual samples and the populations, and can be subsequently prepared for exporting into SplitsTree by the stamppPhylip() function provided by former student Anna (INSERT SURNAME, YEAR).   
 
-## RAXML 
-
-Raxml was downloaded following the instructions on the [raxml-ng](https://github.com/amkozlov/raxml-ng?tab=readme-ov-file) Github page, by selecting the **Download OSX/macOS binary (x86 and ARM)** link on the page.
-
-To display the help messages you can execute the following command from the directory of the raxml-ng executable:
-```
-./raxml-ng -h 
-```
 
 ## Picard version 3.0.0
 
@@ -271,7 +275,9 @@ mkdir ~/2024.Cochlearia.Illumina.cohort/200524_Alignment_Summary_Metrics/
 
 The Illumina paired-end sequencing data provided by Yant (2024) were processed following the steps outlined in the [ngs_pipe](https://github.com/mattheatley/ngs_pipe/blob/main/README) README page written by Healey (2024). 
 
-Firstly, the adapters were trimmed from the reads with Trimmomatic (version 0.39), specifying the Nextera transposase adapter sequences to be trimmed from the reads`ILLUMINACLIP:NexteraPE-PE.fa:2:40:15`. A sliding window of 4 bases was specified with a minimum PHRED score threshold of 20, thus trimming reads with PHRED scores < 20 (`SLIDINGWINDOW:4:20`), and a minimum length of 25 (`MINLEN:25`). An example trimmomatic command for one population (HAM_1) can be found below:
+# Stage 1: Trimming the adapters from Illumina paired-end sequencing reads
+
+Firstly, Nextera Transposase adapters were trimmed from the reads with Trimmomatic (version 0.39), by specifying `ILLUMINACLIP:NexteraPE-PE.fa:2:40:15` on the command line. Reads with PHRED scores < 20 and a minimum length of 25 were trimmed ((`SLIDINGWINDOW:4:20` & `MINLEN:25`, respectively). An example trimmomatic command for one population (HAM_1) can be found below:
 
 ```
 ##Trimmomatic - trims Nextera transposase adapters from the Illumina reads
@@ -280,6 +286,43 @@ java -jar $EBROOTTRIMMOMATIC/trimmomatic-0.39.jar \
         ./HAM_1_EKDL240001890-1A_222TKYLT4_L1_1.trimmed.fq.gz ./HAM_1_EKDL240001890-1A_222TKYLT4_L1_1.orhpan.fq.gz \
         ./HAM_1_EKDL240001890-1A_222TKYLT4_L1_2.trimmed.fq.gz ./HAM_1_EKDL240001890-1A_222TKYLT4_L1_2.orhpan.fq.gz \
         SLIDINGWINDOW:4:20 MINLEN:25 ILLUMINACLIP:NexteraPE-PE.fa:2:40:15
+
+```
+
+# Stage 2: Mapping trimmed reads onto the C_excelsa_V5.fa reference genome with BWA
+
+The Burrow-Wheeler aligner (BWA - version 12.3) was used to align trimmed reads onto the C_excelsa_V5.fa reference genome. An example command for BWA alignment can be found below.
+```
+#make environmental variables to store the metadata (meta), output directory (OUTDIR), and the path to the reference genome (REFDIR).
+meta=EKDL240001890-1A_222TKYLT4
+OUTDIR=~/220524_alignments
+REFDIR=~/C_excelsa_V5_reference/C_excelsa_V5.fa
+
+##Align the PAR_2 reads to C_excelsa_V5.fa reference genome
+bwa mem \
+     -t 16 \
+      $REFDIR \
+     ./PAR_2_${meta}_L1_1.trimmed.fq.gz ./PAR_2_${metad}_L1_2.trimmed.fq.gz \
+     > $OUTDIR/PAR_2_${meta}_aln-pe.sam
+
+```
+
+# Stage 3: Converting to bam files, sorting, and indexing bams with Samtools
+
+Samtools (version - 1.8) was used to convert the `aln-pe.sam` files produced by BWA in the previous stage into binary bam files using the `samtools view` command. The bam files were coordinate sorted using `samtools sort`, and subsequently indexed with `samtools index`. Finally, summary statistics for the alignments were produced with `samtools flagstats`. 
+
+```
+#samtools converting PAR_2 sam alignment to bam with samtools view 
+samtools view -@ 4 -h -b ./PAR_2_${metadata}_aln-pe.sam -o ./bam_files/PAR_2_${metadata}.bam
+
+#samtools sort to produce a coordinate-sorted bam file
+samtools sort -@ 4 -o ./bam_files/PAR_2_${metadata}.sorted.bam ./bam_files/PAR_2_${metadata}.bam
+
+#samtools index to produce an indexed sorted.bam file
+samtools index ./bam_files/PAR_2_${metadata}.sorted.bam
+
+#samtools flagstat produces alignment summary statistics
+samtools flagstat ./bam_files/PAR_2_${metadata}.sorted.bam > ./bam_files/PAR_2_${metadata}.flagstats
 
 ```
 
