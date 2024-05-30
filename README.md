@@ -83,9 +83,9 @@ The structure of the 150524_experimental_TREE_FILE.nwk can be found below, where
 
 Additional *C. danica* and *Ionopsidium* Illumina paired-end sequencing data was provided by Yant (2024). The fastq.gz files from each population folder were investigated for sequencing quality and the presence of adapters utilising Fastqc and Multiqc. 
 
-## Fastqc and Multiqc for sequencing quality control reports
+## FastQC and MultiQC for sequencing quality control reports
 
-The Multiqc report for the additional *Cochlearia danica* and *Ionopsidium* Illumina paired-end sequencing data provided by Yant (2024) can be accessed via the following link [INSERT LINK HERE]. 
+The MultiQC report for the additional *Cochlearia danica* and *Ionopsidium* Illumina paired-end sequencing data provided by Yant (2024) can be accessed via the following link [INSERT LINK HERE]. 
 
 An example command for producing a fastqc sequencing quality control report can be found below:
 ```
@@ -104,7 +104,7 @@ fastqc -o ../170524_fastqc/ ./FLE_2/*.fq.gz
 module unload fastqc-uoneasy/0.12.1-Java-11
 ```
 
-Subsequently, a multiqc report can be performed/executed on the directory containing the results from the fastqc reports, which will be .fastqc.gz files. The command required to produce the multiqc report can be found below.
+Subsequently, a MultiQC report can be performed/executed on the directory containing the results from the fastqc reports, which will be .fastqc.gz files. The command required to produce the MultiQC report can be found below.
 ```
 ##load multiqc module
 module load multiqc-uoneasy/1.14-foss-2023a
