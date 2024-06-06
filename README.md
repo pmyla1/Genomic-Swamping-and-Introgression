@@ -9,6 +9,10 @@ The genus *Cochlearia* displays a **wide range of cytotypes** and levels of ploi
 
 *Cochlearia danica* is a **highly invasive, salt tolerant** species in the *Cochlearia* genus that is **native** to the **Atlantic coasts of Europe** in countries including Denmark, Belgium, the UK, Germany, Finland, Ireland, Norway, Russia, and Sweden amongst others (Fekete et al., 2018). Despite being native to the Atlantic coasts of Europe, *C. danica* has **spread rapidly throughout Central Europe** since the 1970s, especially **along roadsides** which is attributed to the **widespread use of de-icing salts** ([Fekete et al., 2018](http://dx.doi.org/10.23855/preslia.2018.023)). The **rate of spread** of *C. danica* along Central European roadsides was estimated to be **approximately 62-65km/year**, and the soil in which it grows and thrives is characterised by **high salt content** (Fekete et al., 2018). Interestingly, this species has been reported to undergo **rapid and marked/remarkable** changes in **population size**, and one Hungarian population was found to decrease in size by 99% between 2016 and 2017 (Fekete et al., 2018).
 
+Introgression is the exchange of genetic material between species that results from hybridization and recurrent backcrossing ([Wang et al., 2023](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10504873/)).
+
+The aim of this project is to detect and quantify the extent of gene flow/introgression between the invasive hexaploid halophyte *C. danica* and native UK populations of *C. anglica* (6X) or UK populations of *C. officinalis* (4X) by calculating ABBA-BABA statistics on genome-wide SNP data using software such as Dsuite ([Malinsky, 2021](https://doi.org/10.1111/1755-0998.13265)). 
+
 
 # Installation of Software and Dependencies
 
@@ -33,89 +37,62 @@ I executed the Dsuite Dtrios command locally utilising the following commands:
 ./Build/Dsuite Dtrios -t ../Desktop/Individual_Project_files/Dsuite_files/TREE_FILE.nwk -o 120524_Dsuite_stats --ABBAclustering ../Desktop/Individual_Project_files/ld_pruned_110524_WG_allUKhex_allUKdips_someUKtets_copy.vcf ../Desktop/Individual_Project_files/Dsuite_files/SETs.txt 
 ```
 
-The TREE_FILE.nwk was structured as following, where the Outgroup was the UK diploid species *Cochlearia pyrenaica*:
+The TREE_FILE.nwk was structured as following, where the Outgroup was the UK diploid species *Cochlearia pyrenaica* because data for *Ionopsidium* (the true sister taxa and real outgroup) was not available, and UK diploids were indicated as the alternative outgroup by `Dsuite Dquartets`:
 ```
-(Outgroup,(C_officinalis,(C_anglica,C_danica)));
+(Outgroup,(officinalis,(anglica,danica)));
 ```
-The SETs.txt file was structured following the guidelines on the [Dsuite](https://github.com/millanek/Dsuite) Github page with the individual ID and the group ID separated by a tab, and is demonstrated below:
+The SETs.txt file has the following structure with the individual ID and the group ID (i.e. the species) separated by a tab, and is demonstrated below:
 ```
-BNK21  Outgroup
+BNK_21 Outgroup
 CHA_1  Outgroup
 CHA_2  Outgroup
 JOR_1  Outgroup
 ...
-AAH_1  C_officinalis
-AAH_2  C_officinalis
-AAH_3  C_officinalis
-AAH_4  C_officinalis
+AAH_1  officinalis
+AAH_2  officinalis
+AAH_3  officinalis
+AAH_4  officinalis
 ...
-BRE_1  C_danica
-CUM_1  C_danica
-DAR_1  C_danica
-DAR_3  C_danica
+BRE_1  danica
+CUM_1  danica
+DAR_1  danica
+DAR_3  danica
 ...
-SKF_002  C_anglica
-SKF_003  C_anglica
-SKF_005  C_anglica
-SKF_009  C_anglica
+SKF_002  anglica
+SKF_003  anglica
+SKF_005  anglica
+SKF_009  anglica
 ```
 
-## 15/05/2024 Additional Dsuite commands and calculations
-
-Dsuite Dtrios was also executed on a newly LD pruned, filtered VCF file containing all UK hexaploids, including all *C. danica* and putative *C. anglica* samples, all UK diploids, some EU diploids, and approximately half of the UK and EU tetraploids.
-
-This time, the TREE_FILE.nwk was altered to change the relationships between the sequences
-
-```
-##utilise Dsuite
-cd ~/Dsuite/
-
-##execute Dtrios with a jackknife number of 50 (splits the SNPs into 50 blocks)
-./Build/Dsuite Dtrios -k 50 -t ../Desktop/Individual_Project_files/Dsuite_files/150524_experimental_TREE_FILE.nwk --ABBAclustering -o 150524_EU_UK_ld_pruned ../Desktop/Individual_Project_files/VCF_files/150524_ld_pruned_20PCTmis_maf005_EU_UK_pops.vcf.gz ../Desktop/Individual_project_files/Dsuite_files/150524_SETs.txt
-```
-
-The structure of the 150524_experimental_TREE_FILE.nwk can be found below, where *C. danica* replaces *C. officinalis*:
-
-```
-(Outgroup,(C_danica,(C_anglica,C_officinalis)));
-```
 # Data Generation (17/05/2024)
 
-Additional *C. danica* and *Ionopsidium* Illumina paired-end sequencing data was provided by Yant (2024). The fastq.gz files from each population folder were investigated for sequencing quality and the presence of adapters utilising Fastqc and Multiqc. 
+Additional *C. danica* and *Ionopsidium* Illumina paired-end sequencing data was provided by Yant (2024), and the sequencing reads (in fq.gz/fastq.gz format) were processed loosely following the guidelines outlined in [ngs_pipe](https://github.com/mattheatley/ngs_pipe/blob/main/README) from Healey (2024).
 
 ## FastQC and MultiQC for sequencing quality control reports
 
-The MultiQC report for the additional *Cochlearia danica* and *Ionopsidium* Illumina paired-end sequencing data provided by Yant (2024) can be accessed via the following link [INSERT LINK HERE]. 
-
-An example command for producing a fastqc sequencing quality control report can be found below:
+An example command for producing a fastqc report for a single population (FLEET_2 in this example) can be found below:
 ```
-###load the fastqc module for sequencing quality control
+###load fastqc for performing sequencing quality control reports
 module load fastqc-uoneasy/0.12.1-Java-11
 
-##change directory to where your fastq.gz files are stored
+##change directory to the fastq.gz files 
 cd /file/path/to/fastq.gz files
 
-##perform fastqc on the FLE_2 sequencing data/reads
+##perform fastqc on the FLEET_2 sequencing reads
 fastqc -o ../170524_fastqc/ ./FLE_2/*.fq.gz
 
-##repeat for the other populations
-
-##unload fastqc module
-module unload fastqc-uoneasy/0.12.1-Java-11
+##REPEAT for the other populations
 ```
 
-Subsequently, a MultiQC report can be performed/executed on the directory containing the results from the fastqc reports, which will be .fastqc.gz files. The command required to produce the MultiQC report can be found below.
+Subsequently, a MultiQC report can be generated by utilising the directory containing the FastQC reports generated in the previous stage as input files (i.e. the .fastqc.zip files). The command to produce the MultiQC report can be found below.
 ```
 ##load multiqc module
 module load multiqc-uoneasy/1.14-foss-2023a
 
 ##execute multiqc on the fastqc.zip data specifying -f (--force to overwrite existing reports) and -p to export the plots generated
 multiqc /gpfs01/home/pmyla1/170524_fastqc/.*fastqc.zip
-
-##unload multiqc module
-module unload multiqc-uoneasy/1.14-foss-2023a
 ```
-The multiqc plots and reports can be found within the directory from which the commands were executed and include a directory for png, svg, or pdf versions of the plots.
+The MultiQC plots and reports include a directory for png, svg, or pdf versions of the plots.
 
 # Cutadapt (Trimming adapters from Illumina paired-end reads)
 
