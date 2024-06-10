@@ -1,5 +1,5 @@
 # Genomic-Swamping-and-Introgression
-This repository should allow the user to reproduce an analysis of the extent of **introgression** between the invasive hexaploid ***Cochlearia danica*** and native tetraploid species ***Cochlearia officianalis***, utilising tools such as **Dsuite** and **Twisst**. 
+This repository should allow the user to reproduce an analysis of the extent of **introgression** between UK accessions of invasive hexaploid ***Cochlearia danica*** and native tetraploid species ***Cochlearia officinalis***, utilising tools such as **Dsuite** and **Twisst**. 
 
 # Background
 
@@ -93,121 +93,6 @@ module load multiqc-uoneasy/1.14-foss-2023a
 multiqc /gpfs01/home/pmyla1/170524_fastqc/.*fastqc.zip
 ```
 The MultiQC plots and reports include a directory for png, svg, or pdf versions of the plots.
-
-# Cutadapt (Trimming adapters from Illumina paired-end reads)
-
-[Cutadapt Version 4.6](https://cutadapt.readthedocs.io/en/stable/guide.html) and the 170524_cutadapters_fastqc_multiqc.sh script was used to trim the Nextera transposase adapter sequences from the *C. danica* fastq.gz sequencing files. Moreover, the Illumina universal adapters (5'-CTGTCTCTTATACACATCT-3') were trimmed from the *Ionopsidium* sequencing reads. 
-
-Example command:
-```
-##cut adapters from the end of the fastq.gz files with cutadapt
-##the read 1 Nextera transposase sequence is TCGTCGGCAGCGTCAGATGTGTATAAGAGACAG
-## the read 2 Nextera transposase adapter sequence is GTCTCGTGGGCTCGGAGATGTGTATAAGAGACAG
-module load cutadapt-uon/gcc12.3.0/4.6
-
-##first cut the nextera transposase read 1 sequence from FLE_2
-cutadapt -a TCGTCGGCAGCGTCAGATGTGTATAAGAGACAG -o 170524_cutadapt/170524_FLEET_2_EKDL240001890-1A_222TKYLT4_L1_1.fq.gz ./FLE_2/FLEET_2_EKDL240001890-1A_222TKYLT4_L1_1.fq.gz
-
-##then cut the nextera transposase read 2 sequence from FLE_2
-cutadapt -a GTCTCGTGGGCTCGGAGATGTGTATAAGAGACAG -o 170524_cutadapt/170524_FLEET_2_EKDL240001890-1A_222TKYLT4_L1_2.fq.gz ./FLE_2/FLEET_2_EKDL240001890-1A_222TKYLT4_L1_1.fq.gz
-
-```
-
-# Alignment to C_excelsa_V5.fa reference - BWA 
-
-[BWA version 0.7.17](https://bio-bwa.sourceforge.net/bwa.shtml) and the `bwa index` and `bwa mem` commands were used to produce sam alignment files for the Illumina paired-end read data. Firstly, the reads were concatenated into a single fastq.gz file using a `cat` command (example shown below):
-
-```
-###concatenate the R1 and R2 reads for each population into one file for alignment
-cat ./170524_FLEET_2_EKDL240001890-1A_222TKYLT4_L1_1.fq.gz ./170524_FLEET_2_EKDL240001890-1A_222TKYLT4_L1_2.fq.gz > ./180524_merged_FLEET_2_EKDL240001890-1A_222TKYLT4.fq.gz
-```
-
-Subsequently, the C_excelsa_V5.fa reference was indexed using `bwa index`, to produce 5 different files with the `C_excelsa_V5` prefix. Example command shown below:
-
-```
-#index the C_excelsa_V5.fa
-bwa index ./C_excelsa_V5.fa
-```
-
-Next, the merged fastq.gz files were aligned to the C_excelsa_V5 reference utilising a `bwa mem` command with default options for all gap opening penalties, and specifying 16 threads. Example command for LWS_1:
-
-```
-##use bwa mem with 16 threads to produce a sam alignment file 
-bwa mem -t 16 ~/C_excelsa_V5_reference/C_excelsa_V5.fa ./180524_merged_LWS_EKDL240001890-1A_222TKYLT4.fq.gz  > ./180524_alignments/180524_LWS_EKDL240001890-1A_222TKYLT4_paired.sam
-```
-## Samtools - Convert sam to bam
-
-Finally, [Samtools (Version 1.18)](https://www.htslib.org/doc/samtools.html) was used to convert the sam files for each population into bam files. Subsequetly, the bam files were sorted, indexed, and assessed for the quality of the alignment with `samtools view`, `samtools sort`, `samtools index`, and `samtools flagstat`, respectively. Example commands shown below:
-
-```
-##convert Ime sam to bam with samtools view
-samtools view -@ 8 -b ./180524_Ime_paired.sam > ./180524_Ime_paired.bam
-
-##use samtools sort to produce a sorted Ime bam file
-samtools sort -@ 8 -o ./180524_Ime_paired.sorted.bam ./180524_Ime_paired.bam 
-
-#finally index the sorted Ime bam file with samtools index
-samtools index ./180524_Ime_paired.sorted.bam
-
-##now get a summary of the alignment with samtools flagstat
-samtools flagstat ./180524_Ime_paired.sorted.bam
-```
-# Picard MarkDuplicates
-
-Duplicate reads from the sorted bams were marked and discarded using Picard (version 3.0.0) MarkDuplicates, specifying `--REMOVE_DUPLICATES true`. An example MarkDuplicates command for one of the samples can be found below.
-
-```
-##make environmental variables for the output directory (OUTDIR) and the metadata (meta)
-OUTDIR=~/220524_alignments/bam_files/duplicate_marked_bams
-meta=EKDL240001890-1A_222TKYLT4
-
-##execute MarkDuplicates on FLEET_2
-java -jar $EBROOTPICARD/picard.jar MarkDuplicates -I ./FLEET_2_${meta}.sorted.bam -O $OUTDIR/FLEET_2_${meta}.marked_duplicates.bam -M $OUTDIR/FLEET_2_${meta}.marked_dup_metrics.txt --VALIDATION_STRINGENCY SILENT --ASSUME_SORTED true --REMOVE_DUPLICATES true
-
-```
-
-## Picard version 3.0.0
-
-Picard version 3.0.0 can be installed following the instructions on the [Picard github page](https://github.com/broadinstitute/picard). 
-
-Picard was used to mark duplicate reads and to collect summary alignment metrics using the `MarkDuplicates` and `CollectAlignmentSummaryMetrics` commands, respectively. 
-
-Example commands for these processes can be found below:
-
-### MarkDuplicates
-
-```
-##load the picard module to mark the duplicates in the bam alignment files
-module load picard-uoneasy/3.0.0-Java-17
-
-##change directory to the bam alignment files
-cd ~/2024.Cochlearia.Illumina.cohort/170524_cutadapt/180524_merged_reads/180524_alignments/190524_bam_files/
-
-##use MarkDuplicates to mark the duplicated reads in FLE_2 
-java -jar picard.jar MarkDuplicates \
-      I=./180524_FLE_2_paired.sorted.bam \
-      O=./190524_FLE_2_marked_duplicates.sorted.bam \
-      M=./190524_FLE_2_marked_duplicates_metrics.txt
-```
-
-### CollectAlignmentSummaryMetrics
-
-```
-##load the GATK module to grep the read groups from the duplicate marked BAM files
-module load gatk-uoneasy/4.4.0.0-GCCcore-12.3.0-Java-17
-
-##change directory to the bam alignment files
-cd ~/2024.Cochlearia.Illumina.cohort/170524_cutadapt/180524_merged_reads/180524_alignments/190524_bam_files/
-
-##make a new directory for the output
-mkdir ~/2024.Cochlearia.Illumina.cohort/200524_Alignment_Summary_Metrics/
-#############
-##calculate alignment summary metrics for FLE_2 duplicate marked bam
-    java -jar picard.jar CollectAlignmentSummaryMetrics \
-          R=~/C_excelsa_V5_reference/C_excelsa_V5.fa \
-          I=./190524_FLE_2_marked_duplicates.sorted.bam \
-          O=~/2024.Cochlearia.Illumina.cohort/200524_Alignment_Summary_Metrics/200524_FLE_2_aln_sum.txt
-```
 
 ## 22/05/2024 - Whole Pipeline from Data Generation to VCF
 
