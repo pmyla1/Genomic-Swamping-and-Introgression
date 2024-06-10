@@ -269,36 +269,12 @@ gatk SelectVariants \
    --restrict-alleles-to BIALLELIC \
 ```
 
-Subsequently, GATK VariantFiltration was used to filter variants based on depth-normalised quality score (QD < 2), forward-reverse strand bias allele bias (FS > 60), root-squared mean quality mapping score (MQ < 40), when the ALT allele quality is lower than the REF allele quality (MQRankSum < -12.5), when the ALT allele is more frequently at the read end than the REF allele (ReadPoRankSum < -8), and when there are multiple segregating haplotypes (HaplotypeScore < 13).
-
-```
-##GATK VariantFiltration
-gatk VariantFiltration \
-    -R $REF \
-    -V $OUT1 \
-    -O $OUT2 \
-    --filter-name "QD" \
-    --filter-expression "QD < 2.0" \
-    --filter-name "FS" \
-    --filter-expression "FS > 60" \
-    --filter-name "MQ" \
-    --filter-expression "MQ < 40" \
-    --filter-name "MQRS" \
-    --filter-expression "MQRankSum < -12.5" \
-    --filter-name "RPRS" \
-    --filter-expression "ReadPosRankSum < -8" \
-    --filter-name "HS" \
-    --filter-expression "HaplotypeScore < 13" 
-################
-
-```
-
 Finally, VCFtools (version 1.16) was used to output per-site depth statistics.
 
 ```
 #####
 ##use vcftools to output per site depth statistics
-vcftools --gzvcf $OUT2 --out Depth.per.site --site-depth
+vcftools --gzvcf $OUT1 --out Depth.per.site --site-depth
 ```
 
 ## SplitsTree
