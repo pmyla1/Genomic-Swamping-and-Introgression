@@ -264,7 +264,7 @@ samtools flagstat ./bam_files/PAR_2_${metadata}.sorted.bam > ./bam_files/PAR_2_$
 
 ```
 
-# Stage 4: Marking and discarding duplicate reads with Picard MarkDuplicates
+# Stage 4: Marking and discarding duplicate reads with Picard MarkDuplicates and Adding Read Groups with AddOrReplaceReadGroups
 
 Duplicate reads from the sorted bams were marked and discarded using Picard (version 3.0.0) MarkDuplicates, specifying `--REMOVE_DUPLICATES true`. An example MarkDuplicates command for one of the samples can be found below.
 
@@ -276,6 +276,144 @@ meta=EKDL240001890-1A_222TKYLT4
 ##execute MarkDuplicates on FLEET_2
 java -jar $EBROOTPICARD/picard.jar MarkDuplicates -I ./FLEET_2_${meta}.sorted.bam -O $OUTDIR/FLEET_2_${meta}.marked_duplicates.bam -M $OUTDIR/FLEET_2_${meta}.marked_dup_metrics.txt --VALIDATION_STRINGENCY SILENT --ASSUME_SORTED true --REMOVE_DUPLICATES true
 
+```
+
+Read Groups were manually added to the duplicate marked bam files and were coordinate-sorted and indexed using Picard AddOrReplaceReadGroups with the `SORT_ORDER=coordinate` and `CREATE_INDEX=True` command line options. An example command for adding read groups can be found below.
+```
+meta=EKDL240001890-1A_222TKYLT4
+#################
+##fix read groups
+java -jar $EBROOTPICARD/picard.jar AddOrReplaceReadGroups \
+    I=FLEET_2_${meta}.bam \
+    O=FLEET_2_${meta}_with_RG.bam \
+    SORT_ORDER=coordinate \
+    RGID=1A \
+    RGLB=EKDL24001890 \
+    RGPL=ILLUMINA \
+    RGPU=unit1 \
+    RGSM=FLEET_2 \
+    CREATE_INDEX=True
+###############
+```
+
+# Stage 5: Genotyping Individual Samples with GATK HaplotypeCaller
+
+Samples were genotyped utilising GATK (version 4.4.0) HaplotypeCaller specifying `--emit-ref-confidence BP_RESOLUTION`, `--minimum-mapping-quality-score 25` and `--min-base-quality-score 25`. An example command for a single accession/population can be found below.
+
+```
+##make environmental variables for the reference genome and for the output directory
+OUTDIR=~/300524_HaplotypeCaller_output
+REF=~/C_excelsa_V5_reference/C_excelsa_V5.fa
+###########
+##HaplotypeCaller for FLEET_2
+ gatk --java-options "-Xmx4g" HaplotypeCaller  \
+   -R $REF \
+   -I ./FLEET_2_EKDL240001890-1A_222TKYLT4.marked_duplicates.bam \
+   -O $OUTDIR/FLEET_2_EKDL240001890-1A_222TKYLT4.g.vcf.gz \
+   -bamout $OUTDIR/FLEET_2_EKDL240001890-1A_222TKYLT4.6x.bam \
+   --emit-ref-confidence BP_RESOLUTION \
+   --min-base-quality-score 25 \
+   --minimum-mapping-quality 25 \
+   --sample-ploidy 6 \
+```
+
+# Stage 6: Combining per-sample gVCFs into a single gVCF with GATK CombineGVCFs
+
+The per-sample gVCFs generated in the previous stage by GATK HaplotypeCaller were combined into a multi-sample gVCF with `GATK CombineGVCFs`. The command used to combine all the gVCFs into a multi-sample gVCF can be seen below.
+
+```
+###make environmental variables for the reference genome and the output directory
+REF=~/C_excelsa_V5_reference/C_excelsa_V5.fa
+OUTDIR=~/300524_HaplotypeCaller_output/090624_Combined_VCF
+################
+##GATK CombineGVCFs of the additional danica and ionopsidium samples
+ gatk CombineGVCFs \
+   -R $REF \
+   --variant ./Iac.g.vcf.gz \
+   --variant ./Ime.g.vcf.gz \
+   --variant ./Pen_1_EKDL240001890-1A_222TKYLT4.g.vcf.gz \
+   --variant ./NOT_EKDL240001890-1A_222TKYLT4.g.vcf.gz \
+   --variant ./SPEY_2_EKDL240001890-1A_222TKYLT4.g.vcf.gz \
+   --variant ./LWS_EKDL240001890-1A_222TKYLT4.g.vcf.gz \
+   --variant ./Iab_1.g.vcf.gz \
+   --variant ./Iab_2.g.vcf.gz \
+   --variant ./FLEET_2_EKDL240001890-1A_222TKYLT4.g.vcf.gz \
+   --variant ./PAR_2_EKDL240001890-1A_222TKYLT4.g.vcf.gz \
+   -O $OUTDIR/090624_Ionops_danica_combined.g.vcf.gz
+################
+```
+
+# Stage 7: Joint genotyping with GATK GenotypeGVCFs
+
+The multi-sample gVCF produced in the previous stage with GATK CombineGVCFs was joint-genotyped using GATK GenotypeGVCFs specifying `-G StandardAnnotation` and `--include-non-variant-sites True`. The command used to joint-genotype the multi-sample gVCF can be found below.
+
+```
+###make environmental variables for the reference genome, input directory, and the output directory
+REF=~/C_excelsa_V5_reference/C_excelsa_V5.fa
+INDIR=~/300524_HaplotypeCaller_output/090624_Combined_VCF
+OUTDIR=~/300524_HaplotypeCaller_output/090624_combined_genotyped
+################
+##GATK GenotypeGVCFs of the additional danica samples and ionopsidium samples
+ gatk GenotypeGVCFs \
+   -R $REF \
+   -V $INDIR/090624_Ionops_danica_combined.g.vcf.gz \
+   -O $OUTDIR/090624_Ionops_danica_genotypd.g.vcf.gz \
+   -G StandardAnnotation \
+   --include-non-variant-sites True
+################
+```
+
+# Stage 8: Filtering with GATK SelectVariants and GATK VariantFiltration
+
+GATK SelectVariants was used to exclude insertion-deletion mutations and mixed SNP-indels, and to include only biallelic SNPs from the multi-sample gVCF.
+
+```
+###make environmental variables for the reference genome, input directory, and the output directory
+REF=~/C_excelsa_V5_reference/C_excelsa_V5.fa
+VCF=~/300524_HaplotypeCaller_output/090624_combined_genotyped/090624_Ionops_danica_genotyped.g.vcf.gz
+OUT1=~/300524_HaplotypeCaller_output/090624_combined_genotyped/100624_filtered.best/100624_Ion.dan.filtered.F1.biallelic.g.vcf.gz
+OUT1=~/300524_HaplotypeCaller_output/090624_combined_genotyped/100624_filtered.best/100624_Ion.dan.filtered.F2.best.practice.g.vcf.gz
+################
+##GATK SelectVariants to select biallelic variants only
+gatk SelectVariants \
+   -R $REF \
+   -V $VCF \
+   -O $OUT1 \
+   --select-type-to-exclude INDEL \
+   --select-type-to-exclude MIXED \
+   --restrict-alleles-to BIALLELIC \
+```
+
+Subsequently, GATK VariantFiltration was used to filter variants based on depth-normalised quality score (QD < 2), forward-reverse strand bias allele bias (FS > 60), root-squared mean quality mapping score (MQ < 40), when the ALT allele quality is lower than the REF allele quality (MQRankSum < -12.5), when the ALT allele is more frequently at the read end than the REF allele (ReadPoRankSum < -8), and when there are multiple segregating haplotypes (HaplotypeScore < 13).
+
+```
+##GATK VariantFiltration
+gatk VariantFiltration \
+    -R $REF \
+    -V $OUT1 \
+    -O $OUT2 \
+    --filter-name "QD" \
+    --filter-expression "QD < 2.0" \
+    --filter-name "FS" \
+    --filter-expression "FS > 60" \
+    --filter-name "MQ" \
+    --filter-expression "MQ < 40" \
+    --filter-name "MQRS" \
+    --filter-expression "MQRankSum < -12.5" \
+    --filter-name "RPRS" \
+    --filter-expression "ReadPosRankSum < -8" \
+    --filter-name "HS" \
+    --filter-expression "HaplotypeScore < 13" 
+################
+
+```
+
+Finally, VCFtools (version 1.16) was used to output per-site depth statistics.
+
+```
+#####
+##use vcftools to output per site depth statistics
+vcftools --gzvcf $OUT2 --out Depth.per.site --site-depth
 ```
 
 ## SplitsTree
