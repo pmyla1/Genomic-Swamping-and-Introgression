@@ -305,6 +305,8 @@ The .iqtree file produced as output suggested that the substitution model that p
 
 [iTOL](https://itol.embl.de/upload.cgi) or the Interactive Tree of Life, is a GUI which was used to upload the Newick-formatted consensus tree produced by IQTREE and to visualize the consensus tree. 
 
+To visualise your consensus tree you can upload the consensus tree in Newick format into the `Tree Text` box and select upload. Next you can customise the layout of your consensus tree as you wish by selecting the toolbar which includes `Basic`, `Advanced`, and `Datasets`. 
+
 ## Twisst (Topology weighting by iterative sampling of sub-trees)
 
 This software can be used to quantify relationships between taxa that are not necessarily monophyletic, and can be used to explore how relationships between taxa varies across the genome by using genomic single nucleotide polymorphism (SNP) windows.
