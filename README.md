@@ -287,7 +287,23 @@ Editing the phylogenetic networks was performed using Microsoft Powerpoint and m
 
 The 140524_adegenet_VCFs.R script was used to analyse the LD pruned and filtered VCF, utilising the glPcaFast() and vcf2genlightTetra() functions provided by Yant et al (2023). The VCF is loaded into Rstudio and is subsequently converted into a genlight object using the vcf2genlightTetra() function for polyploid data. Next, principal component analysis (PCA) can be performed on the genlight object, and subsequently, the genlight object can be converted into Nei's genetic distances using the stamppNeisD() function. Nei's genetic distances can be calculated for both the individual samples and the populations, and can be subsequently prepared for exporting into SplitsTree by the stamppPhylip() function provided by former student Anna (INSERT SURNAME, YEAR).   
 
+## IQTREE and iTOL for maximum likelihood tree estimation and visualization
 
+[IQTREE](http://www.iqtree.org/#download) was downloaded locally following the download instructions for `64-bit macOS Universal`. 
+
+After navigating to the directory where the IQTREE executable is located, the following command was executed.
+
+```
+##Execute iqtree2 using Nei's genetic distance data and 4 threads/CPUs
+bin/iqtree2 -s ~/Desktop/110624_aa.indiv_Neis_distance_4ds.phy -nt 4
+```
+The .iqtree file produced as output suggested that the substitution model that produces the maximum likelihood tree was `MK+I{0.0727447}+G4{0.244664}`, therefore, the analysis was re-done, this time with 1000 Bootstrap replicates for estimating branch supports and utilising the `-bnni` flag to reduce the risk of over-estimating branch supports. The command can be found below.
+```
+##execute iqtree2 with 4 threads, 1000 bootstrap replicates, the ML substitution model, and -bnni to reduce the risk of branch-support overestimation
+~/Desktop/iqtree-2.3.4-macOS/bin/iqtree2 -s ~/Desktop/110624_IQTREE.OUT/110624_aa.indiv_Neis_distance_4ds.phy -nt 4 -B 1000 -m "MK+I{0.0727447}+G4{0.244664}" -bnni -redo
+```
+
+[iTOL](https://itol.embl.de/upload.cgi) or the Interactive Tree of Life, is a GUI which was used to upload the Newick-formatted consensus tree produced by IQTREE and to visualize the consensus tree. 
 
 ## Twisst (Topology weighting by iterative sampling of sub-trees)
 
