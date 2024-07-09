@@ -1,5 +1,5 @@
 # Genomic-Swamping-and-Introgression
-This repository should allow the user to reproduce an analysis of the extent of **introgression** between UK accessions of invasive hexaploid ***Cochlearia danica*** and native tetraploid species ***Cochlearia officinalis***, utilising tools such as **Dsuite** and **Twisst**. 
+This repository should allow the user to reproduce an analysis of **gene flow/introgression** between the rapidly spreading invasive hexaploid ***Cochlearia danica*** and native UK ***Cochlearia species*** including: the diploid ***Cochlearia pyrenaica***, the tetraploid ***Cochlearia officinalis***, and the hexaploid ***Cochlearia anglica***-like hybrid, utilising the **Dsuite** software package for calculating Patterson's D and f4-admixture ratios (ABBA-BABA statistics). 
 
 # Background
 
