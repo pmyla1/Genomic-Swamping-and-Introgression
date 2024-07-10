@@ -285,6 +285,41 @@ vcftools --gzvcf $OUT1 --out Depth.per.site --site-depth
 
 # Stage 9: Depth filtering, LD pruning, and final VCF generation
 
+GATK (version 4.4.0) SelectVariants was used to produce a depth-masked VCF file (120624_depth.mask.Ion.dan.g.vcf.gz.) based on a depth cut off of 1.6 * the mean depth. Subsequently, GATK VariantFiltration was used to filter the F2 best practice VCF (110624_Ion.dan.F2.best.g.vcf.gz) using the depth-masked VCF and removing the variants NOT in the masked VCF. The final F4 VCF (120624_Ion.dan.filtered.F4.g.vcf.gz) was produced using GATK SelectVariants by excluding the depth-filtered sites from the F3 VCF with the `--exclude-filtered True` command line option.
+ 
+
+```
+##environmental variables for reference genome (REF), input VCF (VCF), and output depth mask VCF (OUTMASK)
+REF=~/C_excelsa_V5_reference/C_excelsa_V5.fa
+VCF=~/300524_HaplotypeCaller_output/090624_combined_genotyped/110624_filtered.best/110624_Ion.dan.F2.best.g.vcf.gz
+OUTMASK=~/300524_HaplotypeCaller_output/090624_combined_genotyped/110624_filtered.best/120624_depth.mask.Ion.dan.g.vcf.gz
+
+##Use GATK SelectVariants to filter based on a maximum depth cut off of 1.6 * mean depth
+gatk SelectVariants \
+        -R $REF \
+        -V $VCF \
+        -O $OUTMASK \ ##produces depth-mask VCF 
+        --select "DP<149" ##depth cut-off = 1.6 * mean depth
+
+##environmental variable for the F3-depth filtered VCF
+OUTF3=~/300524_HaplotypeCaller_output/090624_combined_genotyped/110624_filtered.best/120624_Ion.dan.filtered.F3.g.vcf.gz
+
+gatk VariantFiltration \
+        -R $REF \
+        -V $VCF \
+        -O $OUTF3 \
+        --mask $OUTMASK \
+        --filter-not-in-mask ##remove the sites NOT in the masked VCF
+
+##environmental variable for final F4-filtered VCF
+OUTF4=~/300524_HaplotypeCaller_output/090624_combined_genotyped/110624_filtered.best/120624_Ion.dan.filtered.F4.g.vcf.gz
+
+gatk SelectVariants \
+    -R $REF \
+    -V $OUTF3 \ ##input F3-filtered VCF from previous stage
+    -O $OUTF4 \ ##final output F4-VCF
+    --exclude-filtered True ##exclude the sites with depth > 149x
+```
 
 
 ## SplitsTree
