@@ -418,11 +418,11 @@ prune_ld -vcf ~/120624_Ionops.allUKsamples.F4.vcf -mis 0.9 -maf 0.05 -r2 50 10 0
 
 SplitsTree was downloaded following the instructions on the [University of Tübingen Website](https://uni-tuebingen.de/fakultaeten/mathematisch-naturwissenschaftliche-fakultaet/fachbereiche/informatik/lehrstuehle/algorithms-in-bioinformatics/software/splitstree/). 
 
-This program was used to construct and visualize phylogenetic networks of the individuals and the populations in the ld pruned VCF file. 
+This program was used to construct and visualize phylogenetic networks of the individuals in the ld pruned 120624.LD.Pruned.Ionops.allUKsamples.vcf. 
 
-Editing the phylogenetic networks was performed using Microsoft Powerpoint and manually highlighting clades. 
+Editing the phylogenetic networks was performed using Microsoft Word and manually highlighting clades according to ploidy. 
 
-The 140524_adegenet_VCFs.R script was used to analyse the LD pruned and filtered VCF, utilising the glPcaFast() and vcf2genlightTetra() functions provided by Yant et al (2023). The VCF is loaded into Rstudio and is subsequently converted into a genlight object using the vcf2genlightTetra() function for polyploid data. Next, principal component analysis (PCA) can be performed on the genlight object, and subsequently, the genlight object can be converted into Nei's genetic distances using the stamppNeisD() function. Nei's genetic distances can be calculated for both the individual samples and the populations, and can be subsequently prepared for exporting into SplitsTree by the stamppPhylip() function provided by former student Anna (INSERT SURNAME, YEAR).   
+The 030724.adegenet.R script was used to analyse the LD pruned and filtered VCF (120624.LD.Pruned.Ionops.allUKsamples.vcf), utilising the glPcaFast() and vcf2genlightTetra() functions provided by Yant et al (2023). The VCF was loaded into Rstudio and converted into a genlight object using the vcf2genlightTetra() function for polyploid data. Next, principal component analysis (PCA) can be performed on the genlight object using the glPcaFast() function, and subsequently, the genlight object can be converted into Nei's genetic distances using the stamppNeisD() function. Nei's genetic distances can be calculated for both the individual samples and the populations, and can be subsequently prepared for exporting into SplitsTree by the stamppPhylip() function.   
 
 ## IQTREE and iTOL for maximum likelihood tree estimation and visualization
 
