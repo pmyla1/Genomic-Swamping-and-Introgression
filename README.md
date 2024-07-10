@@ -476,9 +476,25 @@ SKF_005      anglica
 SKF_009      anglica
 ```
 
+## Dinvestigate - a window-based introgression scan in trios with significantly elevated D-statistics
 
+Dinvestigate was used to perform a window-based scan for introgression in trios that had significantly elevated D-statistics from the Dtrios output. 
 
+The `240624_testtrios.txt` is a text file containing the trio of populations/species to test for localised regions of introgression separated by a tab:
+```
+##240624_testtrios.txt structure
+pyrenaica        officinalis        anglica
+```
 
+An example command for one of the trios with elevated D-statistics (*C. pyrenaica*        *C. officinalis*        *C. anglica*) is shown below with two different SNP window sizes.
+```
+##first calculate windowed D-statistics for pyrenaica        officinalis        anglica trio (50 SNPs, 25 SNP step size)
+Dsuite Dinvestigate -w 50,25 -n 50_25_pyr_off_ang $VCF SETS_SPECIES.txt 240624_testtrios.txt
+##now calculate windowed D-statistics for pyrenaica        officinalis        anglica trio (100 SNPs, 25 SNP step size)
+Dsuite Dinvestigate -w 100,25 -n 100_25_pyr_off_ang $VCF SETS_SPECIES.txt 240624_testtrios.txt
+```
+
+The output for the Dinvestigate analysis includes text files containing the localised windowed F-statistics including Fd, Fdm, and df. For subsequent/downstream analyses, the text files can be uploaded into RStudio and the top 1% introgression windows (using f_dM) can be selected using a dplyr based approach.
 
 
 
