@@ -500,5 +500,15 @@ Dsuite Dinvestigate -w 100,25 -n 100_25_pyr_off_ang $VCF SETS_SPECIES.txt 240624
 
 The output for the Dinvestigate analysis includes text files containing the localised windowed F-statistics including Fd, Fdm, and df. For subsequent/downstream analyses, the text files can be uploaded into RStudio and the top 1% introgression windows (using f_dM) can be selected using a dplyr based approach.
 
+# Bedtools intersect - identify introgressed loci overlapping genes 
 
+Bedtools (version ) intersect was used to identify the introgressed loci/genomic windows overlapping genes in the C_excelsa_V5_braker2_wRseq.gff3 genome annotation file, with the `-wa` and `-wb` flags to write the full output including the overlaps in both input files.
 
+The following command was used to identify genes overlapping introgressed loci/windows in the *C. danica* *C. anglica* and *C. pyrenaica* trio.
+
+```
+##use bedtools intersect to identify introgressed windows overlapping the genome annotation file C_excelsa_V5_braker2_wRseq.gff3 
+bedtools intersect -a danangpyr100025_bed.bed -b ./240624_bedtools/C_excelsa_V5_braker2_wRseq.gff3 -wa -wb > ./100624.danangpyr100025.overlaps.txt
+```
+
+Custom python script `extract.geneIDs.py` was used to extract the gene ID column from the 100624.danangpyr100025.overlaps.txt output file, and the `1-2-1_hits_all_gene_descriptions.tsv` file.
