@@ -282,7 +282,7 @@ Finally, VCFtools (version 1.16) was used to output **per-site depth statistics*
 vcftools --gzvcf $OUT1 --out Depth.per.site --site-depth
 ```
 
-# Stage 9: Depth filtering, LD pruning, and final VCF generation
+# Stage 9: Depth filtering and final VCF generation
 
 GATK (version 4.4.0) SelectVariants was used to produce a depth-masked VCF file (120624_depth.mask.Ion.dan.g.vcf.gz.) based on a depth cut off of 1.6 * the mean depth. Subsequently, GATK VariantFiltration was used to filter the F2 best practice VCF (110624_Ion.dan.F2.best.g.vcf.gz) using the depth-masked VCF and removing the variants NOT in the masked VCF. The final F4 VCF (120624_Ion.dan.filtered.F4.g.vcf.gz) was produced using GATK SelectVariants by excluding the depth-filtered sites from the F3 VCF with the `--exclude-filtered True` command line option.
  
@@ -320,6 +320,43 @@ gatk SelectVariants \
     --exclude-filtered True ##exclude the sites with depth > 149x
 ```
 
+# Stage 10: Manually re-headering and merging VCF files 
+
+BCFtools (version 1.18) was used to re-header the original 133 sample reheadered.F4_133.ann.vcf.gz VCF and the 120624_Ion.dan.filtered.F4.g.vcf.gz containing the additional *C. danica* and *Ionopsidium* samples. Firstly, the original VCF file headers were visualised using the following commands:
+
+```
+##environmental variable for reheadered.F4_133.ann.vcf.gz
+VCF1ORIGINAL=reheadered.F4_133.ann.vcf.gz
+bcftools view -h $VCF1ORIGINAL > ./HEADER1.txt
+
+##environmental variable for 120624_Ion.dan.filtered.F4.g.vcf.gz
+VCF2ORIGINAL=120624_Ion.dan.filtered.F4.g.vcf.gz
+bcftools view -h $VCF2ORIGINAL > ./HEADER2.txt
+
+
+```
+Next, the HEADER1.txt and HEADER2.txt files were manually altered using `nano` (or an equivalent text editor) and changing the Number in the PL field in the VCF header to `Number=.`. Then, `bcftools reheader` was used to reheader the VCFs to allow for merging.
+
+```
+##environmental variable for the reheadered VCFs
+VCF1REHEADERED=120624_reheadered.F4_133.ann.vcf.gz
+bcftools reheader -h HEADER1.txt $VCF1ORIGINAL > ./$VCF1REHEADERED
+
+VCF2REHEADERED=120624_reheadered.Ion.dan.F4.g.vcf.gz
+bcftools reheader -h HEADER2.txt $VCF2ORIGINAL > ./$VCF2REHEADERED
+```
+
+The reheadered VCFs were indexed using a simple `bcftools index` command, and the 120624_reheadered.F4_133.ann.vcf.gz and 120624_reheadered.Ion.dan.F4.g.vcf.gz files were merged using  `bcftools merge`.
+
+```
+##make an environmental variable for the merged output VCF
+FINALMERGEDVCF=120624.final.merged.Ion.dan.F4.vcf.gz
+##use bcftools merge with 8 threads to combine/merge the reheadered VCFs together, assuming missing genotypes are unphased (0/0)
+bcftools merge --t 8 -0 --write-index -Oz $VCF1REHEADERED $VCF2REHEADERED -o $FINALMERGEDVCF
+```
+
+
+# Phylogenetic Trees and Principal Component Analysis
 
 ## SplitsTree
 
