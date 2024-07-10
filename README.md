@@ -30,53 +30,8 @@ git clone https://github.com/millanek/Dsuite.git
 cd Dsuite
 make
 ```
-In order to execute Dsuite commands locally (e.g. Dtrios), you can navigate to the Build folder and run the Dsuite executable with the following command `./Build/Dsuite` which shows the available commands. To execute the Dtrios command you can type `./Build/Dsuite Dtrios`.
 
-I executed Dsuite Dtrios using a modular approach on Ada. Dtrios was executed using a jack-knife block approach which divides the 120624_LD.Pruned.Ionops.allUKsamples.vcf.gz file into 4000 blocks of approximately 92 single nucleotide polymorphisms (total number of biallelic SNPs in the 120624_LD.Pruned.Ionops.allUKsamples.vcf.gz file is  366,504):
-```
-##load Dsuite module
-module load dsuite-uon/gcc11.3.0/0.5r57
-
-##change directory to the 230624_Dsuite folder
-cd ~/230624_Dsuite/
-
-##make an environmental variable for the VCF you want to use (120624_LD.Pruned.Ionops.allUKsamples.vcf.gz)
-VCF=~/120624_LD.Pruned.Ionops.allUKsamples.vcf.gz
-
-#execute Dtrios using the appropriate outgroup (Iac, Ime, Iab_1, Iab_2) using 4000 Jack-knife blocks (-k 4000)
-#without specifying an explictly stated phylogenetic tree
-Dsuite Dtrios -k 4000 -o 240624_Dtrios --ABBAclustering $VCF SETS_SPECIES.txt
-```
-
-The SETs.txt file has the following structure with the individual ID and the group ID (i.e. the species) separated by a tab, and is demonstrated below:
-```
-Ime          Outgroup
-Iac          Outgroup
-Iab_1        Outgroup
-Iab_2        Outgroup
-...         
-BNK_21       pyrenaica
-CHA_1        pyrenaica
-CHA_2        pyrenaica
-JOR_1        pyrenaica
-...
-AAH_1        officinalis
-AAH_2        officinalis
-AAH_3        officinalis
-AAH_4        officinalis
-...
-BRE_1        danica
-CUM_1        danica
-DAR_1        danica
-DAR_3        danica
-...
-SKF_002      anglica
-SKF_003      anglica
-SKF_005      anglica
-SKF_009      anglica
-```
-
-# Data Generation (17/05/2024)
+# Data Generation
 
 Additional *C. danica* and *Ionopsidium* Illumina paired-end sequencing data was provided by Yant (2024), and the sequencing reads (in fq.gz/fastq.gz format) were processed following the guidelines outlined in [ngs_pipe](https://github.com/mattheatley/ngs_pipe) from Healey (2024).
 
@@ -422,7 +377,11 @@ This program was used to construct and visualize phylogenetic networks of the in
 
 Editing the phylogenetic networks was performed using Microsoft Word and manually highlighting clades according to ploidy. 
 
-The 030724.adegenet.R script was used to analyse the LD pruned and filtered VCF (120624.LD.Pruned.Ionops.allUKsamples.vcf), utilising the glPcaFast() and vcf2genlightTetra() functions provided by Yant et al (2023). The VCF was loaded into Rstudio and converted into a genlight object using the vcf2genlightTetra() function for polyploid data. Next, principal component analysis (PCA) can be performed on the genlight object using the glPcaFast() function, and subsequently, the genlight object can be converted into Nei's genetic distances using the stamppNeisD() function. Nei's genetic distances can be calculated for both the individual samples and the populations, and can be subsequently prepared for exporting into SplitsTree by the stamppPhylip() function.   
+The 030724.adegenet.R script was used to analyse the LD pruned and filtered VCF (120624.LD.Pruned.Ionops.allUKsamples.vcf), utilising the glPcaFast() and vcf2genlightTetra() functions provided by Yant et al (2023). 
+
+The VCF was loaded into Rstudio and converted into a genlight object using the vcf2genlightTetra() function for polyploid data. Next, principal component analysis (PCA) can be performed on the genlight object using the glPcaFast() function, and subsequently, the genlight object can be converted into Nei's genetic distances using the stamppNeisD() function. 
+
+Nei's genetic distances can be calculated for both the individual samples and the populations, and can be subsequently prepared for exporting into SplitsTree by the stamppPhylip() function.   
 
 ## IQTREE and iTOL for maximum likelihood tree estimation and visualization
 
@@ -444,6 +403,78 @@ bin/iqtree2 -s ~/Desktop/110624_IQTREE.OUT/110624_aa.indiv_Neis_distance_4ds.phy
 
 To visualise your consensus tree you can upload the consensus tree in Newick format into the `Tree Text` box and select upload. Next you can customise the layout of your consensus tree as you wish by selecting the toolbar which includes `Basic`, `Advanced`, and `Datasets`. 
 
+# Dsuite : Fast ABBA-BABA statistics and F4-admixture ratio calculations
+
+
+## Dquartets - a programme to detect introgression between a quartet of species without an outgroup
+
+Dquartets is part of the Dsuite software package from [Malinsky, 2021](https://github.com/millanek/Dsuite), and can be used to calculate the ABBA-BABA and F4-admixture ratio statistics for all possible quartets of species and does not require an outgroup. The species in the `SETS_SPECIES.txt` file were the individual IDs (3 letter population code followed by a number, e.g. AAH_1) and the species ID (*pyrenaica*, *officinalis*, *anglica*, or *danica*) separated by a tab. 
+
+```
+##SETS_SPECIES.txt file format
+BNK_21       pyrenaica
+...
+AAH_1        officinalis
+...
+SKF_002      anglica
+...
+BRE_1        danica
+
+```
+Dquartets was executed on the 120624_LD.Pruned.Ionops.allUKsamples.vcf.gz using a jack-knife block approach to split the VCF into 4000 blocks of approximately 92 SNPs each (366,504 SNPs in total).  
+
+```
+##execute Dquartets on the dataset to obtain the assumed relationships between the species excluding the Ionopsidium outgroup samples
+Dsuite Dquartets -k 4000 -o 120624_experimental $VCF SETS_SPECIES.txt
+```
+
+## Dsuite Dtrios - a fast programme to calculate ABBA-BABA and F4-admixture ratio statistics
+
+Dtrios was used to calculate Patterson's D (ABBA-BABA) and F4-ratio statistics for all possible trios of species using *Ionopsidium* as an outgroup in the analysis. 
+
+The `--ABBAclustering` option was used to test whether strong ABBA-informative sites cluster together throughout the genome. If introgression has occurred between two species, you would expect clusters of ABBA-informative sites across the genome rather than having many individual ABBA-informative sites evenly distributed across the genome caused by homoplasy, therefore, the `--ABBAclustering` option can be used to test for clustering of ABBA-informative sites. The more significant clustering of ABBA sites, the more confidence you can have that the introgression/gene flow event is real and not caused by homoplasies ([Malinsky, 2021](https://github.com/millanek/Dsuite)).
+
+In order to execute Dsuite commands locally (e.g. Dtrios), you can navigate to the Build folder and run the Dsuite executable with the following command `./Build/Dsuite` which shows the available commands. To execute the Dtrios command you can type `./Build/Dsuite Dtrios`.
+
+Dsuite Dtrios was executed using a modular approach on Ada. Dtrios was executed using a jack-knife block approach which divides the 120624_LD.Pruned.Ionops.allUKsamples.vcf.gz file into 4000 blocks of approximately 92 single nucleotide polymorphisms (total number of biallelic SNPs in the 120624_LD.Pruned.Ionops.allUKsamples.vcf.gz file is  366,504):
+
+```
+##make an environmental variable for the VCF you want to use (120624_LD.Pruned.Ionops.allUKsamples.vcf.gz)
+VCF=~/120624_LD.Pruned.Ionops.allUKsamples.vcf.gz
+
+#execute Dtrios using the appropriate outgroup (Iac, Ime, Iab_1, Iab_2) using 4000 Jack-knife blocks (-k 4000)
+#without specifying an explictly stated phylogenetic tree
+Dsuite Dtrios -k 4000 -o 240624_Dtrios --ABBAclustering $VCF SETS_SPECIES.txt
+```
+
+The SETs.txt file has the following structure with the individual ID and the group/species ID (i.e. the species) separated by a tab, and is demonstrated below:
+
+```
+Ime          Outgroup
+Iac          Outgroup
+Iab_1        Outgroup
+Iab_2        Outgroup
+...         
+BNK_21       pyrenaica
+CHA_1        pyrenaica
+CHA_2        pyrenaica
+JOR_1        pyrenaica
+...
+AAH_1        officinalis
+AAH_2        officinalis
+AAH_3        officinalis
+AAH_4        officinalis
+...
+BRE_1        danica
+CUM_1        danica
+DAR_1        danica
+DAR_3        danica
+...
+SKF_002      anglica
+SKF_003      anglica
+SKF_005      anglica
+SKF_009      anglica
+```
 
 
 
