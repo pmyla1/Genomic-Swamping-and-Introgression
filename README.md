@@ -355,6 +355,62 @@ FINALMERGEDVCF=120624.final.merged.Ion.dan.F4.vcf.gz
 bcftools merge --t 8 -0 --write-index -Oz $VCF1REHEADERED $VCF2REHEADERED -o $FINALMERGEDVCF
 ```
 
+# Stage 11: Selecting only UK diploids, tetraploids, and hexaploids and Ionopsidium samples
+
+The 120624.final.merged.Ion.dan.F4.vcf.gz was indexed using `gatk IndexFeatureFile` and all biallelic SNPs from the UK samples were selected using `gatk SelectVariants` with the `--select-type-to-include SNP` and `--restrict-alleles-to BIALLELIC` flags. The `-sn` flag was used to select the individual IDs for the UK samples only (e.g. AAH_1).  
+
+```
+INVCF=~/120624_merged.133.ann.Ion.dan.F4.vcf.gz
+OUTVCF=~/300524_HaplotypeCaller_output/120624_Ionops.allUKsamples.F4.vcf.gz
+
+##index the 120624.final.merged.Ion.dan.F4.vcf.gz file with gatk IndexFeatureFile
+gatk IndexFeatureFile -I $INVCF
+
+##use GATK SelectVariants to select all Ionopsidium, UK diploids, tetraploids, C. danica, and putative C. anglica
+gatk SelectVariants -V $INVCF \
+ --select-type-to-include SNP \
+ --restrict-alleles-to BIALLELIC \
+ -sn AAH_1 -sn AAH_2 -sn AAH_3 -sn AAH_4 \
+ -sn ALO_006 -sn ALO_007 -sn ALO_013 -sn ALO_017 \
+ -sn BNK_21 -sn BRE_1 -sn CHA_1 -sn CHA_2 -sn CUM_1 \
+ -sn DAR_1 -sn DAR_3 -sn ELI_001 -sn ELI_002 -sn ELI_003 -sn ELI_004 \
+ -sn ERS_1 -sn ERS_2 -sn ERS_3 -sn ERS_4 -sn FOR_1 -sn FRE_013 \
+ -sn FTW_1 -sn FTW_2 -sn FTW_3 -sn FTW_5 -sn GEO_2 -sn GEO_6 \
+ -sn Ime -sn Iac -sn Iab_1 -sn Iab_2 \
+ -sn JON_001 -sn JOR_1 -sn JOR_12 -sn JOR_13 -sn JOR_3 \
+ -sn LAB_004 -sn LAB_1 -sn LAB_2 -sn LAB_300 -sn LAB_4 -sn LAB_400 -sn LAB_5 -sn LAB_500 \
+ -sn LAL_1 -sn LAL_2 -sn LAL_3 -sn LAL_4 -sn LNL_001 -sn LNL_002 -sn LNL_003 -sn LNL_008 \
+ -sn LOS_1 -sn LOS_6 -sn LOS_7 -sn NEI_1 -sn NEI_3 -sn NEI_8 -sn NEI_9 \
+ -sn NEN_001 -sn NEN_003 -sn NEN_200 -sn NEN_300 -sn NEN_4 -sn NEN_5 -sn NEN_6 \
+ -sn ODN_10 -sn ODN_2 -sn ODN_4 -sn ODN_5 -sn ODN_6 -sn ODN_7 -sn ODN_9 \
+ -sn PAR_2 -sn Pen_1 -sn NOT -sn LWS \
+ -sn ROT_004 -sn ROT_006 -sn ROT_007 -sn ROT_013 -sn RYE_1 -sn SPEY_2 -sn SCO_1 \
+ -sn SCU_1 -sn SCU_14 -sn SCU_15 -sn SCU_16 -sn SCU_19 \
+ -sn SKF_002 -sn SKF_003 -sn SKF_005 -sn SKF_009 \
+ -sn SKN_001 -sn SKN_002 -sn SKN_005 -sn SKN_008 \
+ -sn SPU_006 -sn SPU_008 -sn SPU_009 -sn SPU_010 \
+ -sn TET_002 -sn TET_004 -sn TET_006 -sn TET_008 \
+ -O $OUTVCF \
+ --allow-nonoverlapping-command-line-samples
+```
+
+# Stage 12: LD pruning and final VCF generation
+
+The [prune_ld.c](https://github.com/thamala/polySV/blob/main/prune_ld.c) script from Hämälä (2024) was used to thin the VCF and remove all sites with more than 10% missing data, a minor allele frequency less than 0.05, and a squared genotypic correlation of 0.1 (in windows of 50 SNPs and a window step size of 10 SNPs). 
+
+The script was first compiled using the following command:
+
+```
+##compile the prune_ld.c script 
+gcc prune_ld.c -o prune_ld -lm 
+```
+
+The 120624_Ionops.allUKsamples.F4.vcf.gz was first unzipped using `gunzip` from the samtools suite and subsequently LD-pruned using the prune_ld executable.
+
+```
+##LD-prune the VCF - maximum missing 10%, minor allele frequency 0.05, squared genotypic correlation 50 10 0.1
+prune_ld -vcf ~/120624_Ionops.allUKsamples.F4.vcf -mis 0.9 -maf 0.05 -r2 50 10 0.1 > ~/120624.LD.Pruned.Ionops.allUKsamples.vcf
+```
 
 # Phylogenetic Trees and Principal Component Analysis
 
