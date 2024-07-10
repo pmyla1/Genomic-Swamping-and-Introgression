@@ -48,7 +48,6 @@ VCF=~/120624_LD.Pruned.Ionops.allUKsamples.vcf.gz
 Dsuite Dtrios -k 4000 -o 240624_Dtrios --ABBAclustering $VCF SETS_SPECIES.txt
 ```
 
-```
 The SETs.txt file has the following structure with the individual ID and the group ID (i.e. the species) separated by a tab, and is demonstrated below:
 ```
 Ime          Outgroup
