@@ -480,6 +480,8 @@ SKF_009      anglica
 
 Dinvestigate was used to perform a window-based scan for introgression in trios that had significantly elevated D-statistics from the Dtrios output. 
 
+The D-statistic has high variance when applied to small genomic windows, therefore, can be a poor estimator of the amount of introgression between species ([Malinsky, 2021](https://onlinelibrary.wiley.com/doi/10.1111/1755-0998.13265)). The f_d statistic can be used to locate genomic regions introgressed between P2 and P3, yet, does not account for the excess sharing of derived alleles between P1 and P3 and may take on large negative values. [Malinsky (2015)](https://doi.org/10.1126/science.aac9927) developed a modified version of f_d, called the f_dM statistic which can be used account for the excess sharing of derived alleles between both P2 and P3 and between P1 and P3.
+
 The `240624_testtrios.txt` is a text file containing the trio of populations/species to test for localised regions of introgression separated by a tab:
 ```
 ##240624_testtrios.txt structure
