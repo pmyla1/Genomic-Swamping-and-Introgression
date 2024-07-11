@@ -379,11 +379,34 @@ This program was used to construct and visualize phylogenetic networks of the in
 
 Editing the phylogenetic networks was performed using Microsoft Word and manually highlighting clades according to ploidy. 
 
-The 030724.adegenet.R script was used to analyse the LD pruned and filtered VCF (120624.LD.Pruned.Ionops.allUKsamples.vcf), utilising the glPcaFast() and vcf2genlightTetra() functions provided by Yant et al (2023). 
+The 030724.adegenet.R script was used to analyse the LD pruned and filtered VCF (120624.LD.Pruned.Ionops.allUKsamples.vcf), utilising the glPcaFast() and vcf2genlightTetra() functions provided by Yant et al (2023).
 
-The VCF was loaded into Rstudio and converted into a genlight object using the vcf2genlightTetra() function for polyploid data. Next, principal component analysis (PCA) can be performed on the genlight object using the glPcaFast() function, and subsequently, the genlight object can be converted into Nei's genetic distances using the stamppNeisD() function. 
+The VCF was loaded into Rstudio and converted into a genlight object using the vcfR2genlight.tetra() function for polyploid data. Next, principal component analysis (PCA) can be performed on the genlight object using the glPcaFast() function, and subsequently, the genlight object can be converted into Nei's genetic distances using the stamppNeisD() function. 
 
-Nei's genetic distances can be calculated for both the individual samples and the populations, and can be subsequently prepared for exporting into SplitsTree by the stamppPhylip() function.   
+```{R Functions to convert VCF to genlight object}
+##import the SNP data for Cochlearia and Ionopsidium data
+vcf <- read.vcfR("120624_LD.Pruned.Ionops.allUKsamples.vcf.gz")
+
+##convert the Cochlearia/Ionopsidium VCF to genlight object using vcfR2genlight.tetra()	
+aa.genlight <- vcfR2genlight.tetra(vcf) ##convert vcf to genlight object
+locNames(aa.genlight) <- paste(vcf@fix[,1],vcf@fix[,2],sep="_")   # add real SNP.names
+pop(aa.genlight)<-substr(indNames(aa.genlight),1,3)
+```
+
+**Nei's genetic distances** can be calculated for both the **individual samples** and the **populations**, and can be prepared for phylogenetic analyses in **SplitsTree** and **IQTree2** with the **stamppPhylip()** function.   
+
+```{R functions to calculate Nei's genetic distances}
+##Calculate Nei's genetic distances for the individuals
+aa.D.ind <- stamppNeisD(aa.genlight, pop = FALSE) # Nei's 1972 distance between indivs
+##export matrix - for SplitsTree and for IQ-tree analysis
+stamppPhylip(aa.D.ind, file="030724.INDIVIDUALS.Neis.dist.4ds.phy")
+
+##create the genetic distance objects 
+colnames(aa.D.ind) <- rownames(aa.D.ind)
+aa.D.ind.dist <-as.dist(aa.D.ind, diag=T)
+##name the matrix rows with the individual sample names/labels
+attr(aa.D.ind.dist, "Labels") <-rownames(aa.D.ind) 
+```
 
 ## IQTREE and iTOL for maximum likelihood tree estimation and visualization
 
@@ -403,14 +426,14 @@ bin/iqtree2 -s ~/Desktop/110624_IQTREE.OUT/110624_aa.indiv_Neis_distance_4ds.phy
 
 [iTOL](https://itol.embl.de/upload.cgi) or the Interactive Tree of Life, is a GUI which was used to upload the Newick-formatted consensus tree produced by IQTREE and to visualize the consensus tree. 
 
-To visualise your consensus tree you can upload the consensus tree in Newick format into the `Tree Text` box and select upload. Next you can customise the layout of your consensus tree as you wish by selecting the toolbar which includes `Basic`, `Advanced`, and `Datasets`. 
+To visualise your consensus tree you can upload the **consensus tree in Newick format** into the `Tree Text` box and select upload. Next you can customise the layout of your consensus tree as you wish by selecting the toolbar which includes `Basic`, `Advanced`, and `Datasets`. 
 
 # Dsuite : Fast ABBA-BABA statistics and F4-admixture ratio calculations
 
 
 ## Dquartets - a programme to detect introgression between a quartet of species without an outgroup
 
-Dquartets is part of the Dsuite software package from [Malinsky, 2021](https://github.com/millanek/Dsuite), and can be used to calculate the ABBA-BABA and F4-admixture ratio statistics for all possible quartets of species and does not require an outgroup. The species in the `SETS_SPECIES.txt` file were the individual IDs (3 letter population code followed by a number, e.g. AAH_1) and the species ID (*pyrenaica*, *officinalis*, *anglica*, or *danica*) separated by a tab. 
+**Dquartets** is part of the Dsuite software package from [Malinsky, 2021](https://github.com/millanek/Dsuite), and can be used to calculate the **ABBA-BABA** and **F4-admixture ratio** statistics for **all possible quartets** of species and **does NOT require an outgroup**. The species in the `SETS_SPECIES.txt` file were the individual IDs (3 letter population code followed by a number, e.g. AAH_1) and the species ID (*pyrenaica*, *officinalis*, *anglica*, or *danica*) separated by a tab. 
 
 ```
 ##SETS_SPECIES.txt file format
@@ -423,7 +446,7 @@ SKF_002      anglica
 BRE_1        danica
 
 ```
-Dquartets was executed on the 120624_LD.Pruned.Ionops.allUKsamples.vcf.gz using a jack-knife block approach to split the VCF into 4000 blocks of approximately 92 SNPs each (366,504 SNPs in total).  
+Dquartets was executed on the 120624_LD.Pruned.Ionops.allUKsamples.vcf.gz using a **jack-knife block** approach to split the VCF into **4000 blocks** of approximately **92 SNPs** each (**366,504 SNPs total**).  
 
 ```
 ##execute Dquartets on the dataset to obtain the assumed relationships between the species excluding the Ionopsidium outgroup samples
@@ -434,7 +457,7 @@ Dsuite Dquartets -k 4000 -o 120624_experimental $VCF SETS_SPECIES.txt
 
 Dtrios was used to calculate Patterson's D (ABBA-BABA) and F4-ratio statistics for all possible trios of species using *Ionopsidium* as an outgroup in the analysis. 
 
-The `--ABBAclustering` option was used to test whether strong ABBA-informative sites cluster together throughout the genome. If introgression has occurred between two species, you would expect clusters of ABBA-informative sites across the genome rather than having many individual ABBA-informative sites evenly distributed across the genome caused by homoplasy, therefore, the `--ABBAclustering` option can be used to test for clustering of ABBA-informative sites. The more significant clustering of ABBA sites, the more confidence you can have that the introgression/gene flow event is real and not caused by homoplasies ([Malinsky, 2021](https://github.com/millanek/Dsuite)).
+The `--ABBAclustering` option was used to test whether **strong ABBA-informative sites cluster** together throughout the genome. If introgression has occurred between two species, you would **expect clusters of ABBA-informative sites** across the genome rather than having many individual ABBA-informative sites evenly distributed across the genome caused by homoplasy, therefore, the `--ABBAclustering` option can be used to **test for clustering of ABBA-informative sites**. The more significant clustering of ABBA sites, the more confidence you can have that the introgression/gene flow event is real and not caused by homoplasies ([Malinsky, 2021](https://github.com/millanek/Dsuite)).
 
 In order to execute Dsuite commands locally (e.g. Dtrios), you can navigate to the Build folder and run the Dsuite executable with the following command `./Build/Dsuite` which shows the available commands. To execute the Dtrios command you can type `./Build/Dsuite Dtrios`.
 
@@ -480,7 +503,7 @@ SKF_009      anglica
 
 ## Dinvestigate - a window-based introgression scan in trios with significantly elevated D-statistics
 
-Dinvestigate was used to perform a window-based scan for introgression in trios that had significantly elevated D-statistics from the Dtrios output. 
+Dinvestigate was used to perform a **window-based scan for introgression** in trios that had significantly elevated D-statistics from the Dtrios output. 
 
 The D-statistic has high variance when applied to small genomic windows, therefore, can be a poor estimator of the amount of introgression between species ([Malinsky, 2021](https://onlinelibrary.wiley.com/doi/10.1111/1755-0998.13265)). The f_d statistic can be used to locate genomic regions introgressed between P2 and P3, yet, does not account for the excess sharing of derived alleles between P1 and P3 and may take on large negative values. [Malinsky (2015)](https://doi.org/10.1126/science.aac9927) developed a modified version of f_d, called the f_dM statistic which can be used account for the excess sharing of derived alleles between both P2 and P3 and between P1 and P3.
 
