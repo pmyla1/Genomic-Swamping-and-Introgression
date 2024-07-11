@@ -512,3 +512,55 @@ bedtools intersect -a danangpyr100025_bed.bed -b ./240624_bedtools/C_excelsa_V5_
 ```
 
 Custom python script `extract.geneIDs.py` was used to extract the gene ID column from the 100624.danangpyr100025.overlaps.txt output file, and the `1-2-1_hits_all_gene_descriptions.tsv` file.
+
+# Gene Ontology (GO) Enrichment Analysis
+
+GO enrichment analysis was performed in R using a custom script provided by Bray (2024).
+
+
+# Protein Structure Prediction - AlphaFold Colab V2
+
+Two of the genes of interest found in the candidate introgressed regions between the *C. pyrenaica*, *C. anglica*, *C. danica* trio were selected to produce AlphaFold Protein Structure models using [AlphaFold2.Colab](https://colab.research.google.com/github/sokrypton/ColabFold/blob/main/AlphaFold2.ipynb#scrollTo=kOblAo-xetgx). The two genes selected for protein structure prediction were JAR1 (g50778.t1 in *Cochlearia*) encoding Jasmonate Resistance 1 and AVI2 (g50851.t1 in *Cochlearia*). Firstly, the coordinates for each of the genes were identified using a simple grep command:
+```
+##use grep to obtain the genomic coordinates for JAR1 (g50778) from the C_excelsa_V5_braker2_wRseq.gff3 genome annotation file
+grep "g50778.t1" C_excelsa_V5_braker2_wRseq.gff3 > ./g50778.JAR1.genomic.coordinates.tsv
+
+##do the same for AVI2 (g50851)
+grep "g50851.t1" C_excelsa_V5_braker2_wRseq.gff3 > ./g50851.AVI2.genomic.coordinates.tsv
+```
+
+Next, `gatk IndexFeatureFile` was used to index the 120624_LD.Pruned.Ionops.allUKsamples.vcf.gz, and `gatk FastaAlternateReferenceMaker` was used to extract the coding sequences (CDS) for both JAR1 and AVI2 by using the genomic coordinates for the exons in both genes.
+
+```
+##firstly index the VCF file
+gatk IndexFeatureFile -I 120624_LD.Pruned.Ionops.allUKsamples.vcf.gz
+
+##now use FastaAlternateReferenceMaker to extract the CDS only from JAR1
+gatk FastaAlternateReferenceMaker \
+   -R C_excelsa_V5.fasta \
+   -O g50778.JAR1.coding.sequence.fasta \
+   -L Cexcelsa_scaf_6:5890772-5890782 -L Cexcelsa_scaf_6:5891040-5891069 -L Cexcelsa_scaf_6:5891770-5892090 \
+   -L Cexcelsa_scaf_6:5892184-5892285 -L Cexcelsa_scaf_6:5892388-5893175 -L Cexcelsa_scaf_6:5893260-5893801 \
+   -V 120624_LD.Pruned.Ionops.allUKsamples.vcf.gz \
+
+##now do the same for AVI2
+ gatk FastaAlternateReferenceMaker \
+   -R C_excelsa_V5.fasta \
+   -O g50851.AVI2.coding.sequence.fasta \
+   -L Cexcelsa_scaf_6:6172087-6172589 -L Cexcelsa_scaf_6:6173101-6173130 -L Cexcelsa_scaf_6:6173309-6173426 \
+   -L Cexcelsa_scaf_6:6173511-6173603 -L Cexcelsa_scaf_6:6173925-6174062 -L Cexcelsa_scaf_6:6174172-6174299 \
+   -L Cexcelsa_scaf_6:6174397-6174557 -L Cexcelsa_scaf_6:6174657-6174747 -L Cexcelsa_scaf_6:6174841-6174897 \
+   -L Cexcelsa_scaf_6:6174972-6175092 \
+   -V 120624_LD.Pruned.Ionops.allUKsamples.vcf.gz \
+```
+
+Subsequently, the headers were removed from the coding sequence fasta files using a simple grep command:
+```
+##remove the headers from the fasta files
+grep -v ">" g50778.JAR1.coding.sequence.fasta > ./g50778.JAR1.no.headers.fasta
+
+grep -v ">" g50851.AVI2.coding.sequence.fasta > ./g50851.AVI2.no.headers.fasta
+```
+
+Next, the [Expasy online translate tool](https://web.expasy.org/translate/) was used to input the CDS for both JAR1 and AVI2 and to obtain the amino acid sequences from this. The amino acid sequences from the longest continuous open reading frame (ORF) were used as input files for [AlphaFold2 Colab](https://colab.research.google.com/github/sokrypton/ColabFold/blob/main/AlphaFold2.ipynb#scrollTo=kOblAo-xetgx) and Model1 was selected as the best model to visualise the proteins in [pYMOL](https://www.google.com/search?client=safari&rls=en&q=ypyMol&ie=UTF-8&oe=UTF-8). 
+
