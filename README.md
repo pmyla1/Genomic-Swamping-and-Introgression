@@ -552,7 +552,7 @@ grep "g50778.t1" C_excelsa_V5_braker2_wRseq.gff3 > ./g50778.JAR1.genomic.coordin
 grep "g50851.t1" C_excelsa_V5_braker2_wRseq.gff3 > ./g50851.AVI2.genomic.coordinates.tsv
 ```
 
-Next, `gatk IndexFeatureFile` was used to index the 120624_LD.Pruned.Ionops.allUKsamples.vcf.gz, and `gatk FastaAlternateReferenceMaker` was used to extract the coding sequences (CDS) for both JAR1 and AVI2 by using the genomic coordinates for the exons in both genes.
+Next, `gatk IndexFeatureFile` was used to index the 120624_LD.Pruned.Ionops.allUKsamples.vcf.gz, and `gatk FastaAlternateReferenceMaker` was used to extract the coding sequences (CDS) for both JAR1 and AVI2 by using the genomic coordinates for the exons in both genes. A further 3 genes including the homologues for BBX11, PRR9, and GRP7 were selected to produce AlphaFold models since these genes were identified in a Gene Ontology Enrichment analysis of the *C. pyrenica*, *C. anglica*, *C. danica* trio.
 
 ```
 ##firstly index the VCF file
