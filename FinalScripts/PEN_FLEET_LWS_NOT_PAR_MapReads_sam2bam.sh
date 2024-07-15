@@ -88,28 +88,28 @@ cd ~/220524_alignments/
 
 ###########
 #on LWS_1
-#samtools view -@ 4 -h -b ./LWS_${metadata}_aln-pe.sam -o ./bam_files/LWS_${metadata}.bam
-#samtools sort -@ 4 -o ./bam_files/LWS_${metadata}.sorted.bam ./bam_files/LWS_${metadata}.bam
-#samtools index ./bam_files/LWS_${metadata}.sorted.bam
-#samtools flagstat ./bam_files/LWS_${metadata}.sorted.bam > ./bam_files/LWS_${metadata}.flagstats
+samtools view -@ 4 -h -b ./LWS_${metadata}_aln-pe.sam -o ./bam_files/LWS_${metadata}.bam
+samtools sort -@ 4 -o ./bam_files/LWS_${metadata}.sorted.bam ./bam_files/LWS_${metadata}.bam
+samtools index ./bam_files/LWS_${metadata}.sorted.bam
+samtools flagstat ./bam_files/LWS_${metadata}.sorted.bam > ./bam_files/LWS_${metadata}.flagstats
 ############
 #on NOT_5
-#samtools view -@ 4 -h -b ./NOT_${metadata}_aln-pe.sam -o ./bam_files/NOT_${metadata}.bam
-#samtools sort -@ 4 -o ./bam_files/NOT_${metadata}.sorted.bam ./bam_files/NOT_${metadata}.bam
-#samtools index ./bam_files/NOT_${metadata}.sorted.bam
-#samtools flagstat ./bam_files/NOT_${metadata}.sorted.bam > ./bam_files/NOT_${metadata}.flagstats
+samtools view -@ 4 -h -b ./NOT_${metadata}_aln-pe.sam -o ./bam_files/NOT_${metadata}.bam
+samtools sort -@ 4 -o ./bam_files/NOT_${metadata}.sorted.bam ./bam_files/NOT_${metadata}.bam
+samtools index ./bam_files/NOT_${metadata}.sorted.bam
+samtools flagstat ./bam_files/NOT_${metadata}.sorted.bam > ./bam_files/NOT_${metadata}.flagstats
 ###########
 #on PAR_2
-#samtools view -@ 4 -h -b ./PAR_2_${metadata}_aln-pe.sam -o ./bam_files/PAR_2_${metadata}.bam
-#samtools sort -@ 4 -o ./bam_files/PAR_2_${metadata}.sorted.bam ./bam_files/PAR_2_${metadata}.bam
-#samtools index ./bam_files/PAR_2_${metadata}.sorted.bam
-#samtools flagstat ./bam_files/PAR_2_${metadata}.sorted.bam > ./bam_files/PAR_2_${metadata}.flagstats
+samtools view -@ 4 -h -b ./PAR_2_${metadata}_aln-pe.sam -o ./bam_files/PAR_2_${metadata}.bam
+samtools sort -@ 4 -o ./bam_files/PAR_2_${metadata}.sorted.bam ./bam_files/PAR_2_${metadata}.bam
+samtools index ./bam_files/PAR_2_${metadata}.sorted.bam
+samtools flagstat ./bam_files/PAR_2_${metadata}.sorted.bam > ./bam_files/PAR_2_${metadata}.flagstats
 ###########
 #on FLEET_2
-#samtools view -@ 4 -h -b ./FLEET_2_${metadata}_aln-pe.sam -o ./bam_files/FLEET_2_${metadata}.bam
-#samtools sort -@ 4 -o ./bam_files/FLEET_2_${metadata}.sorted.bam ./bam_files/FLEET_2_${metadata}.bam
-#samtools index ./bam_files/FLEET_2_${metadata}.sorted.bam
-#samtools flagstat ./bam_files/FLEET_2_${metadata}.sorted.bam > ./bam_files/FLEET_2_${metadata}.flagstats
+samtools view -@ 4 -h -b ./FLEET_2_${metadata}_aln-pe.sam -o ./bam_files/FLEET_2_${metadata}.bam
+samtools sort -@ 4 -o ./bam_files/FLEET_2_${metadata}.sorted.bam ./bam_files/FLEET_2_${metadata}.bam
+samtools index ./bam_files/FLEET_2_${metadata}.sorted.bam
+samtools flagstat ./bam_files/FLEET_2_${metadata}.sorted.bam > ./bam_files/FLEET_2_${metadata}.flagstats
 ###########
 ##on Pen_1
 samtools view -@ 4 -h -b ./Pen_1_${metadata}_aln-pe.sam -o ./bam_files/Pen_1_${metadata}.bam
@@ -117,7 +117,18 @@ samtools sort -@ 4 -o ./bam_files/Pen_1_${metadata}.sorted.bam ./bam_files/Pen_1
 samtools index ./bam_files/Pen_1_${metadata}.sorted.bam
 samtools flagstat ./bam_files/Pen_1_${metadata}.sorted.bam > ./bam_files/Pen_1_${metadata}.flagstats
 ###########
-
+#on SBA_1
+samtools view -@ 4 -h -b ./SBAY_1_${metadata}_aln-pe.sam -o ./bam_files/SBAY_1_${metadata}.bam
+samtools sort -@ 4 -o ./bam_files/SBAY_1_${metadata}.sorted.bam ./bam_files/SBAY_1_${metadata}.bam
+samtools index ./bam_files/SBAY_1_${metadata}.sorted.bam
+samtools flagstat ./bam_files/SBAY_1_${metadata}.sorted.bam > ./bam_files/SBAY_1_${metadata}.flagstats
+############
+##SPE_2
+samtools view -@ 4 -h -b ./SPEY_2_${metadata}_aln-pe.sam -o ./bam_files/SPEY_2_${metadata}.bam
+samtools sort -@ 4 -o ./bam_files/SPEY_2_${metadata}.sorted.bam ./bam_files/SPEY_2_${metadata}.bam 
+samtools index ./bam_files/SPEY_2_${metadata}.sorted.bam
+samtools flagstat ./bam_files/SPEY_2_${metadata}.sorted.bam > ./bam_files/SPEY_2_${metadata}.flagstats
+##########
 
 
 module unload samtools-uoneasy/1.18-GCC-12.3.0
