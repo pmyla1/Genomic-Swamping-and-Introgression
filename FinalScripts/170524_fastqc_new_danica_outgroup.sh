@@ -20,38 +20,38 @@ source $HOME/.bash_profile
 cd /gpfs01/home/pmyla1/2024.Cochlearia.Illumina.cohort/
 
 ###load the fastqc module for sequencing quality control
-#module load fastqc-uoneasy/0.12.1-Java-11
+module load fastqc-uoneasy/0.12.1-Java-11
 ###############
 
 ################
 ##use fastqc specifying the output directory for the results
 ##Do this for the newly sequenced Cochlearia danica samples
 ##first on the FLE_2 sequencing data
-#fastqc -o ../170524_fastqc/ ./FLE_2/*.fq.gz
+fastqc -o ../170524_fastqc/ ./FLE_2/*.fq.gz
 ##next on HAM_1
-#fastqc -o ../170524_fastqc/ ./HAM_1/*.fq.gz
+fastqc -o ../170524_fastqc/ ./HAM_1/*.fq.gz
 ##next on LWS_1
-#fastqc -o ../170524_fastqc/ ./LWS_1/*.fq.gz
+fastqc -o ../170524_fastqc/ ./LWS_1/*.fq.gz
 ##next on NOT_5
-#fastqc -o ../170524_fastqc/ ./NOT_5/*.fq.gz
+fastqc -o ../170524_fastqc/ ./NOT_5/*.fq.gz
 ##next on PAR_2
-#fastqc -o ../170524_fastqc/ ./PAR_2/*.fq.gz
+fastqc -o ../170524_fastqc/ ./PAR_2/*.fq.gz
 ##next on PEN_1
-#fastqc -o ../170524_fastqc/ ./PEN_1/*.fq.gz
+fastqc -o ../170524_fastqc/ ./PEN_1/*.fq.gz
 ##next on SBA_1
-#fastqc -o ../170524_fastqc/ ./SBA_1/*.fq.gz
+fastqc -o ../170524_fastqc/ ./SBA_1/*.fq.gz
 ##next on SPE_2
-#fastqc -o ../170524_fastqc/ ./SPE_2/*.fq.gz
+fastqc -o ../170524_fastqc/ ./SPE_2/*.fq.gz
 
 ##now perform fastqc for the outgroup sequencing data
 ##Iac & Ime - Ionopsidium (sister taxa and outgroup for donwstream analyses - Dsuite)
-#fastqc -o ../170524_fastqc/ ./Iac/*.fastq.gz
+fastqc -o ../170524_fastqc/ ./Iac/*.fastq.gz
 
-#fastqc -o ../170524_fastqc/ ./Ime/*.fastq.gz
+fastqc -o ../170524_fastqc/ ./Ime/*.fastq.gz
 ##############
 
 ##unload fastqc module
-#module unload fastqc-uoneasy/0.12.1-Java-11
+module unload fastqc-uoneasy/0.12.1-Java-11
 ##########
 
 #################
