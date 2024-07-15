@@ -63,7 +63,7 @@ module load multiqc-uoneasy/1.14-foss-2023a
 ##execute multiqc on the fastqc.zip data specifying -f (--force to overwrite existing reports) and -p to export the plots generated
 multiqc -f -p ~/170524_fastqc/.*fastqc.zip
 ```
-The MultiQC plots and reports include a directory for **png**, **svg**, or **pdf** versions of the plots and can be found in the [SupplementaryFiles]() folder.
+The MultiQC plots and reports include a directory for **png**, **svg**, or **pdf** versions of the plots and can be found in the [MultiQC]() folder.
 
 ## 22/05/2024 - Whole Pipeline from Data Generation to VCF
 
