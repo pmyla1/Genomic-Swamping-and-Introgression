@@ -20,11 +20,11 @@ module load gatk-uoneasy/4.4.0.0-GCCcore-12.3.0-Java-17
 
 #####
 ##index the reheadered.F4_133.ann.vcf.gz file with gatk IndexFeatureFile
-gatk IndexFeatureFile -I /gpfs01/home/pmyla1/reheadered.F4_133.ann.vcf.gz
+gatk IndexFeatureFile -I ~/reheadered.F4_133.ann.vcf.gz
 
 ######
 ##use GATK SelectVariants to select all UK diploids, tetraploids, C. danica, and putative C. anglica
-gatk SelectVariants -V /gpfs01/home/pmyla1/reheadered.F4_133.ann.vcf.gz \
+gatk SelectVariants -V ~/reheadered.F4_133.ann.vcf.gz \
  --select-type-to-include SNP \
  --restrict-alleles-to BIALLELIC \
  -sn AAH_1 -sn AAH_2 -sn AAH_3 -sn AAH_4 \
@@ -45,7 +45,7 @@ gatk SelectVariants -V /gpfs01/home/pmyla1/reheadered.F4_133.ann.vcf.gz \
  -sn SKN_001 -sn SKN_002 -sn SKN_005 -sn SKN_008 \
  -sn SPU_006 -sn SPU_008 -sn SPU_009 -sn SPU_010 \
  -sn TET_002 -sn TET_004 -sn TET_006 -sn TET_008 \
- -O /gpfs01/home/pmyla1/bcftools_gatk_output/130524_allUKdips_allUKtets_allUKhex.vcf.gz \
+ -O ~/bcftools_gatk_output/130524_allUKdips_allUKtets_allUKhex.vcf.gz \
  --allow-nonoverlapping-command-line-samples
 ##########
 
@@ -58,10 +58,10 @@ module unload gatk-uoneasy/4.4.0.0-GCCcore-12.3.0-Java-17
 module load samtools-uoneasy/1.18-GCC-12.3.0
 
 ##make a copy of the 130524_allUKdips_allUKtets_allUKhex.vcf.gz
-cp /gpfs01/home/pmyla1/bcftools_gatk_output/130524_allUKdips_allUKtets_allUKhex.vcf.gz /gpfs01/home/pmyla1/bcftools_gatk_output/130524_allUKdips_allUKtets_allUKhex_copy.vcf.gz
+cp ~/bcftools_gatk_output/130524_allUKdips_allUKtets_allUKhex.vcf.gz /gpfs01/home/pmyla1/bcftools_gatk_output/130524_allUKdips_allUKtets_allUKhex_copy.vcf.gz
 
 ##unzip the VCF file you want to LD prune
-gunzip /gpfs01/home/pmyla1/bcftools_gatk_output/130524_allUKdips_allUKtets_allUKhex_copy.vcf.gz
+gunzip ~/bcftools_gatk_output/130524_allUKdips_allUKtets_allUKhex_copy.vcf.gz
 
 ##unload samtools 
 module unload samtools-uoneasy/1.18-GCC-12.3.0
@@ -74,10 +74,10 @@ module load gcc-uoneasy/13.2.0
 
 ###### 
 ##compile prune_ld.c script
-gcc /gpfs01/home/pmyla1/scripts/prune_ld.c -o /gpfs01/home/pmyla1/bcftools_gatk_output/prune_ld -lm 
+gcc ~/scripts/prune_ld.c -o ~/bcftools_gatk_output/prune_ld -lm 
 
 ##execute the script on the whole genome UK_dips_tets_danica_anglica.vcf
-/gpfs01/home/pmyla1/bcftools_gatk_output/prune_ld -vcf /gpfs01/home/pmyla1/bcftools_gatk_output/130524_allUKdips_allUKtets_allUKhex_copy.vcf -mis 0.9 -maf 0.05 -r2 100 50 0.1 > /gpfs01/home/pmyla1/bcftools_gatk_output/ld_pruned_130524_allUKdips_allUKtets_allUKhex.vcf
+~/bcftools_gatk_output/prune_ld -vcf ~/bcftools_gatk_output/130524_allUKdips_allUKtets_allUKhex_copy.vcf -mis 0.9 -maf 0.05 -r2 100 50 0.1 > /gpfs01/home/pmyla1/bcftools_gatk_output/ld_pruned_130524_allUKdips_allUKtets_allUKhex.vcf
  
 ##unload gcc module 
 module unload gcc-uoneasy/13.2.0
@@ -86,10 +86,10 @@ module unload gcc-uoneasy/13.2.0
 module load htslib-uoneasy/1.18-GCC-13.2.0
 
 #bgzip the newly produced ld_pruned vcf 
-bgzip /gpfs01/home/pmyla1/bcftools_gatk_output/ld_pruned_130524_allUKdips_allUKtets_allUKhex.vcf
+bgzip ~/bcftools_gatk_output/ld_pruned_130524_allUKdips_allUKtets_allUKhex.vcf
 
 ##bgzip the 110524_WG_allUKhex_allUKdips_someUKtets.vcf
-bgzip /gpfs01/home/pmyla1/bcftools_gatk_output/130524_allUKdips_allUKtets_allUKhex.vcf
+bgzip ~/bcftools_gatk_output/130524_allUKdips_allUKtets_allUKhex.vcf
 
 ##unload htslib
 module unload htslib-uoneasy/1.18-GCC-13.2.0
