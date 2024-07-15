@@ -39,6 +39,8 @@ Additional *C. danica* and *Ionopsidium* Illumina paired-end sequencing data was
 
 ## FastQC and MultiQC for sequencing quality control reports
 
+The [070724_FastQC.MultiQC.sh]() script was used to produce a sequencing quality control report for the additional *C. danica* and *Ionopsidium* sequencing data.
+
 An example command for producing a fastqc report for a single population (FLEET_2 in this example) can be found below:
 ```
 ###load fastqc module for performing sequencing quality control reports
