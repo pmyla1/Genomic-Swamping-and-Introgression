@@ -39,7 +39,7 @@ Additional *C. danica* and *Ionopsidium* Illumina paired-end sequencing data was
 
 ## FastQC and MultiQC for sequencing quality control reports
 
-The [070724_FastQC.MultiQC.sh]() script was used to produce a sequencing quality control report for the additional *C. danica* and *Ionopsidium* sequencing data.
+The [070724_FastQC.MultiQC.sh](https://github.com/pmyla1/Genomic-Swamping-and-Introgression/blob/main/FinalScripts/070724_FastQC.MultiQC.sh) script was used to produce a sequencing quality control report for the additional *C. danica* and *Ionopsidium* sequencing data.
 
 An example command for producing a fastqc report for a single population (FLEET_2 in this example) can be found below:
 ```
@@ -63,7 +63,7 @@ module load multiqc-uoneasy/1.14-foss-2023a
 ##execute multiqc on the fastqc.zip data specifying -f (--force to overwrite existing reports) and -p to export the plots generated
 multiqc -f -p ~/170524_fastqc/.*fastqc.zip
 ```
-The MultiQC plots and reports include a directory for **png**, **svg**, or **pdf** versions of the plots.
+The MultiQC plots and reports include a directory for **png**, **svg**, or **pdf** versions of the plots and can be found in the [SupplementaryFiles]() folder.
 
 ## 22/05/2024 - Whole Pipeline from Data Generation to VCF
 
