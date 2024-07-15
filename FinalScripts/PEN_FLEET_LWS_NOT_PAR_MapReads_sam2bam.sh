@@ -35,35 +35,47 @@ REF=~/C_excelsa_V5_reference/C_excelsa_V5.fa
 
 ####################
 ###############
-#bwa mem \
-#     -t 20 $REF \
-#     ./LWS_*_L1_1.trimmed.fq.gz ./LWS_*_L1_2.trimmed.fq.gz \
-#     > $OUT/LWS_EKDL240001890-1A_222TKYLT4_aln-pe.sam
+bwa mem \
+     -t 20 $REF \
+     ./LWS_*_L1_1.trimmed.fq.gz ./LWS_*_L1_2.trimmed.fq.gz \
+     > $OUT/LWS_EKDL240001890-1A_222TKYLT4_aln-pe.sam
 ##########
-#bwa mem \
-#     -t 16 $REF \
-#     ./NOT_*_L1_1.trimmed.fq.gz ./NOT_*_L1_2.trimmed.fq.gz \
-#     > $OUT/NOT_EKDL240001890-1A_222TKYLT4_aln-pe.sam
+bwa mem \
+     -t 16 $REF \
+     ./NOT_*_L1_1.trimmed.fq.gz ./NOT_*_L1_2.trimmed.fq.gz \
+     > $OUT/NOT_EKDL240001890-1A_222TKYLT4_aln-pe.sam
 ##########
 ########
 ##PAR_2
-#bwa mem \
-#     -t 16 $REF \
-#     ./PAR_2_${metadata}_L1_1.trimmed.fq.gz ./PAR_2_${metadata}_L1_2.trimmed.fq.gz \
-#     > $OUT/PAR_2_${metadata}_aln-pe.sam
+bwa mem \
+     -t 16 $REF \
+     ./PAR_2_${metadata}_L1_1.trimmed.fq.gz ./PAR_2_${metadata}_L1_2.trimmed.fq.gz \
+     > $OUT/PAR_2_${metadata}_aln-pe.sam
 ##########
 ##FLEET_2
-#bwa mem \
-#     -t 16 $REF \
-#     ./FLEET_2_${metadata}_L1_1.trimmed.fq.gz ./FLEET_2_${metadata}_L1_2.trimmed.fq.gz \
-#¥     > $OUT/FLEET_2_${metadata}_aln-pe.sam
+bwa mem \
+     -t 16 $REF \
+     ./FLEET_2_${metadata}_L1_1.trimmed.fq.gz ./FLEET_2_${metadata}_L1_2.trimmed.fq.gz \
+     > $OUT/FLEET_2_${metadata}_aln-pe.sam
 ########
 ##now on Pen_1
 bwa mem \
      -t 16 $REF \
      ./Pen_1_${metadata}_L1_1.trimmed.fq.gz ./Pen_1_${metadata}_L1_2.trimmed.fq.gz \
      > $OUT/Pen_1_${metadata}_aln-pe.sam
-########
+###########
+##now on SBAY_1
+bwa mem \
+     -t 16 $REF \
+     ./SBAY_1_${metadata}_L1_1.trimmed.fq.gz ./SBAY_1_${metadata}_L1_2.trimmed.fq.gz \
+     > $OUT/SBAY_1_${metadata}_aln-pe.sam
+##############
+##now on SPEY_2
+bwa mem \
+     -t 16 $REF \
+     ./SPEY_2_${metadata}_L1_1.trimmed.fq.gz ./SPEY_2_${metadata}_L1_2.trimmed.fq.gz \
+     > $OUT/SPEY_2_${metadata}_aln-pe.sam
+
 ###unload module
 module unload bwa-uoneasy/0.7.17-GCCcore-12.3.0
 
