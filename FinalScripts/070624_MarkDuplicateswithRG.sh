@@ -28,34 +28,34 @@ mkdir -p duplicate_marked_bams_RG/
 OUTDIR=~/220524_alignments/bam_files/duplicate_marked_bams_RG
 meta=EKDL240001890-1A_222TKYLT4
 ##first on FLEET_2
-#java -jar $EBROOTPICARD/picard.jar MarkDuplicates -I ./FLEET_2_${meta}_with_RG.bam -O $OUTDIR/FLEET_2_${meta}.marked_duplicates.bam -M $OUTDIR/FLEET_2_${meta}.marked_dup_metrics.txt --VALIDATION_STRINGENCY SILENT --ASSUME_SORTED true --REMOVE_DUPLICATES true
+java -jar $EBROOTPICARD/picard.jar MarkDuplicates -I ./FLEET_2_${meta}_with_RG.bam -O $OUTDIR/FLEET_2_${meta}.marked_duplicates.bam -M $OUTDIR/FLEET_2_${meta}.marked_dup_metrics.txt --VALIDATION_STRINGENCY SILENT --ASSUME_SORTED true --REMOVE_DUPLICATES true
 ############
 ##try on Iac
-#java -jar $EBROOTPICARD/picard.jar MarkDuplicates -I ./Iac_with_RG.bam -O $OUTDIR/Iac.marked_duplicates.bam -M $OUTDIR/Iac.marked_dup_metrics.txt --VALIDATION_STRINGENCY SILENT --ASSUME_SORTED true --REMOVE_DUPLICATES true
+java -jar $EBROOTPICARD/picard.jar MarkDuplicates -I ./Iac_with_RG.bam -O $OUTDIR/Iac.marked_duplicates.bam -M $OUTDIR/Iac.marked_dup_metrics.txt --VALIDATION_STRINGENCY SILENT --ASSUME_SORTED true --REMOVE_DUPLICATES true
 #########
 ##try on Ime
-#java -jar $EBROOTPICARD/picard.jar MarkDuplicates -I ./Ime_with_RG.bam -O $OUTDIR/Ime.marked_duplicates.bam -M $OUTDIR/Ime.marked_dup_metrics.txt --VALIDATION_STRINGENCY SILENT --ASSUME_SORTED true --REMOVE_DUPLICATES true
+java -jar $EBROOTPICARD/picard.jar MarkDuplicates -I ./Ime_with_RG.bam -O $OUTDIR/Ime.marked_duplicates.bam -M $OUTDIR/Ime.marked_dup_metrics.txt --VALIDATION_STRINGENCY SILENT --ASSUME_SORTED true --REMOVE_DUPLICATES true
 #########
 ##now on LWS
-#java -jar $EBROOTPICARD/picard.jar MarkDuplicates -I ./LWS_${meta}_with_RG.bam -O $OUTDIR/LWS_${meta}.marked_duplicates.bam -M $OUTDIR/LWS_${meta}.marked_dup_metrics.txt --VALIDATION_STRINGENCY SILENT --ASSUME_SORTED true --REMOVE_DUPLICATES true
+java -jar $EBROOTPICARD/picard.jar MarkDuplicates -I ./LWS_${meta}_with_RG.bam -O $OUTDIR/LWS_${meta}.marked_duplicates.bam -M $OUTDIR/LWS_${meta}.marked_dup_metrics.txt --VALIDATION_STRINGENCY SILENT --ASSUME_SORTED true --REMOVE_DUPLICATES true
 #########
 ##now on NOT
-#java -jar $EBROOTPICARD/picard.jar MarkDuplicates -I ./NOT_${meta}_with_RG.bam -O $OUTDIR/NOT_${meta}.marked_duplicates.bam -M $OUTDIR/NOT_${meta}.marked_dup_metrics.txt --VALIDATION_STRINGENCY SILENT --ASSUME_SORTED true --REMOVE_DUPLICATES true
+java -jar $EBROOTPICARD/picard.jar MarkDuplicates -I ./NOT_${meta}_with_RG.bam -O $OUTDIR/NOT_${meta}.marked_duplicates.bam -M $OUTDIR/NOT_${meta}.marked_dup_metrics.txt --VALIDATION_STRINGENCY SILENT --ASSUME_SORTED true --REMOVE_DUPLICATES true
 #########
 ##now on PAR_2
-#java -jar $EBROOTPICARD/picard.jar MarkDuplicates -I ./PAR_2_${meta}_with_RG.bam -O $OUTDIR/PAR_2_${meta}.marked_duplicates.bam -M $OUTDIR/PAR_2_${meta}.marked_dup_metrics.txt --VALIDATION_STRINGENCY SILENT --ASSUME_SORTED true --REMOVE_DUPLICATES true
+java -jar $EBROOTPICARD/picard.jar MarkDuplicates -I ./PAR_2_${meta}_with_RG.bam -O $OUTDIR/PAR_2_${meta}.marked_duplicates.bam -M $OUTDIR/PAR_2_${meta}.marked_dup_metrics.txt --VALIDATION_STRINGENCY SILENT --ASSUME_SORTED true --REMOVE_DUPLICATES true
 #########
 ##now on SBAY_1
-#java -jar $EBROOTPICARD/picard.jar MarkDuplicates -I ./SBAY_1_${meta}_with_RG.bam -O $OUTDIR/SBAY_1_${meta}.marked_duplicates.bam -M $OUTDIR/SBAY_1_${meta}.marked_dup_metrics.txt --VALIDATION_STRINGENCY SILENT --ASSUME_SORTED true --REMOVE_DUPLICATES true
+java -jar $EBROOTPICARD/picard.jar MarkDuplicates -I ./SBAY_1_${meta}_with_RG.bam -O $OUTDIR/SBAY_1_${meta}.marked_duplicates.bam -M $OUTDIR/SBAY_1_${meta}.marked_dup_metrics.txt --VALIDATION_STRINGENCY SILENT --ASSUME_SORTED true --REMOVE_DUPLICATES true
 ###########
 ##now on SPEY_2
-#java -jar $EBROOTPICARD/picard.jar MarkDuplicates -I ./SPEY_2_${meta}_with_RG.bam -O $OUTDIR/SPEY_2_${meta}.marked_duplicates.bam -M $OUTDIR/SPEY_2_${meta}.marked_dup_metrics.txt --VALIDATION_STRINGENCY SILENT --ASSUME_SORTED true --REMOVE_DUPLICATES true
+java -jar $EBROOTPICARD/picard.jar MarkDuplicates -I ./SPEY_2_${meta}_with_RG.bam -O $OUTDIR/SPEY_2_${meta}.marked_duplicates.bam -M $OUTDIR/SPEY_2_${meta}.marked_dup_metrics.txt --VALIDATION_STRINGENCY SILENT --ASSUME_SORTED true --REMOVE_DUPLICATES true
 ###########
 ##now on HAM_1
-#java -jar $EBROOTPICARD/picard.jar MarkDuplicates -I ./HAM_1_${meta}_with_RG.bam -O $OUTDIR/HAM_1_${meta}.marked_duplicates.bam -M $OUTDIR/HAM_1_${meta}.marked_dup_metrics.txt --VALIDATION_STRINGENCY SILENT --ASSUME_SORTED true --REMOVE_DUPLICATES true
+java -jar $EBROOTPICARD/picard.jar MarkDuplicates -I ./HAM_1_${meta}_with_RG.bam -O $OUTDIR/HAM_1_${meta}.marked_duplicates.bam -M $OUTDIR/HAM_1_${meta}.marked_dup_metrics.txt --VALIDATION_STRINGENCY SILENT --ASSUME_SORTED true --REMOVE_DUPLICATES true
 ############
 ##now on Pen_1
-#java -jar $EBROOTPICARD/picard.jar MarkDuplicates -I ./Pen_1_${meta}_with_RG.bam -O $OUTDIR/Pen_1_${meta}.marked_duplicates.bam -M $OUTDIR/Pen_1_${meta}.marked_dup_metrics.txt --VALIDATION_STRINGENCY SILENT --ASSUME_SORTED true --REMOVE_DUPLICATES true
+java -jar $EBROOTPICARD/picard.jar MarkDuplicates -I ./Pen_1_${meta}_with_RG.bam -O $OUTDIR/Pen_1_${meta}.marked_duplicates.bam -M $OUTDIR/Pen_1_${meta}.marked_dup_metrics.txt --VALIDATION_STRINGENCY SILENT --ASSUME_SORTED true --REMOVE_DUPLICATES true
 ###########
 
 module load picard-uoneasy/3.0.0-Java-17
