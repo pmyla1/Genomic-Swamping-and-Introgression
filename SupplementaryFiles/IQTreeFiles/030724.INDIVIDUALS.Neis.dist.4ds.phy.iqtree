@@ -1,0 +1,352 @@
+IQ-TREE 2.3.4 COVID-edition built Apr 27 2024
+
+Input file name: /Users/lukearcher/Desktop/120624_VCFs/030724.INDIVIDUALS.Neis.dist.4ds.phy
+Type of analysis: ModelFinder + tree reconstruction
+Random seed number: 599146
+
+REFERENCES
+----------
+
+To cite IQ-TREE please use:
+
+Bui Quang Minh, Heiko A. Schmidt, Olga Chernomor, Dominik Schrempf,
+Michael D. Woodhams, Arndt von Haeseler, and Robert Lanfear (2020)
+IQ-TREE 2: New models and efficient methods for phylogenetic inference
+in the genomic era. Mol. Biol. Evol., in press.
+https://doi.org/10.1093/molbev/msaa015
+
+To cite ModelFinder please use: 
+
+Subha Kalyaanamoorthy, Bui Quang Minh, Thomas KF Wong, Arndt von Haeseler,
+and Lars S Jermiin (2017) ModelFinder: Fast model selection for
+accurate phylogenetic estimates. Nature Methods, 14:587–589.
+https://doi.org/10.1038/nmeth.4285
+
+SEQUENCE ALIGNMENT
+------------------
+
+Input data: 108 sequences with 756 morphological sites
+Number of constant sites: 216 (= 28.5714% of all sites)
+Number of invariant (constant or ambiguous constant) sites: 216 (= 28.5714% of all sites)
+Number of parsimony informative sites: 529
+Number of distinct site patterns: 489
+
+ModelFinder
+-----------
+
+Best-fit model according to BIC: MK+FQ+I+G4
+
+List of models sorted by BIC scores: 
+
+Model                  LogL         AIC      w-AIC        AICc     w-AICc         BIC      w-BIC
+MK+FQ+I+G4       -92624.704  185679.408 +        1  185851.408 +        1  186674.437 +        1
+MK+FQ+G4         -92667.408  185762.815 - 7.73e-19  185932.908 - 2.01e-18  186753.216 - 7.82e-18
+MK+FQ+I+R10      -93219.775  186903.551 - 1.52e-266  187110.266 - 4.39e-274  187977.256 - 1.25e-283
+MK+FQ+I+R9       -93294.020  187048.039 - 6.39e-298  187250.439 - 1.6e-304  188112.489 - 5.38e-313
+MK+FQ+I+R8       -93392.048  187240.096 -        0  187438.244 -        0  188295.290 -        0
+MK+FQ+I+R7       -93539.203  187530.406 -        0  187724.364 -        0  188576.343 -        0
+MK+FQ+R10        -93674.858  187811.716 -        0  188016.266 -        0  188880.794 -        0
+MK+FQ+I+R6       -93698.232  187844.465 -        0  188034.295 -        0  188881.146 -        0
+MK+FQ+R9         -93816.963  188091.925 -        0  188292.191 -        0  189151.747 -        0
+MK+FQ+I+R5       -93944.320  188332.640 -        0  188518.404 -        0  189360.065 -        0
+MK+FQ+R8         -93985.643  188425.287 -        0  188621.332 -        0  189475.852 -        0
+MK+FQ+R7         -94208.669  188867.338 -        0  189059.225 -        0  189908.647 -        0
+MK+FQ+I+R4       -94310.920  189061.840 -        0  189243.597 -        0  190080.009 -        0
+MK+FQ+R6         -94552.522  189551.043 -        0  189738.833 -        0  190583.096 -        0
+MK+FQ+R5         -94978.531  190399.061 -        0  190582.814 -        0  191421.859 -        0
+MK+FQ+I+R3       -95087.059  190610.118 -        0  190787.928 -        0  191619.031 -        0
+MK+FQ+R4         -95594.141  191626.281 -        0  191806.057 -        0  192639.822 -        0
+MK+FQ+I+R2       -95701.342  191834.684 -        0  192008.606 -        0  192834.340 -        0
+MK+FQ+R3         -96687.685  193809.369 -        0  193985.228 -        0  194813.654 -        0
+MK+FQ+R2         -98431.053  197292.107 -        0  197464.107 -        0  198287.136 -        0
+MK+FQ+I         -107021.616  214471.231 -        0  214641.324 -        0  215461.632 -        0
+MK+FQ           -113288.120  227002.240 -        0  227170.439 -        0  227988.013 -        0
+
+AIC, w-AIC   : Akaike information criterion scores and weights.
+AICc, w-AICc : Corrected AIC scores and weights.
+BIC, w-BIC   : Bayesian information criterion scores and weights.
+
+Plus signs denote the 95% confidence sets.
+Minus signs denote significant exclusion.
+
+SUBSTITUTION PROCESS
+--------------------
+
+Model of substitution: MK+FQ+I+G4
+
+State frequencies: (equal frequencies)
+
+Model of rate heterogeneity: Invar+Gamma with 4 categories
+Proportion of invariable sites: 0.0715
+Gamma shape alpha: 0.2414
+
+ Category  Relative_rate  Proportion
+  0         0              0.0715
+  1         0.0019         0.2321
+  2         0.0652         0.2321
+  3         0.5202         0.2321
+  4         3.7210         0.2321
+Relative rates are computed as MEAN of the portion of the Gamma distribution falling in the category.
+
+MAXIMUM LIKELIHOOD TREE
+-----------------------
+
+Log-likelihood of the tree: -92180.3900 (s.e. 2975.5851)
+Unconstrained log-likelihood (without tree): -3900.4546
+Number of free parameters (#branches + #model parameters): 215
+Akaike information criterion (AIC) score: 184790.7800
+Corrected Akaike information criterion (AICc) score: 184962.7800
+Bayesian information criterion (BIC) score: 185785.8089
+
+Total tree length (sum of branch lengths): 476.5067
+Sum of internal branch lengths: 308.1251 (64.6633% of tree length)
+
+WARNING: 2 near-zero internal branches (<0.0013) should be treated with caution
+         Such branches are denoted by '**' in the figure below
+
+WARNING: 7 too long branches (>9.8000) should be treated with caution!
+NOTE: Tree is UNROOTED although outgroup taxon 'AAH_1' is drawn at root
+
++--AAH_1
+|
+|  +--AAH_2
++--|
+|  +--AAH_4
+|
+|  +--AAH_3
++--|
+   |                                                                               +--ALO_006
+   |                                                                            +--|
+   |                                                                            |  |  +--ALO_007
+   |                                                                            |  +**|
+   |                                                                            |     |               +**Iab_1
+   |                                                                            |     |            +--|
+   |                                                                            |     |            |  +**Iab_2
+   |                                                                            |     |         +--|
+   |                                                                            |     |         |  +--SPEY_2
+   |                                                                            |     |    +----|
+   |                                                                            |     |    |    |              +--Iac
+   |                                                                            |     |    |    |           +--|
+   |                                                                            |     |    |    |           |  +--Ime
+   |                                                                            |     |    |    |        +--|
+   |                                                                            |     |    |    |        |  +--Pen_1
+   |                                                                            |     |    |    |     +--|
+   |                                                                            |     |    |    |     |  +--PAR_2
+   |                                                                            |     |    |    |  +--|
+   |                                                                            |     |    |    |  |  +**NOT
+   |                                                                            |     |    |    +--|
+   |                                                                            |     |    |       +--LWS
+   |                                                                            |     +----|
+   |                                                                            |          |    +**LAB_300
+   |                                                                            |          +----|
+   |                                                                            |               +--NEN_003
+   |                                                                         +--|
+   |                                                                         |  |              +--FRE_013
+   |                                                                         |  |           +--|
+   |                                                                         |  |           |  |                    +--SKF_002
+   |                                                                         |  |           |  |                 +--|
+   |                                                                         |  |           |  |                 |  +--SPU_010
+   |                                                                         |  |           |  |              +--|
+   |                                                                         |  |           |  |              |  +**SPU_006
+   |                                                                         |  |           |  |           +--|
+   |                                                                         |  |           |  |           |  |        +--SKF_003
+   |                                                                         |  |           |  |           |  |     +--|
+   |                                                                         |  |           |  |           |  |     |  |  +--SKF_005
+   |                                                                         |  |           |  |           |  |     |  +--|
+   |                                                                         |  |           |  |           |  |     |     +--SKF_009
+   |                                                                         |  |           |  |           |  |  +--|
+   |                                                                         |  |           |  |           |  |  |  +--TET_004
+   |                                                                         |  |           |  |           |  +--|
+   |                                                                         |  |           |  |           |     +--SPU_008
+   |                                                                         |  |           |  |        +--|
+   |                                                                         |  |           |  |        |  +--TET_006
+   |                                                                         |  |           |  |     +--|
+   |                                                                         |  |           |  |     |  +--TET_002
+   |                                                                         |  |           |  |  +--|
+   |                                                                         |  |           |  |  |  +**TET_008
+   |                                                                         |  |           |  +--|
+   |                                                                         |  |           |     +--SPU_009
+   |                                                                         |  |        +--|
+   |                                                                         |  |        |  |  +--LNL_002
+   |                                                                         |  |        |  +--|
+   |                                                                         |  |        |     +**LNL_003
+   |                                                                         |  |     +--|
+   |                                                                         |  |     |  +--ROT_006
+   |                                                                         |  |  +--|
+   |                                                                         |  |  |  +--SKN_002
+   |                                                                         |  +--|
+   |                                                                         |     +--LNL_001
+   |                                                                      +--|
+   |                                                                      |  |      +**ALO_013
+   |                                                                      |  |   +--|
+   |                                                                      |  |   |  +--ALO_017
+   |                                                                      |  +---|
+   |                                                                      |      |  +--LNL_008
+   |                                                                      |      +--|
+   |                                                                      |         |       +--NEN_5
+   |                                                                      |         |  +----|
+   |                                                                      |         |  |    |           +--ODN_10
+   |                                                                      |         |  |    |        +--|
+   |                                                                      |         |  |    |        |  +--ODN_9
+   |                                                                      |         |  |    |     +**|
+   |                                                                      |         |  |    |     |  |     +--ODN_4
+   |                                                                      |         |  |    |     |  |  +--|
+   |                                                                      |         |  |    |     |  |  |  +--ODN_7
+   |                                                                      |         |  |    |     |  +--|
+   |                                                                      |         |  |    |     |     +--ODN_5
+   |                                                                      |         |  |    |  +--|
+   |                                                                      |         |  |    |  |  +--ODN_2
+   |                                                                      |         |  |    +--|
+   |                                                                      |         |  |       +--ODN_6
+   |                                                                      |         +--|
+   |                                                                      |            +---SKN_001
+   |                                                                   +--|
+   |                                                                   |  |  +--SKN_005
+   |                                                                   |  +--|
+   |                                                                   |     +--SKN_008
+   |                                                                +--|
+   |                                                                |  |     +--ROT_004
+   |                                                                |  |  +--|
+   |                                                                |  |  |  +--ROT_007
+   |                                                                |  +--|
+   |                                                                |     +--ROT_013
+   |                                                             +--|
+   |                                                             |  |     +--ELI_001
+   |                                                             |  |  +--|
+   |                                                             |  |  |  |  +--ELI_002
+   |                                                             |  |  |  +--|
+   |                                                             |  |  |     +--ELI_003
+   |                                                             |  +--|
+   |                                                             |     +--ELI_004
+   |                                                          +--|
+   |                                                          |  |     +--GEO_2
+   |                                                          |  |  +--|
+   |                                                          |  |  |  +--GEO_6
+   |                                                          |  +--|
+   |                                                          |     |     +**LAL_1
+   |                                                          |     |  +--|
+   |                                                          |     |  |  |  +--LAL_2
+   |                                                          |     |  |  +--|
+   |                                                          |     |  |     +--LAL_3
+   |                                                          |     +--|
+   |                                                          |        +--LAL_4
+   |                                                       +--|
+   |                                                       |  |              +--ERS_1
+   |                                                       |  |           +--|
+   |                                                       |  |           |  +--ERS_3
+   |                                                       |  |        +--|
+   |                                                       |  |        |  +--ERS_4
+   |                                                       |  |     +--|
+   |                                                       |  |     |  +**ERS_2
+   |                                                       |  |  +--|
+   |                                                       |  |  |  +--SCU_14
+   |                                                       |  +--|
+   |                                                       |     |  +--SCU_15
+   |                                                       |     +--|
+   |                                                       |        |  +--SCU_16
+   |                                                       |        +--|
+   |                                                       |           +**SCU_19
+   |                                                    +--|
+   |                                                    |  +--FTW_3
+   |                                                 +--|
+   |                                                 |  +--FTW_1
+   |                                              +--|
+   |                                              |  +--FTW_5
+   |                                           +--|
+   |                                           |  +--FTW_2
+   |                                      +----|
+   |                                      |    |        +--LOS_1
+   |                                      |    |     +--|
+   |                                      |    |     |  |  +--LOS_7
+   |                                      |    |     |  +--|
+   |                                      |    |     |     |     +--NEI_1
+   |                                      |    |     |     |  +--|
+   |                                      |    |     |     |  |  +--NEI_8
+   |                                      |    |     |     +--|
+   |                                      |    |     |        +**NEI_3
+   |                                      |    |  +--|
+   |                                      |    |  |  +--NEI_9
+   |                                      |    +--|
+   |                                      |       +--LOS_6
+   |                                   +--|
+   |                                   |  +--JOR_1
+   |                                +--|
+   |                                |  |     +--LAB_004
+   |                                |  |  +--|
+   |                                |  |  |  |  +--LAB_400
+   |                                |  |  |  +--|
+   |                                |  |  |     +--NEN_300
+   |                                |  +--|
+   |                                |     |  +--NEN_001
+   |                                |     +--|
+   |                                |        +--NEN_200
+   |                             +--|
+   |                             |  +--LAB_500
+   |                          +--|
+   |                          |  +--JOR_12
+   |                       +--|
+   |                       |  +--JOR_3
+   |                    +--|
+   |                    |  +--CHA_1
+   |                 +--|
+   |                 |  +--LAB_2
+   |              +--|
+   |              |  +--LAB_1
+   |           +--|
+   |           |  +--LAB_5
+   |        +--|
+   |        |  +--LAB_4
+   |     +--|
+   |     |  |        +--BNK_21
+   |     |  |     +--|
+   |     |  |     |  +--NEN_4
+   |     |  |  +--|
+   |     |  |  |  +--NEN_6
+   |     |  +--|
+   |     |     +--JOR_13
+   |  +--|
+   |  |  +--CHA_2
+   +--|
+      |                +--BRE_1
+      |             +--|
+      |             |  |  +--DAR_1
+      |             |  +--|
+      |             |     +--SCO_1
+      |          +--|
+      |          |  +**DAR_3
+      |       +--|
+      |       |  +**CUM_1
+      |    +--|
+      |    |  +--RYE_1
+      +----|
+           |  +**FOR_1
+           +--|
+              +-----JON_001
+
+Tree in newick format:
+
+(AAH_1:0.6359943719,(AAH_2:4.8613229332,AAH_4:1.4121014852):2.1666474514,(AAH_3:2.1191748735,((((((((((((((((((((((((((ALO_006:5.1086110851,(ALO_007:1.7987730855,((((Iab_1:0.0000026253,Iab_2:0.0000013590):0.5294414860,SPEY_2:0.1312232795):0.0247203324,(((((Iac:0.2750477926,Ime:0.4191889287):0.0775708010,Pen_1:0.1571776214):0.0598442454,PAR_2:0.2501929157):0.2739388447,NOT:0.0000028731):0.2849938334,LWS:0.1116098902):0.1156996289):10.0062624444,(LAB_300:0.0000023905,NEN_003:7.7494325643):10.0098836701):10.0098832401):0.0000020930):0.6022584266,(((((FRE_013:0.6074143822,(((((((SKF_002:6.0930059125,SPU_010:0.0664792554):4.2398407618,SPU_006:0.0000022901):1.7360159915,(((SKF_003:1.7144997154,(SKF_005:1.0670686612,SKF_009:0.9039409724):1.2376964701):0.6264977179,TET_004:0.1055484253):1.8949468202,SPU_008:1.1567421515):0.4941872937):0.4996684691,TET_006:0.2084164202):2.5718240392,TET_002:0.2140870755):3.0385500786,TET_008:0.0000023071):4.3005321366,SPU_009:0.1660699866):3.7333515474):5.1052590402,(LNL_002:1.3468397332,LNL_003:0.0000025511):1.5170957991):5.2128710942,ROT_006:3.5391971637):1.0777439909,SKN_002:1.1067536493):4.2274115879,LNL_001:2.3020667207):0.4552079610):4.7183348777,((ALO_013:0.0000021915,ALO_017:3.7085071684):1.7437589242,(LNL_008:0.4422859558,((NEN_5:3.1933435578,((((ODN_10:0.4600002812,ODN_9:0.5927399910):0.3039146331,((ODN_4:0.3152810497,ODN_7:2.2794916884):6.7892779548,ODN_5:0.3345634392):1.1791346975):0.0000023545,ODN_2:0.2165387127):4.8521594519,ODN_6:0.3789170415):7.0427228610):10.0098838902,SKN_001:8.4150184320):6.1054050167):0.8638522339):7.9807870591):0.1278426880,(SKN_005:0.8362509741,SKN_008:3.4708888614):1.0430731591):0.3860627592,((ROT_004:0.3843010056,ROT_007:4.8178288528):4.4514751478,ROT_013:1.4548866319):1.8420586384):2.1865850203,((ELI_001:0.4184002903,(ELI_002:0.9084664074,ELI_003:2.3126564820):0.8486461070):2.6855296568,ELI_004:0.6509091250):1.4637928052):6.0937770686,((GEO_2:0.4519765772,GEO_6:1.2624451040):5.4291717458,((LAL_1:0.0000022633,(LAL_2:1.7276116542,LAL_3:1.2687197501):1.4295079797):0.7178413385,LAL_4:4.4153150554):1.1089478789):4.9641731840):1.0347791749,(((((ERS_1:1.4731546828,ERS_3:0.9183042267):0.6351929541,ERS_4:2.3421349282):0.6413127446,ERS_2:0.0000025789):5.7787113049,SCU_14:0.3067386340):7.1279728197,(SCU_15:0.6978400564,(SCU_16:6.0759316376,SCU_19:0.0000027478):1.2270435049):2.0248378814):1.4192148576):5.8727004484,FTW_3:0.2515243558):2.5981231000,FTW_1:1.8388797414):1.9520034615,FTW_5:1.5849506616):2.9412406871,FTW_2:1.8975033733):4.3905900951,(((LOS_1:0.4220865704,(LOS_7:0.3351266559,((NEI_1:1.5911489872,NEI_8:0.5925401728):1.5208484656,NEI_3:0.0000022060):7.2402641769):1.0385294161):5.5524154304,NEI_9:0.1365637008):3.8785063291,LOS_6:2.6077325634):1.0898019462):10.0037615375,JOR_1:5.6784442292):4.6506731701,((LAB_004:0.8621305527,(LAB_400:3.6946504148,NEN_300:1.5345255198):4.7165428226):1.5039713820,(NEN_001:0.8948209265,NEN_200:1.3950229832):1.2487887281):3.4621180702):3.4884950742,LAB_500:0.7775516050):2.6268859439,JOR_12:1.2130616115):2.8662808115,JOR_3:4.7252228952):1.0004787902,CHA_1:3.6080354184):0.3722036395,LAB_2:1.1986301243):0.6863910516,LAB_1:0.5900543100):4.1048881680,LAB_5:0.9302757285):2.3873261249,LAB_4:0.8776295718):0.7340222386,(((BNK_21:4.3369476892,NEN_4:0.5643339394):2.5832696344,NEN_6:0.6506099225):2.7705097653,JOR_13:1.7336180500):0.9889055280):3.5683283993,CHA_2:4.6794407236):5.2239128991,(((((BRE_1:0.0420098124,(DAR_1:0.5175053408,SCO_1:0.2699815388):0.2422291306):1.2965497445,DAR_3:0.0000021865):6.3430585073,CUM_1:0.0000026080):3.7944226868,RYE_1:0.7312346600):2.7007630682,(FOR_1:0.0000029637,JON_001:12.9288858641):2.8006222161):10.0062626544):1.4110146698):0.6102539525);
+
+ALISIM COMMAND
+--------------
+To simulate an alignment of the same length as the original alignment, using the tree and model parameters estimated from this analysis, you can use the following command:
+
+--alisim simulated_MSA -t /Users/lukearcher/Desktop/120624_VCFs/030724.INDIVIDUALS.Neis.dist.4ds.phy.treefile -m "MK+I{0.0715467}+G4{0.241375}" -st "MORPH{10}" --length 756
+
+To mimic the alignment used to produce this analysis, i.e. simulate an alignment of the same length as the original alignment, using the tree and model parameters estimated from this analysis *and* copying the same gap positions as the original alignment, you can use the following command:
+
+iqtree -s /Users/lukearcher/Desktop/120624_VCFs/030724.INDIVIDUALS.Neis.dist.4ds.phy --alisim mimicked_MSA
+
+To simulate any number of alignments in either of the two commandlines above, use the --num-alignments options, for example mimic 100 alignments you would use the command line:
+
+iqtree -s /Users/lukearcher/Desktop/120624_VCFs/030724.INDIVIDUALS.Neis.dist.4ds.phy --alisim mimicked_MSA --num-alignments 100
+
+For more information on using AliSim, please visit: www.iqtree.org/doc/AliSim
+
+TIME STAMP
+----------
+
+Date and time: Wed Jul  3 15:36:34 2024
+Total CPU time used: 1572.65 seconds (0h:26m:12s)
+Total wall-clock time used: 467.353 seconds (0h:7m:47s)
+
