@@ -52,15 +52,15 @@ REF=~/C_excelsa_V5_reference/C_excelsa_V5.fa
 #########
 ##use GATK HaplotypeCaller to make a gVCF of the additional outgroup Ionopsidium files 
 ##firstly for Iac
-# gatk --java-options "-Xmx4g" HaplotypeCaller  \
-#   -R $REF \
-#   -I ./Iac/Iac.mrkd.nmd.bam \
-#   -O $OUTDIR/Iac.g.vcf.gz \
-#   -bamout $OUTDIR/Iac.raw.8x.bam \
-#   --emit-ref-confidence BP_RESOLUTION \
-#   --min-base-quality-score 25 \
-#   --minimum-mapping-quality 25 \
-#   --sample-ploidy 8 \
+ gatk --java-options "-Xmx4g" HaplotypeCaller  \
+   -R $REF \
+   -I ./Iac/Iac.mrkd.nmd.bam \
+   -O $OUTDIR/Iac.g.vcf.gz \
+   -bamout $OUTDIR/Iac.raw.8x.bam \
+   --emit-ref-confidence BP_RESOLUTION \
+   --min-base-quality-score 25 \
+   --minimum-mapping-quality 25 \
+   --sample-ploidy 8 \
 ############
 ##use GATK HaplotypeCaller to make a gVCF of the additional C. danica and Ionopsidium files
 ##now for Ime
@@ -75,26 +75,26 @@ REF=~/C_excelsa_V5_reference/C_excelsa_V5.fa
    --sample-ploidy 8 \
 ############
 ##now for Iab_1
-# gatk --java-options "-Xmx4g" HaplotypeCaller  \
-#   -R $REF \
-#   -I ./Iab_1/Iac_1.mrkd.nmd.bam \
-#   -O $OUTDIR/Iab_1.g.vcf.gz \
-#   -bamout $OUTDIR/Iab_1.raw.8x.bam \
-#   --emit-ref-confidence BP_RESOLUTION \
-#   --min-base-quality-score 25 \
-#   --minimum-mapping-quality 25 \
-#   --sample-ploidy 8 \
+ gatk --java-options "-Xmx4g" HaplotypeCaller  \
+   -R $REF \
+   -I ./Iab_1/Iac_1.mrkd.nmd.bam \
+   -O $OUTDIR/Iab_1.g.vcf.gz \
+   -bamout $OUTDIR/Iab_1.raw.8x.bam \
+   --emit-ref-confidence BP_RESOLUTION \
+   --min-base-quality-score 25 \
+   --minimum-mapping-quality 25 \
+   --sample-ploidy 8 \
 ############
 ##now for Iab_2
-# gatk --java-options "-Xmx4g" HaplotypeCaller  \
-#   -R $REF \
-#   -I ./Iab_2/Iac_2.mrkd.nmd.bam \
-#   -O $OUTDIR/Iab_2.g.vcf.gz \
-#   -bamout $OUTDIR/Iab_2.raw.8x.bam \
-#   --emit-ref-confidence BP_RESOLUTION \
-#   --min-base-quality-score 25 \
-#   --minimum-mapping-quality 25 \
-#   --sample-ploidy 8 \
+ gatk --java-options "-Xmx4g" HaplotypeCaller  \
+   -R $REF \
+   -I ./Iab_2/Iac_2.mrkd.nmd.bam \
+   -O $OUTDIR/Iab_2.g.vcf.gz \
+   -bamout $OUTDIR/Iab_2.raw.8x.bam \
+   --emit-ref-confidence BP_RESOLUTION \
+   --min-base-quality-score 25 \
+   --minimum-mapping-quality 25 \
+   --sample-ploidy 8 \
 ############
 
 ###unload module
