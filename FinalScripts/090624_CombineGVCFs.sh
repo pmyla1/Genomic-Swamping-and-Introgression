@@ -31,14 +31,14 @@ OUTDIR=~/300524_HaplotypeCaller_output/090624_Combined_VCF
  gatk CombineGVCFs \
    -R $REF \
    --variant ./Iac.g.vcf.gz \
-#   --variant ./Ime.g.vcf.gz \
+   --variant ./Ime.g.vcf.gz \
    --variant ./Pen_1_EKDL240001890-1A_222TKYLT4.g.vcf.gz \
    --variant ./NOT_EKDL240001890-1A_222TKYLT4.g.vcf.gz \
    --variant ./SPEY_2_EKDL240001890-1A_222TKYLT4.g.vcf.gz \
    --variant ./LWS_EKDL240001890-1A_222TKYLT4.g.vcf.gz \
    --variant ./Iab_1.g.vcf.gz \
    --variant ./Iab_2.g.vcf.gz \
-#   --variant ./FLEET_2_EKDL240001890-1A_222TKYLT4.g.vcf.gz \
+   --variant ./FLEET_2_EKDL240001890-1A_222TKYLT4.g.vcf.gz \
    --variant ./PAR_2_EKDL240001890-1A_222TKYLT4.g.vcf.gz \
    -O $OUTDIR/090624_Ionops_danica_combined.g.vcf.gz
 ################
