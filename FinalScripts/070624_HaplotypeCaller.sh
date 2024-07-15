@@ -4,8 +4,8 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=64
-#SBATCH --mem=40g
-#SBATCH --time=16:00:00
+#SBATCH --mem=64g
+#SBATCH --time=36:00:00
 #SBATCH --job-name=HaplotypeCaller
 #SBATCH --output=/gpfs01/home/pmyla1/slurm_output_error/slurm-%x-%j.out
 #SBATCH --error=/gpfs01/home/pmyla1/slurm_output_error/slurm-%x-%j.err
@@ -50,15 +50,15 @@ OUTDIR=~/300524_HaplotypeCaller_output
 REF=~/C_excelsa_V5_reference/C_excelsa_V5.fa
 ###########
 ##for FLEET_2
-# gatk --java-options "-Xmx4g" HaplotypeCaller  \
-#   -R $REF \
-#   -I ./FLEET_2_EKDL240001890-1A_222TKYLT4.marked_duplicates.bam \
-#   -O $OUTDIR/FLEET_2_EKDL240001890-1A_222TKYLT4.g.vcf.gz \
-#   -bamout $OUTDIR/FLEET_2_EKDL240001890-1A_222TKYLT4.6x.bam \
-#   --emit-ref-confidence BP_RESOLUTION \
-#   --min-base-quality-score 25 \
-#   --minimum-mapping-quality 25 \
-#   --sample-ploidy 6 \
+ gatk --java-options "-Xmx4g" HaplotypeCaller  \
+   -R $REF \
+   -I ./FLEET_2_EKDL240001890-1A_222TKYLT4.marked_duplicates.bam \
+   -O $OUTDIR/FLEET_2_EKDL240001890-1A_222TKYLT4.g.vcf.gz \
+   -bamout $OUTDIR/FLEET_2_EKDL240001890-1A_222TKYLT4.6x.bam \
+   --emit-ref-confidence BP_RESOLUTION \
+   --min-base-quality-score 25 \
+   --minimum-mapping-quality 25 \
+   --sample-ploidy 6 \
 ############
 ##now for LWS_1
  gatk --java-options "-Xmx4g" HaplotypeCaller  \
@@ -94,70 +94,70 @@ REF=~/C_excelsa_V5_reference/C_excelsa_V5.fa
    --sample-ploidy 6 \
 ############
 ##now for PEN_1
-# gatk --java-options "-Xmx4g" HaplotypeCaller  \
-#   -R $REF \
-#   -I ./Pen_1_EKDL240001890-1A_222TKYLT4.marked_duplicates.bam \
-#   -O $OUTDIR/Pen_1_EKDL240001890-1A_222TKYLT4.g.vcf.gz \#
-#   -bamout $OUTDIR/Pen_1_EKDL240001890-1A_222TKYLT4.6x.bam \
-#   --emit-ref-confidence BP_RESOLUTION \
-#   --min-base-quality-score 25 \
-#   --minimum-mapping-quality 25 \
-#   --sample-ploidy 6 \
+ gatk --java-options "-Xmx4g" HaplotypeCaller  \
+   -R $REF \
+   -I ./Pen_1_EKDL240001890-1A_222TKYLT4.marked_duplicates.bam \
+   -O $OUTDIR/Pen_1_EKDL240001890-1A_222TKYLT4.g.vcf.gz \#
+   -bamout $OUTDIR/Pen_1_EKDL240001890-1A_222TKYLT4.6x.bam \
+   --emit-ref-confidence BP_RESOLUTION \
+   --min-base-quality-score 25 \
+   --minimum-mapping-quality 25 \
+   --sample-ploidy 6 \
 ############
 ##now for SBAY_1
-# gatk --java-options "-Xmx4g" HaplotypeCaller  \
-#   -R $REF \
-#   -I ./SBAY_1_EKDL240001890-1A_222TKYLT4.marked_duplicates.bam \
-#   -O $OUTDIR/SBAY_1_EKDL240001890-1A_222TKYLT4.g.vcf.gz \
-#   -bamout $OUTDIR/SBAY_1_EKDL240001890-1A_222TKYLT4.6x.bam \
-#   --emit-ref-confidence BP_RESOLUTION \
-#   --min-base-quality-score 25 \
-#   --minimum-mapping-quality 25 \
-#   --sample-ploidy 6 \
+ gatk --java-options "-Xmx4g" HaplotypeCaller  \
+   -R $REF \
+   -I ./SBAY_1_EKDL240001890-1A_222TKYLT4.marked_duplicates.bam \
+   -O $OUTDIR/SBAY_1_EKDL240001890-1A_222TKYLT4.g.vcf.gz \
+   -bamout $OUTDIR/SBAY_1_EKDL240001890-1A_222TKYLT4.6x.bam \
+   --emit-ref-confidence BP_RESOLUTION \
+   --min-base-quality-score 25 \
+   --minimum-mapping-quality 25 \
+   --sample-ploidy 6 \
 ############
 ##now for SPEY_2
-# gatk --java-options "-Xmx4g" HaplotypeCaller  \
-#   -R $REF \
-#   -I ./SPEY_2_EKDL240001890-1A_222TKYLT4.marked_duplicates.bam \
-#   -O $OUTDIR/SPEY_2_EKDL240001890-1A_222TKYLT4.g.vcf.gz \
-#   -bamout $OUTDIR/SPEY_2_EKDL240001890-1A_222TKYLT4.6x.bam \
-#   --emit-ref-confidence BP_RESOLUTION \
-#   --min-base-quality-score 25 \
-#   --minimum-mapping-quality 25 \
-#   --sample-ploidy 6 \
+ gatk --java-options "-Xmx4g" HaplotypeCaller  \
+   -R $REF \
+   -I ./SPEY_2_EKDL240001890-1A_222TKYLT4.marked_duplicates.bam \
+   -O $OUTDIR/SPEY_2_EKDL240001890-1A_222TKYLT4.g.vcf.gz \
+   -bamout $OUTDIR/SPEY_2_EKDL240001890-1A_222TKYLT4.6x.bam \
+   --emit-ref-confidence BP_RESOLUTION \
+   --min-base-quality-score 25 \
+   --minimum-mapping-quality 25 \
+   --sample-ploidy 6 \
 ############
 ##now for Iac
-# gatk --java-options "-Xmx4g" HaplotypeCaller  \
-#   -R $REF \
-#   -I ./Iac.marked_duplicates.bam \
-#   -O $OUTDIR/Iac.g.vcf.gz \
-#   -bamout $OUTDIR/Iac.bam \
-#   --emit-ref-confidence BP_RESOLUTION \
-#   --min-base-quality-score 25 \
-#   --minimum-mapping-quality 25 \
-#   --sample-ploidy 6 \
+ gatk --java-options "-Xmx4g" HaplotypeCaller  \
+   -R $REF \
+   -I ./Iac.marked_duplicates.bam \
+   -O $OUTDIR/Iac.g.vcf.gz \
+   -bamout $OUTDIR/Iac.bam \
+   --emit-ref-confidence BP_RESOLUTION \
+   --min-base-quality-score 25 \
+   --minimum-mapping-quality 25 \
+   --sample-ploidy 6 \
 ############
 ##now for Ime
-# gatk --java-options "-Xmx4g" HaplotypeCaller  \
-#   -R $REF \
-#   -I ./Ime.marked_duplicates.bam \
-#   -O $OUTDIR/Ime.g.vcf.gz \
-#   -bamout $OUTDIR/Ime.bam \
-#   --emit-ref-confidence BP_RESOLUTION \
-#   --min-base-quality-score 25 \
-#   --minimum-mapping-quality 25 \
-#   --sample-ploidy 6 \
+ gatk --java-options "-Xmx4g" HaplotypeCaller  \
+   -R $REF \
+   -I ./Ime.marked_duplicates.bam \
+   -O $OUTDIR/Ime.g.vcf.gz \
+   -bamout $OUTDIR/Ime.bam \
+   --emit-ref-confidence BP_RESOLUTION \
+   --min-base-quality-score 25 \
+   --minimum-mapping-quality 25 \
+   --sample-ploidy 6 \
 ############
 ##now for HAM_1
-# gatk --java-options "-Xmx4g" HaplotypeCaller  \
-#   -R $REF \
-#   -I ./HAM_1_EKDL240001890-1A_222TKYLT4.marked_duplicates.bam \
-#   -O $OUTDIR/HAM_1_EKDL240001890-1A_222TKYLT4.g.vcf.gz \
-#   -bamout $OUTDIR/HAM_1_EKDL240001890-1A_222TKYLT4.6x.bam \
-#   --emit-ref-confidence BP_RESOLUTION \
-#   --min-base-quality-score 25 \
-#   --minimum-mapping-quality 25 \
-#   --sample-ploidy 6 \
+ gatk --java-options "-Xmx4g" HaplotypeCaller  \
+   -R $REF \
+   -I ./HAM_1_EKDL240001890-1A_222TKYLT4.marked_duplicates.bam \
+   -O $OUTDIR/HAM_1_EKDL240001890-1A_222TKYLT4.g.vcf.gz \
+   -bamout $OUTDIR/HAM_1_EKDL240001890-1A_222TKYLT4.6x.bam \
+   --emit-ref-confidence BP_RESOLUTION \
+   --min-base-quality-score 25 \
+   --minimum-mapping-quality 25 \
+   --sample-ploidy 6 \
 ############
 ############
 
