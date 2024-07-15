@@ -4,13 +4,17 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=48
-#SBATCH --mem=24g
-#SBATCH --time=04:00:00
+#SBATCH --mem=40g
+#SBATCH --time=12:00:00
 #SBATCH --job-name=MAPREADSSAMTOOLSSORT
 #SBATCH --output=/gpfs01/home/pmyla1/slurm_output_error/slurm-%x-%j.out
 #SBATCH --error=/gpfs01/home/pmyla1/slurm_output_error/slurm-%x-%j.err
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=pmyla1@exmail.nottingham.ac.uk
+
+######################
+This script was written by Luke Archer (2024) and can be used to map the trimmed reads onto the C_excelsa_V5.fasta reference genome and subsequently to convert the .sam files into bam files, and to produce flagstats summarising the alignment quality.
+#####################
 
 ##################
 ##setup 
