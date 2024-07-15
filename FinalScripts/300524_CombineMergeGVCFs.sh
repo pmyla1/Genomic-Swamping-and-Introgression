@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH --partition=shortq
+#SBATCH --partition=defq
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=48
