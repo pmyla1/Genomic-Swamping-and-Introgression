@@ -1,5 +1,5 @@
 # Genomic-Swamping-and-Introgression
-This repository should allow the user to reproduce an analysis of **gene flow/introgression** between the rapidly spreading invasive hexaploid ***Cochlearia danica*** and native UK ***Cochlearia species*** including: the diploid ***Cochlearia pyrenaica***, the tetraploid ***Cochlearia officinalis***, and the hexaploid ***Cochlearia anglica***-like hybrid, utilising the **Dsuite** software package for calculating Patterson's D and f4-admixture ratios (ABBA-BABA statistics). 
+This repository should allow the user to reproduce an analysis of **introgression** between the rapidly spreading invasive hexaploid ***Cochlearia danica*** and native UK ***Cochlearia species*** including: the diploid ***Cochlearia pyrenaica***, the tetraploid ***Cochlearia officinalis***, and the hexaploid ***Cochlearia anglica***-like hybrid, utilising the **Dsuite** software package for calculating Patterson's D and f4-admixture ratios (**ABBA-BABA statistics**). 
 
 # Background
 
@@ -11,17 +11,17 @@ The genus *Cochlearia* displays a **wide range of cytotypes** and ploidies, rang
 
 **Introgression** is the exchange of genetic material between species that results from **hybridization** and **recurrent backcrossing** ([Wang et al., 2023](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10504873/)). Introgression has the potential to introduce large sets of new alleles simultaneously at multiple unlinked loci, which permits adaptation even in polygenic traits thus potentially promoting rapid species evolution ([Burgarella et al., 2019](https://doi.org/10.3389/fpls.2019.00004)). Introgression is considered **"adaptive"** if the genetic material transferred confers the **recipient species an increased fitness**, which occurs between **crop wild relatives** and their **domesticated counterparts** providing the latter with beneficial traits such as **increased resistance** to **biotic and abiotic stress** including drought or extreme temperatures ([Burgarella et al., 2019](https://doi.org/10.3389/fpls.2019.00004)).
 
-One of the major consequences of long-term hybridization between rare and common species is genomic swamping, which is the reduction of a rare species' genetic diversity through recurrent hybridization with a common species which breaks down reproductive barriers and drive the rare species to extinction as rare genotypes are replaced in the hybrids ([Ge et al., 2022](https://doi.org/10.1093/molbev/msac274)). 
+One of the **major consequences** of long-term hybridization between rare and common species is **genomic swamping**, which is the reduction of a rare species' genetic diversity through **recurrent hybridization** with a common species which breaks down reproductive barriers and drive the rare species to extinction as rare genotypes are replaced in the hybrids ([Ge et al., 2022](https://doi.org/10.1093/molbev/msac274)). 
 
-The aim of this project is to detect and quantify the extent of gene flow/introgression between the invasive hexaploid halophyte *C. danica* and native UK populations of *C. anglica* (6X) or UK populations of *C. officinalis* (4X) by calculating ABBA-BABA statistics on genome-wide SNP data using Dsuite ([Malinsky, 2021](https://doi.org/10.1111/1755-0998.13265)). 
+The aim of this project is to **detect and quantify** the extent of **introgression** between the invasive hexaploid halophyte *C. danica* and native UK populations of *C. anglica* (6X) or UK populations of *C. officinalis* (4X) by calculating **ABBA-BABA statistics** on genome-wide SNP data using **Dsuite** ([Malinsky, 2021](https://doi.org/10.1111/1755-0998.13265)). 
 
 
 # Installation of Software and Dependencies
 
 ## Dsuite
-[Dsuite](https://github.com/millanek/Dsuite) is a software program developed to quickly calculate Patterson's D (ABBA-BABA), and the f4-ratio statistics across many populations and/or species. 
+[Dsuite](https://github.com/millanek/Dsuite) is a software program developed to quickly **calculate Patterson's D** (ABBA-BABA), and the **f4-ratio statistics** across many populations and/or species. 
 
-This software takes a VCF file and an explicitly stated phylogenetic tree in the Newick format as input and uses "parsimony informative" single nucleotide polymorphisms from a quartet of species to detect the occurrence of gene flow between species on internal branches of the tree. 
+This software takes a **VCF file** and an explicitly stated **phylogenetic tree** in the **Newick** format as input and uses **"parsimony informative"** single nucleotide polymorphisms from a quartet of species to detect the occurrence of gene flow between species on internal branches of the tree. 
 
 Citation: Malinsky, M., Matschiner, M. and Svardal, H. (2021) Dsuite ‐ fast D‐statistics and related admixture evidence from VCF files. Molecular Ecology Resources 21, 584–595. doi:[https://doi.org/10.1111/1755-0998.13265](https://doi.org/10.1111/1755-0998.13265)
 
@@ -35,13 +35,13 @@ make
 
 # Data Generation
 
-Additional *C. danica* and *Ionopsidium* Illumina paired-end sequencing data was provided by Yant (2024), and the sequencing reads (in fq.gz/fastq.gz format) were processed following the guidelines outlined in [ngs_pipe](https://github.com/mattheatley/ngs_pipe) from Healey (2024).
+Additional *C. danica* and *Ionopsidium* **Illumina paired-end** sequencing data was provided by Yant (2024), and the sequencing reads (in fq.gz/fastq.gz format) were processed following the **guidelines** outlined in [ngs_pipe](https://github.com/mattheatley/ngs_pipe) from Healey (2024).
 
 ## FastQC and MultiQC for sequencing quality control reports
 
-The [070724_FastQC.MultiQC.sh](https://github.com/pmyla1/Genomic-Swamping-and-Introgression/blob/main/FinalScripts/070724_FastQC.MultiQC.sh) script was used to produce a sequencing quality control report for the additional *C. danica* and *Ionopsidium* sequencing data.
+The [070724_FastQC.MultiQC.sh](https://github.com/pmyla1/Genomic-Swamping-and-Introgression/blob/main/FinalScripts/070724_FastQC.MultiQC.sh) script was used to produce a **sequencing quality control** report for the additional *C. danica* and *Ionopsidium* sequencing data.
 
-An example command for producing a fastqc report for a single population (FLEET_2 in this example) can be found below:
+An example command for producing a fastqc report for a **single population** (FLEET_2 in this example) can be found below:
 ```
 ###load fastqc module for performing sequencing quality control reports
 module load fastqc-uoneasy/0.12.1-Java-11
@@ -55,7 +55,7 @@ fastqc -o ../170524_fastqc/ ./FLE_2/*.fq.gz
 ##REPEAT for the other populations
 ```
 
-Subsequently, a MultiQC report can be generated by utilising the directory containing the FastQC reports generated in the previous stage as input files (i.e. the .fastqc.zip files). The command to produce the MultiQC report can be found below.
+Subsequently, a **MultiQC report** was generated by utilising the directory containing the FastQC reports generated in the previous stage as input files (i.e. the .fastqc.zip files). The command to produce the MultiQC report can be found below.
 ```
 ##load multiqc module
 module load multiqc-uoneasy/1.14-foss-2023a
@@ -63,15 +63,15 @@ module load multiqc-uoneasy/1.14-foss-2023a
 ##execute multiqc on the fastqc.zip data specifying -f (--force to overwrite existing reports) and -p to export the plots generated
 multiqc -f -p ~/170524_fastqc/.*fastqc.zip
 ```
-The MultiQC plots and reports include a directory for **png**, **svg**, or **pdf** versions of the plots and can be found in the [MultiQC]() folder.
+The MultiQC plots and reports include a directory for **png**, **svg**, or **pdf** versions of the plots and can be found in the [MultiQC](https://github.com/pmyla1/Genomic-Swamping-and-Introgression/tree/main/MultiQC) folder.
 
-## 22/05/2024 - Whole Pipeline from Data Generation to VCF
+## Whole Pipeline from Data Generation to VCF
 
 The Illumina paired-end sequencing data provided by Yant (2024) were processed following the steps outlined in the [ngs_pipe](https://github.com/mattheatley/ngs_pipe/blob/main/README) README page written by Healey (2024). 
 
 # Stage 1: Trimming the adapters from Illumina paired-end sequencing reads
 
-Firstly, Nextera Transposase adapters were trimmed from the reads with Trimmomatic (version 0.39), by specifying `ILLUMINACLIP:NexteraPE-PE.fa:2:40:15` on the command line. Reads with PHRED scores < 20 and a minimum length of 25 were trimmed ((`SLIDINGWINDOW:4:20` & `MINLEN:25`, respectively). An example trimmomatic command for one population (HAM_1) can be found below:
+Firstly, **Nextera Transposase adapters** were trimmed from the reads with **[Trimmomatic](https://github.com/usadellab/Trimmomatic/releases/tag/v0.39)** (version 0.39), by specifying `ILLUMINACLIP:NexteraPE-PE.fa:2:40:15` on the command line. Reads with **PHRED scores < 20** and a **minimum length of 25bp** were trimmed ((`SLIDINGWINDOW:4:20` & `MINLEN:25`, respectively). An example trimmomatic command for one population (HAM_1) can be found below:
 
 ```
 ##Trimmomatic - trims Nextera transposase adapters from the Illumina reads
@@ -84,7 +84,7 @@ java -jar $EBROOTTRIMMOMATIC/trimmomatic-0.39.jar \
 
 # Stage 2: Mapping trimmed reads onto the C_excelsa_V5.fa reference genome with BWA
 
-The Burrows-Wheeler aligner (BWA - version 12.3) was used to align trimmed reads onto the C_excelsa_V5.fa reference genome. An example command for BWA alignment can be found below.
+The **Burrows-Wheeler aligner** ([BWA](https://github.com/lh3/bwa) - version 12.3) was used to **align trimmed reads** onto the **C_excelsa_V5.fa** reference genome. An example command for BWA alignment can be found below.
 ```
 #make environmental variables to store the metadata (meta), output directory (OUTDIR), and the path to the reference genome (REFDIR).
 meta=EKDL240001890-1A_222TKYLT4
@@ -101,7 +101,7 @@ bwa mem \
 
 # Stage 3: Converting to bam files, sorting, and indexing bams with Samtools
 
-Samtools (version - 1.8) was used to convert the `aln-pe.sam` files produced by BWA in the previous stage into binary bam files using the `samtools view` command. The bam files were coordinate sorted using `samtools sort`, and subsequently indexed with `samtools index`. Finally, summary statistics for the alignments were produced with `samtools flagstats`. 
+**[Samtools](https://www.htslib.org/)** (version - 1.8) was used to convert the `aln-pe.sam` files produced by BWA in the previous stage **into binary bam files** using the `samtools view` command. The bam files were **coordinate sorted** using `samtools sort`, and subsequently **indexed** with `samtools index`. Finally, **summary statistics** for the alignments were produced with `samtools flagstats`. 
 
 ```
 #samtools converting PAR_2 sam alignment to bam with samtools view 
@@ -120,7 +120,7 @@ samtools flagstat ./bam_files/PAR_2_${metadata}.sorted.bam > ./bam_files/PAR_2_$
 
 # Stage 4: Marking and discarding duplicate reads with Picard MarkDuplicates and Adding Read Groups with AddOrReplaceReadGroups
 
-Duplicate reads from the sorted bams were marked and discarded using Picard (version 3.0.0) MarkDuplicates, specifying `--REMOVE_DUPLICATES true`. An example MarkDuplicates command for one of the samples can be found below.
+**Duplicate reads** from the sorted bams were **marked and discarded** using [Picard (version 3.0.0)](https://github.com/broadinstitute/picard/releases/tag/3.0.0) MarkDuplicates, specifying `--REMOVE_DUPLICATES true`. An example MarkDuplicates command for one of the samples can be found below.
 
 ```
 ##make environmental variables for the output directory (OUTDIR) and the metadata (meta)
@@ -131,7 +131,7 @@ meta=EKDL240001890-1A_222TKYLT4
 java -jar $EBROOTPICARD/picard.jar MarkDuplicates -I ./FLEET_2_${meta}.sorted.bam -O $OUTDIR/FLEET_2_${meta}.marked_duplicates.bam -M $OUTDIR/FLEET_2_${meta}.marked_dup_metrics.txt --VALIDATION_STRINGENCY SILENT --ASSUME_SORTED true --REMOVE_DUPLICATES true
 ```
 
-Read Groups were manually added to the duplicate marked bam files and were coordinate-sorted and indexed using Picard AddOrReplaceReadGroups with the `SORT_ORDER=coordinate` and `CREATE_INDEX=True` command line options. An example command for adding read groups can be found below.
+**Read Groups were manually added** to the duplicate marked bam files and were **coordinate-sorted** and **indexed** using Picard AddOrReplaceReadGroups with the `SORT_ORDER=coordinate` and `CREATE_INDEX=True` command line options. An example command for adding read groups can be found below.
 ```
 ##store the metadata in an environmental variable called meta
 meta=EKDL240001890-1A_222TKYLT4
@@ -150,7 +150,7 @@ java -jar $EBROOTPICARD/picard.jar AddOrReplaceReadGroups \
 
 # Stage 5: Genotyping Individual Samples with GATK HaplotypeCaller
 
-Samples were genotyped utilising GATK (version 4.4.0) HaplotypeCaller specifying `--emit-ref-confidence BP_RESOLUTION`, `--minimum-mapping-quality-score 25`, `--min-base-quality-score 25`, and `--sample-ploidy 6` because the additional *C. danica* samples are hexaploid. An example command for a **single population** can be found below.
+Samples were genotyped utilising [GATK (version 4.4.0)](https://gatk.broadinstitute.org/hc/en-us/sections/13832625991067-4-4-0-0) HaplotypeCaller specifying `--emit-ref-confidence BP_RESOLUTION`, `--minimum-mapping-quality-score 25`, `--min-base-quality-score 25`, and `--sample-ploidy 6` because the additional *C. danica* samples are hexaploid. An example command for a **single population** can be found below.
 
 ```
 ##make environmental variables for the reference genome and for the output directory
@@ -171,7 +171,7 @@ REF=~/C_excelsa_V5_reference/C_excelsa_V5.fa
 
 # Stage 6: Combining per-sample gVCFs into a single gVCF with GATK CombineGVCFs
 
-The per-sample gVCFs generated in the previous stage by GATK HaplotypeCaller were combined into a **multi-sample gVCF** with `GATK CombineGVCFs`. The command used to combine all **per-sample gVCFs** into a **multi-sample gVCF** is below.
+The **individual sample gVCFs** generated in the previous stage by GATK HaplotypeCaller were combined into a **multi-sample gVCF** with `GATK CombineGVCFs`. The command used to combine all **per-sample gVCFs** into a **multi-sample gVCF** is below.
 
 ```
 ###make environmental variables for the reference genome and the output directory
@@ -196,7 +196,7 @@ OUTDIR=~/300524_HaplotypeCaller_output/090624_Combined_VCF
 
 # Stage 7: Joint genotyping with GATK GenotypeGVCFs
 
-The multi-sample gVCF produced in the previous stage with GATK CombineGVCFs was **joint-genotyped** using GATK GenotypeGVCFs specifying `-G StandardAnnotation` and `--include-non-variant-sites True`. The command used to joint-genotype the multi-sample gVCF can be found below.
+The **multi-sample gVCF** produced by GATK CombineGVCFs was **joint-genotyped** using GATK **GenotypeGVCFs** specifying `-G StandardAnnotation` and `--include-non-variant-sites True`. The command used to joint-genotype the multi-sample gVCF can be found below.
 
 ```
 ###make environmental variables for the reference genome, input directory, and the output directory
@@ -234,7 +234,7 @@ gatk SelectVariants \
    --restrict-alleles-to BIALLELIC \
 ```
 
-Finally, VCFtools (version 1.16) was used to output **per-site depth statistics**.
+Finally, [VCFtools (version 1.16)](https://vcftools.sourceforge.net/) was used to output **per-site depth statistics**.
 
 ```
 ##use vcftools to output per site depth statistics and use 1.6 * mean depth as a maximum depth cut-off
@@ -243,7 +243,7 @@ vcftools --gzvcf $OUT1 --out Depth.per.site --site-depth
 
 # Stage 9: Depth filtering and final VCF generation
 
-GATK (version 4.4.0) SelectVariants was used to produce a depth-masked VCF file (120624_depth.mask.Ion.dan.g.vcf.gz.) based on a depth cut off of 1.6 * the mean depth. Subsequently, GATK VariantFiltration was used to filter the F2 best practice VCF (110624_Ion.dan.F2.best.g.vcf.gz) using the depth-masked VCF and removing the variants NOT in the masked VCF. The final F4 VCF (120624_Ion.dan.filtered.F4.g.vcf.gz) was produced using GATK SelectVariants by excluding the depth-filtered sites from the F3 VCF with the `--exclude-filtered True` command line option.
+**GATK SelectVariants** was used to produce a **depth-masked VCF** (120624_depth.mask.Ion.dan.g.vcf.gz.) based on a depth **cut off of 1.6 * mean depth**. Subsequently, **GATK VariantFiltration** was used to filter the F2 best practice VCF (110624_Ion.dan.F2.best.g.vcf.gz) using the depth-masked VCF and **removing variants NOT in the masked VCF**. The **final F4** VCF (120624_Ion.dan.filtered.F4.g.vcf.gz) was produced using **GATK SelectVariants** by excluding the depth-filtered sites from the F3 VCF with the `--exclude-filtered True` command line option.
  
 
 ```
@@ -281,7 +281,7 @@ gatk SelectVariants \
 
 # Stage 10: Manually re-headering and merging VCF files 
 
-BCFtools (version 1.18) was used to re-header the original 133 sample reheadered.F4_133.ann.vcf.gz VCF and the 120624_Ion.dan.filtered.F4.g.vcf.gz containing the additional *C. danica* and *Ionopsidium* samples. Firstly, the original VCF file headers were visualised using the following commands:
+[BCFtools (version 1.18)](https://github.com/samtools/bcftools/releases/tag/1.18) was used to **re-header** the original 133 sample **reheadered.F4_133.ann.vcf.gz** VCF and the **120624_Ion.dan.filtered.F4.g.vcf.gz** containing the additional *C. danica* and *Ionopsidium* samples. Firstly, the **original VCF file headers were viewed** using the following commands:
 
 ```
 ##environmental variable for reheadered.F4_133.ann.vcf.gz
@@ -294,7 +294,7 @@ bcftools view -h $VCF2ORIGINAL > ./HEADER2.txt
 
 
 ```
-Next, the HEADER1.txt and HEADER2.txt files were manually altered using `nano` (or an equivalent text editor) and changing the Number in the PL field in the VCF header to `Number=.`. Then, `bcftools reheader` was used to reheader the VCFs to allow for merging.
+Next, the **HEADER1.txt** and **HEADER2.txt** files were **manually altered** using `nano` (or an equivalent text editor) and changing the **Number in the PL field** in the VCF header to **`Number=.`**. Then, `bcftools reheader` was used to **reheader the VCFs** to allow for merging.
 
 ```
 ##environmental variable for the reheadered VCFs
@@ -305,7 +305,7 @@ VCF2REHEADERED=120624_reheadered.Ion.dan.F4.g.vcf.gz
 bcftools reheader -h HEADER2.txt $VCF2ORIGINAL > ./$VCF2REHEADERED
 ```
 
-The reheadered VCFs were indexed using a simple `bcftools index` command, and the 120624_reheadered.F4_133.ann.vcf.gz and 120624_reheadered.Ion.dan.F4.g.vcf.gz files were merged using  `bcftools merge`.
+The **reheadered VCFs were indexed** using a simple `bcftools index` command, and the 120624_reheadered.F4_133.ann.vcf.gz and 120624_reheadered.Ion.dan.F4.g.vcf.gz files were **merged** using  `bcftools merge`.
 
 ```
 ##make an environmental variable for the merged output VCF
@@ -316,7 +316,7 @@ bcftools merge --t 8 -0 --write-index -Oz $VCF1REHEADERED $VCF2REHEADERED -o $FI
 
 # Stage 11: Selecting only UK diploids, tetraploids, and hexaploids and Ionopsidium samples
 
-The 120624.final.merged.Ion.dan.F4.vcf.gz was indexed using `gatk IndexFeatureFile` and all biallelic SNPs from the UK samples were selected using `gatk SelectVariants` with the `--select-type-to-include SNP` and `--restrict-alleles-to BIALLELIC` flags. The `-sn` flag was used to select the individual IDs for the UK samples only (e.g. AAH_1).  
+The **120624.final.merged.Ion.dan.F4.vcf.gz was indexed** using `gatk IndexFeatureFile` and **all biallelic SNPs** from the **UK samples** were selected using `gatk SelectVariants` with the `--select-type-to-include SNP` and `--restrict-alleles-to BIALLELIC` flags. The `-sn` flag was used to select the individual IDs for the UK samples only (e.g. AAH_1).  
 
 ```
 INVCF=~/120624_merged.133.ann.Ion.dan.F4.vcf.gz
@@ -355,7 +355,7 @@ gatk SelectVariants -V $INVCF \
 
 # Stage 12: LD pruning and final VCF generation
 
-The [prune_ld.c](https://github.com/thamala/polySV/blob/main/prune_ld.c) script from Hämälä (2024) was used to thin the VCF and remove all sites with more than 10% missing data, a minor allele frequency less than 0.05, and a squared genotypic correlation of 0.1 (in windows of 50 SNPs and a window step size of 10 SNPs). 
+The [prune_ld.c](https://github.com/thamala/polySV/blob/main/prune_ld.c) script from Hämälä (2024) was used to **filter the VCF** and remove all sites with **more than 10% missing data**, a **minor allele frequency less than 0.05**, and a **squared genotypic correlation of 0.1** (in windows of 50 SNPs and a window step size of 10 SNPs). 
 
 The script was first compiled using the following command:
 
@@ -377,13 +377,13 @@ prune_ld -vcf ~/120624_Ionops.allUKsamples.F4.vcf -mis 0.9 -maf 0.05 -r2 50 10 0
 
 SplitsTree was downloaded following the instructions on the [University of Tübingen Website](https://uni-tuebingen.de/fakultaeten/mathematisch-naturwissenschaftliche-fakultaet/fachbereiche/informatik/lehrstuehle/algorithms-in-bioinformatics/software/splitstree/). 
 
-This program was used to construct and visualize phylogenetic networks of the individuals in the ld pruned 120624.LD.Pruned.Ionops.allUKsamples.vcf. 
+This program was used to construct and **visualize phylogenetic networks** of the individuals in the ld pruned 120624.LD.Pruned.Ionops.allUKsamples.vcf. 
 
-Editing the phylogenetic networks was performed using Microsoft Word and manually highlighting clades according to ploidy. 
+Editing the phylogenetic networks was performed using **Microsoft Word** and **manually highlighting clades** according to **ploidy**. 
 
 The 030724.adegenet.R script was used to analyse the LD pruned and filtered VCF (120624.LD.Pruned.Ionops.allUKsamples.vcf), utilising the glPcaFast() and vcf2genlightTetra() functions provided by Yant et al (2023).
 
-The VCF was loaded into Rstudio and converted into a genlight object using the vcfR2genlight.tetra() function for polyploid data. Next, principal component analysis (PCA) can be performed on the genlight object using the glPcaFast() function, and subsequently, the genlight object can be converted into Nei's genetic distances using the stamppNeisD() function. 
+The VCF was loaded into Rstudio and **converted into a genlight object** using the **vcfR2genlight.tetra()** function for polyploid data. Next, principal component analysis **(PCA)** can be performed on the genlight object using the **glPcaFast()** function, and subsequently, the genlight object can be converted into **Nei's genetic distances** using the **stamppNeisD()** function. 
 
 ```{R Functions to convert VCF to genlight object}
 ##import the SNP data for Cochlearia and Ionopsidium data
@@ -412,9 +412,9 @@ attr(aa.D.ind.dist, "Labels") <-rownames(aa.D.ind)
 
 ## IQTREE and iTOL for maximum likelihood tree estimation and visualization
 
-[IQTREE](http://www.iqtree.org/#download) was downloaded locally following the download instructions for `64-bit macOS Universal`. 
+[IQTREE](http://www.iqtree.org/#download) was **downloaded locally** following the download instructions for `64-bit macOS Universal`. 
 
-After navigating to the directory where the IQTREE executable is located, the following command was executed.
+After navigating to the **directory where the IQTREE executable is** located, the following command was executed.
 
 ```
 ##Execute iqtree2 using Nei's genetic distance data and 4 threads/CPUs
@@ -426,7 +426,7 @@ The .iqtree file produced as output suggested that the substitution model that p
 bin/iqtree2 -s ~/Desktop/110624_IQTREE.OUT/110624_aa.indiv_Neis_distance_4ds.phy -nt 4 -B 1000 -m "MK+I{0.0727447}+G4{0.244664}" -bnni -redo
 ```
 
-[iTOL](https://itol.embl.de/upload.cgi) or the Interactive Tree of Life, is a GUI which was used to upload the Newick-formatted consensus tree produced by IQTREE and to visualize the consensus tree. 
+[iTOL](https://itol.embl.de/upload.cgi) or the **Interactive Tree of Life**, is a GUI which was used to upload the **Newick-formatted consensus tree** produced by IQTREE and to visualize the consensus tree. 
 
 To visualise your consensus tree you can upload the **consensus tree in Newick format** into the `Tree Text` box and select upload. Next you can customise the layout of your consensus tree as you wish by selecting the toolbar which includes `Basic`, `Advanced`, and `Datasets`. 
 
@@ -461,9 +461,9 @@ Dtrios was used to calculate Patterson's D (ABBA-BABA) and F4-ratio statistics f
 
 The `--ABBAclustering` option was used to test whether **strong ABBA-informative sites cluster** together throughout the genome. If introgression has occurred between two species, you would **expect clusters of ABBA-informative sites** across the genome rather than having many individual ABBA-informative sites evenly distributed across the genome caused by homoplasy, therefore, the `--ABBAclustering` option can be used to **test for clustering of ABBA-informative sites**. The more significant clustering of ABBA sites, the more confidence you can have that the introgression/gene flow event is real and not caused by homoplasies ([Malinsky, 2021](https://github.com/millanek/Dsuite)).
 
-In order to execute Dsuite commands locally (e.g. Dtrios), you can navigate to the Build folder and run the Dsuite executable with the following command `./Build/Dsuite` which shows the available commands. To execute the Dtrios command you can type `./Build/Dsuite Dtrios`.
+In order to execute Dsuite commands locally (e.g. Dtrios), you can **navigate to the Build folder** and run the Dsuite executable with the following command `./Build/Dsuite` which shows the available commands. To execute the Dtrios command you can type `./Build/Dsuite Dtrios`.
 
-Dsuite Dtrios was executed using a modular approach on Ada. Dtrios was executed using a jack-knife block approach which divides the 120624_LD.Pruned.Ionops.allUKsamples.vcf.gz file into 4000 blocks of approximately 92 single nucleotide polymorphisms (total number of biallelic SNPs in the 120624_LD.Pruned.Ionops.allUKsamples.vcf.gz file is  366,504):
+**Dtrios** was executed using a **jack-knife block approach** which divides the 120624_LD.Pruned.Ionops.allUKsamples.vcf.gz file into **4000 blocks** of approximately **92 single nucleotide polymorphisms** (total number of biallelic SNPs in the 120624_LD.Pruned.Ionops.allUKsamples.vcf.gz file is  366,504):
 
 ```
 ##make an environmental variable for the VCF you want to use (120624_LD.Pruned.Ionops.allUKsamples.vcf.gz)
@@ -474,7 +474,7 @@ VCF=~/120624_LD.Pruned.Ionops.allUKsamples.vcf.gz
 Dsuite Dtrios -k 4000 -o 240624_Dtrios --ABBAclustering $VCF SETS_SPECIES.txt
 ```
 
-The SETs.txt file has the following structure with the individual ID and the group/species ID (i.e. the species) separated by a tab, and is demonstrated below:
+The **SETs.txt** file has the following structure with the **individual ID** and the **group/species ID** (i.e. the species) separated by a tab, and is demonstrated below:
 
 ```
 Ime          Outgroup
@@ -505,9 +505,9 @@ SKF_009      anglica
 
 ## Dinvestigate - a window-based introgression scan in trios with significantly elevated D-statistics
 
-Dinvestigate was used to perform a **window-based scan for introgression** in trios that had significantly elevated D-statistics from the Dtrios output. 
+Dinvestigate was used to perform a **window-based scan for introgression** in trios that had **significantly elevated D-statistics** from the Dtrios output. 
 
-The D-statistic has high variance when applied to small genomic windows, therefore, can be a poor estimator of the amount of introgression between species ([Malinsky, 2021](https://onlinelibrary.wiley.com/doi/10.1111/1755-0998.13265)). The f_d statistic can be used to locate genomic regions introgressed between P2 and P3, yet, does not account for the excess sharing of derived alleles between P1 and P3 and may take on large negative values. [Malinsky (2015)](https://doi.org/10.1126/science.aac9927) developed a modified version of f_d, called the f_dM statistic which can be used account for the excess sharing of derived alleles between both P2 and P3 and between P1 and P3.
+The D-statistic has **high variance** when applied to **small genomic windows**, therefore, can be a **poor estimator** of the amount of introgression between species ([Malinsky, 2021](https://onlinelibrary.wiley.com/doi/10.1111/1755-0998.13265)). The **f_d statistic** can be used to locate **genomic regions introgressed** between P2 and P3, yet, does not account for the excess sharing of derived alleles between P1 and P3 and **may take on large negative values**. [Malinsky (2015)](https://doi.org/10.1126/science.aac9927) developed a modified version of f_d, called the **f_dM statistic** which can be used account for the **excess sharing of derived alleles** between both P2 and P3 and between P1 and P3.
 
 The `240624_testtrios.txt` is a text file containing the trio of populations/species to test for localised regions of introgression separated by a tab:
 ```
@@ -523,11 +523,11 @@ Dsuite Dinvestigate -w 50,25 -n 50_25_pyr_off_ang $VCF SETS_SPECIES.txt 240624_t
 Dsuite Dinvestigate -w 100,25 -n 100_25_pyr_off_ang $VCF SETS_SPECIES.txt 240624_testtrios.txt
 ```
 
-The output for the Dinvestigate analysis includes text files containing the localised windowed F-statistics including Fd, Fdm, and df. For subsequent/downstream analyses, the text files can be uploaded into RStudio and the top 1% introgression windows (using f_dM) can be selected using a dplyr based approach.
+The output for the Dinvestigate analysis includes text files containing the **localised windowed F-statistics** including Fd, Fdm, and df. For subsequent/downstream analyses, the text files can be uploaded into RStudio and the **top 1% introgression windows** (using f_dM) can be selected using a **dplyr based approach**.
 
 # Bedtools intersect - identify introgressed loci overlapping genes 
 
-Bedtools (version ) intersect was used to identify the introgressed loci/genomic windows overlapping genes in the C_excelsa_V5_braker2_wRseq.gff3 genome annotation file, with the `-wa` and `-wb` flags to write the full output including the overlaps in both input files.
+**Bedtools intersect** was used to identify the **introgressed loci overlapping genes** in the **C_excelsa_V5_braker2_wRseq.gff3** genome annotation file, with the `-wa` and `-wb` flags to write the full output including the overlaps in both input files.
 
 The following command was used to identify genes overlapping introgressed loci/windows in the *C. danica* *C. anglica* and *C. pyrenaica* trio.
 
@@ -536,7 +536,7 @@ The following command was used to identify genes overlapping introgressed loci/w
 bedtools intersect -a danangpyr100025_bed.bed -b ./240624_bedtools/C_excelsa_V5_braker2_wRseq.gff3 -wa -wb > ./100624.danangpyr100025.overlaps.txt
 ```
 
-Custom python script `extract.geneIDs.py` was used to extract the gene ID column from the 100624.danangpyr100025.overlaps.txt output file, and the `1-2-1_hits_all_gene_descriptions.tsv` file.
+Custom python script `extractgeneids_improved.py` was used to **extract the gene ID column** from the 100624.danangpyr100025.overlaps.txt output file, and the `1-2-1_hits_all_gene_descriptions.tsv` file.
 
 # Gene Ontology (GO) Enrichment Analysis
 
@@ -545,7 +545,7 @@ GO enrichment analysis was performed in R using a custom script provided by Bray
 
 # Protein Structure Prediction - AlphaFold Colab V2
 
-Two of the genes of interest found in the candidate introgressed regions between the *C. pyrenaica*, *C. anglica*, *C. danica* trio were selected to produce AlphaFold Protein Structure models using [AlphaFold2.Colab](https://colab.research.google.com/github/sokrypton/ColabFold/blob/main/AlphaFold2.ipynb#scrollTo=kOblAo-xetgx). The two genes selected for protein structure prediction were JAR1 (g50778.t1 in *Cochlearia*) encoding Jasmonate Resistance 1 and AVI2 (g50851.t1 in *Cochlearia*). Firstly, the coordinates for each of the genes were identified using a simple grep command:
+**Five genes** of interest found in the **candidate introgressed regions** between the *C. pyrenaica*, *C. anglica*, *C. danica* trio were selected to produce **AlphaFold Protein Structure models** using [AlphaFold2.Colab](https://colab.research.google.com/github/sokrypton/ColabFold/blob/main/AlphaFold2.ipynb#scrollTo=kOblAo-xetgx). The five genes selected for protein structure prediction were JAR1 (g50778.t1 in *Cochlearia*) encoding Jasmonate Resistance 1 and AVI2 (g50851.t1 in *Cochlearia*). Firstly, the coordinates for each of the genes were identified using a simple grep command:
 ```
 ##use grep to obtain the genomic coordinates for JAR1 (g50778) from the C_excelsa_V5_braker2_wRseq.gff3 genome annotation file
 grep "g50778.t1" C_excelsa_V5_braker2_wRseq.gff3 > ./g50778.JAR1.genomic.coordinates.tsv
@@ -554,7 +554,7 @@ grep "g50778.t1" C_excelsa_V5_braker2_wRseq.gff3 > ./g50778.JAR1.genomic.coordin
 grep "g50851.t1" C_excelsa_V5_braker2_wRseq.gff3 > ./g50851.AVI2.genomic.coordinates.tsv
 ```
 
-Next, `gatk IndexFeatureFile` was used to index the 120624_LD.Pruned.Ionops.allUKsamples.vcf.gz, and `gatk FastaAlternateReferenceMaker` was used to extract the coding sequences (CDS) for both JAR1 and AVI2 by using the genomic coordinates for the exons in both genes. A further 3 genes including the homologues for BBX11, PRR9, and GRP7 were selected to produce AlphaFold models since these genes were identified in a Gene Ontology Enrichment analysis of the *C. pyrenica*, *C. anglica*, *C. danica* trio.
+Next, `gatk IndexFeatureFile` was used to index the 120624_LD.Pruned.Ionops.allUKsamples.vcf.gz, and `gatk FastaAlternateReferenceMaker` was used to **extract the coding sequences (CDS)** for both JAR1 and AVI2 by using the **genomic coordinates** for the exons in both genes. A further 3 genes including the homologues for BBX11, PRR9, and GRP7 were selected to produce AlphaFold models since these genes were identified in a Gene Ontology Enrichment analysis of the *C. pyrenica*, *C. anglica*, *C. danica* trio.
 
 ```
 ##firstly index the VCF file
