@@ -20,7 +20,7 @@ module load gatk-uoneasy/4.4.0.0-GCCcore-12.3.0-Java-17
 
 #####
 ##index the reheadered.F4_133.ann.vcf.gz file with gatk IndexFeatureFile
-gatk IndexFeatureFile -I /gpfs01/home/pmyla1/reheadered.F4_133.ann.vcf.gz
+gatk IndexFeatureFile -I ~/reheadered.F4_133.ann.vcf.gz
 
 ######
 ##use GATK SelectVariants to select all UK diploids, tetraploids, C. danica, and putative C. anglica
