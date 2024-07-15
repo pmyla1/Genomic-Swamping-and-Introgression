@@ -18,27 +18,27 @@ source $HOME/.bash_profile
 
 
 ##load the GATK module for combining the GVCFs
-#module load gatk-uoneasy/4.4.0.0-GCCcore-12.3.0-Java-17
+module load gatk-uoneasy/4.4.0.0-GCCcore-12.3.0-Java-17
 
-#cd ~/300524_HaplotypeCaller_output/090624_combined_genotyped/
+cd ~/300524_HaplotypeCaller_output/090624_combined_genotyped/
 
-#mkdir -p 100624_filtered.best/
+mkdir -p 100624_filtered.best/
 ###make environmental variables for the reference genome, input directory, and the output directory
 REF=~/C_excelsa_V5_reference/C_excelsa_V5.fa
 VCF=~/300524_HaplotypeCaller_output/090624_combined_genotyped/090624_Ionops_danica_genotyped.g.vcf.gz
 OUT1=~/300524_HaplotypeCaller_output/090624_combined_genotyped/100624_filtered.best/100624_Ion.dan.filtered.F1.biallelic.g.vcf.gz
 ################
 ##GATK SelectVariants to select biallelic variants only
-#gatk SelectVariants \
-#   -R $REF \
-#   -V $VCF \
-#   -O $OUT1 \
-#   --select-type-to-exclude INDEL \
-#   --select-type-to-exclude MIXED \
-#   --restrict-alleles-to BIALLELIC 
+gatk SelectVariants \
+   -R $REF \
+   -V $VCF \
+   -O $OUT1 \
+   --select-type-to-exclude INDEL \
+   --select-type-to-exclude MIXED \
+   --restrict-alleles-to BIALLELIC 
 
 ##unload the GATK module
-#module unload gatk-uoneasy/4.4.0.0-GCCcore-12.3.0-Java-17
+module unload gatk-uoneasy/4.4.0.0-GCCcore-12.3.0-Java-17
 
 ##load the Picard module for filtering the VCF
 module load picard-uoneasy/3.0.0-Java-17
