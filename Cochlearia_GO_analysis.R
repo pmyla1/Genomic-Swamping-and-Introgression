@@ -1,3 +1,6 @@
+###This script was provided by Dr Sian Bray (2024) and can be used to perform a GO-enrichment analysis of a list of genes found in a selection scan. This GO-enrichment script is specific to the Cochlearia genus and the top1perc is the file containing the list of genes from your selection scan, which changes every time you have a new gene list to analyse. The other files can remain the same, i.e. the go and the genesinscan.
+
+
 # Install packages
 install.packages("ggplot2")
 install.packages("dplyr")
@@ -22,7 +25,8 @@ go <- readMappings(file="/Users/lukearcher/Desktop/280624_GOanalysis/Cochlearia_
 genesInScan <- read.csv("/Users/lukearcher/Desktop/280624_GOanalysis/genes_in_scan_clean.txt", 
                         header = FALSE)
 
-# My genes of interest (i.e. Fst top 1%)
+# My genes of interest (i.e. Fst top 1%) 
+##the top1perc is the gene list that contains genes found in the selection scan and is a list of genes with one gene per line
 top1perc <- read.csv("/Users/lukearcher/Desktop/280624_GOanalysis/pyrangdan100025.GOgenelist.txt", 
                      header = FALSE)
 
