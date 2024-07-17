@@ -101,7 +101,7 @@ bwa mem \
 
 # Stage 3: Converting to bam files, sorting, and indexing bams with Samtools
 
-**[Samtools](https://www.htslib.org/)** (version - 1.8) was used to convert the `aln-pe.sam` files produced by BWA in the previous stage **into binary bam files** using the `samtools view` command. The bam files were **coordinate sorted** using `samtools sort`, and subsequently **indexed** with `samtools index`. Finally, **summary statistics** for the alignments were produced with `samtools flagstats`. 
+**[Samtools](https://www.htslib.org/)** (version - 1.8) and the [260524_MapReads.sh](https://github.com/pmyla1/Genomic-Swamping-and-Introgression/blob/main/FinalScripts/260524_MapReads.sh) were used to convert the `aln-pe.sam` files produced by BWA in the previous stage **into binary bam files** using the `samtools view` command. The bam files were **coordinate sorted** using `samtools sort`, and subsequently **indexed** with `samtools index`. Finally, **summary statistics** for the alignments were produced with `samtools flagstats`. 
 
 ```
 #samtools converting PAR_2 sam alignment to bam with samtools view 
