@@ -214,7 +214,7 @@ OUTDIR=~/300524_HaplotypeCaller_output/090624_combined_genotyped
 
 # Stage 8: Filtering with GATK SelectVariants and GATK VariantFiltration
 
-GATK SelectVariants and the [100624_Filtered.Best.sh]() script was used to **exclude insertion-deletion** mutations and **mixed SNP-indels**, and to **include only biallelic SNPs** from the multi-sample gVCF.
+GATK SelectVariants and the [100624_Filtered.Best.sh](https://github.com/pmyla1/Genomic-Swamping-and-Introgression/blob/main/FinalScripts/100624_Filtered.Best.sh) script was used to **exclude insertion-deletion** mutations and **mixed SNP-indels**, and to **include only biallelic SNPs** from the multi-sample gVCF.
 
 ```
 ###make environmental variables for the reference genome, input directory, and the output directory
@@ -280,7 +280,7 @@ gatk SelectVariants \
 
 # Stage 10: Manually re-headering and merging VCF files 
 
-[BCFtools (version 1.18)](https://github.com/samtools/bcftools/releases/tag/1.18) was used to **re-header** the original 133 sample **reheadered.F4_133.ann.vcf.gz** VCF and the **120624_Ion.dan.filtered.F4.g.vcf.gz** containing the additional *C. danica* and *Ionopsidium* samples. Firstly, the **original VCF file headers were viewed** using the following commands:
+[BCFtools (version 1.18)](https://github.com/samtools/bcftools/releases/tag/1.18) and the [120624_BCFTOOLSMERGE.sh]() script was used to **re-header** the original 133 sample **reheadered.F4_133.ann.vcf.gz** VCF and the **120624_Ion.dan.filtered.F4.g.vcf.gz** containing the additional *C. danica* and *Ionopsidium* samples. Firstly, the **original VCF file headers were viewed** using the following commands:
 
 ```
 ##environmental variable for reheadered.F4_133.ann.vcf.gz
