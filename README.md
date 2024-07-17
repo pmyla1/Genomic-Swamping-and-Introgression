@@ -149,7 +149,7 @@ java -jar $EBROOTPICARD/picard.jar MarkDuplicates -I ./FLEET_2_${meta}.sorted.ba
 
 # Stage 5: Genotyping Individual Samples with GATK HaplotypeCaller
 
-Samples were genotyped utilising [GATK (version 4.4.0)](https://gatk.broadinstitute.org/hc/en-us/sections/13832625991067-4-4-0-0) HaplotypeCaller specifying `--emit-ref-confidence BP_RESOLUTION`, `--minimum-mapping-quality-score 25`, `--min-base-quality-score 25`, and `--sample-ploidy 6` because the additional *C. danica* samples are hexaploid. An example command for a **single population** can be found below.
+Samples were genotyped utilising [GATK (version 4.4.0)](https://gatk.broadinstitute.org/hc/en-us/sections/13832625991067-4-4-0-0) HaplotypeCaller and the [070624_HaplotypeCaller.sh](https://github.com/pmyla1/Genomic-Swamping-and-Introgression/blob/main/FinalScripts/070624_HaplotypeCaller.sh) which specifies `--emit-ref-confidence BP_RESOLUTION`, `--minimum-mapping-quality-score 25`, `--min-base-quality-score 25`, and `--sample-ploidy 6` because the additional *C. danica* samples are hexaploid. An example command for a **single population** can be found below.
 
 ```
 ##make environmental variables for the reference genome and for the output directory
