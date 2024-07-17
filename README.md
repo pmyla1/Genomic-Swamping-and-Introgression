@@ -84,7 +84,7 @@ java -jar $EBROOTTRIMMOMATIC/trimmomatic-0.39.jar \
 
 # Stage 2: Mapping trimmed reads onto the C_excelsa_V5.fa reference genome with BWA
 
-The **Burrows-Wheeler aligner** ([BWA](https://github.com/lh3/bwa) - version 12.3) was used to **align trimmed reads** onto the **C_excelsa_V5.fa** reference genome. An example command for BWA alignment can be found below.
+The **Burrows-Wheeler aligner** ([BWA](https://github.com/lh3/bwa) - version 12.3) was used to **align trimmed reads** onto the **C_excelsa_V5.fa** reference genome. The [260524_MapReads.sh](https://github.com/pmyla1/Genomic-Swamping-and-Introgression/blob/main/FinalScripts/260524_MapReads.sh) script was used to align the trimmed sequencing reads to the [C_excelsa_V5.fasta](https://datadryad.org/stash/downloads/file_stream/2651757) reference genomme. An example command for BWA alignment can be found below.
 ```
 #make environmental variables to store the metadata (meta), output directory (OUTDIR), and the path to the reference genome (REFDIR).
 meta=EKDL240001890-1A_222TKYLT4
