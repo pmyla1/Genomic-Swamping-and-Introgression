@@ -315,7 +315,7 @@ bcftools merge --t 8 -0 --write-index -Oz $VCF1REHEADERED $VCF2REHEADERED -o $FI
 
 # Stage 11: Selecting only UK diploids, tetraploids, and hexaploids and Ionopsidium samples
 
-The **120624.final.merged.Ion.dan.F4.vcf.gz was indexed** using `gatk IndexFeatureFile` and **all biallelic SNPs** from the **UK samples** were selected using `gatk SelectVariants` with the `--select-type-to-include SNP` and `--restrict-alleles-to BIALLELIC` flags using the [120624_LDPrune.sh]() script. The `-sn` flag was used to select the individual IDs for the UK samples only (e.g. AAH_1).  
+The **120624.final.merged.Ion.dan.F4.vcf.gz was indexed** using `gatk IndexFeatureFile` and **all biallelic SNPs** from the **UK samples** were selected using `gatk SelectVariants` with the `--select-type-to-include SNP` and `--restrict-alleles-to BIALLELIC` flags using the [120624_LDPrune.sh](https://github.com/pmyla1/Genomic-Swamping-and-Introgression/blob/main/FinalScripts/120624_LDPrune.sh) script. The `-sn` flag was used to select the individual IDs for the UK samples only (e.g. AAH_1).  
 
 ```
 INVCF=~/120624_merged.133.ann.Ion.dan.F4.vcf.gz
@@ -354,7 +354,7 @@ gatk SelectVariants -V $INVCF \
 
 # Stage 12: LD pruning and final VCF generation
 
-The [prune_ld.c](https://github.com/thamala/polySV/blob/main/prune_ld.c) script from Hämälä (2024) was used to **filter the VCF** and remove all sites with **more than 10% missing data**, a **minor allele frequency less than 0.05**, and a **squared genotypic correlation of 0.1** (in windows of 50 SNPs and a window step size of 10 SNPs). 
+The [prune_ld.c](https://github.com/thamala/polySV/blob/main/prune_ld.c) script from Hämälä (2024) was used to **filter the VCF** and remove all sites with **more than 10% missing data**, a **minor allele frequency less than 0.05**, and a **squared genotypic correlation of 0.1** (in windows of 50 SNPs and a window step size of 10 SNPs). This was executed as a batch script [120624_LDPrune.sh](https://github.com/pmyla1/Genomic-Swamping-and-Introgression/blob/main/FinalScripts/120624_LDPrune.sh).
 
 The script was first compiled using the following command:
 
