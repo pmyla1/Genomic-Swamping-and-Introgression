@@ -118,20 +118,9 @@ samtools flagstat ./bam_files/PAR_2_${metadata}.sorted.bam > ./bam_files/PAR_2_$
 
 ```
 
-# Stage 4: Marking and discarding duplicate reads with Picard MarkDuplicates and Adding Read Groups with AddOrReplaceReadGroups
+# Stage 4: Marking & discarding duplicate reads with Picard MarkDuplicates and Adding Read Groups with AddOrReplaceReadGroups
 
-**Duplicate reads** from the sorted bams were **marked and discarded** using [Picard (version 3.0.0)](https://github.com/broadinstitute/picard/releases/tag/3.0.0) MarkDuplicates, specifying `--REMOVE_DUPLICATES true`. An example MarkDuplicates command for one of the samples can be found below.
-
-```
-##make environmental variables for the output directory (OUTDIR) and the metadata (meta)
-OUTDIR=~/220524_alignments/bam_files/duplicate_marked_bams
-meta=EKDL240001890-1A_222TKYLT4
-
-##execute MarkDuplicates on FLEET_2
-java -jar $EBROOTPICARD/picard.jar MarkDuplicates -I ./FLEET_2_${meta}.sorted.bam -O $OUTDIR/FLEET_2_${meta}.marked_duplicates.bam -M $OUTDIR/FLEET_2_${meta}.marked_dup_metrics.txt --VALIDATION_STRINGENCY SILENT --ASSUME_SORTED true --REMOVE_DUPLICATES true
-```
-
-**Read Groups were manually added** to the duplicate marked bam files and were **coordinate-sorted** and **indexed** using Picard AddOrReplaceReadGroups with the `SORT_ORDER=coordinate` and `CREATE_INDEX=True` command line options. An example command for adding read groups can be found below.
+**Read Groups were manually added** to the duplicate marked bam files and were **coordinate-sorted** and **indexed** using Picard AddOrReplaceReadGroups with the `SORT_ORDER=coordinate` and `CREATE_INDEX=True` command line options with the [070624_AddOrReplaceReadGroups.sh]() script. An example command for adding read groups can be found below.
 ```
 ##store the metadata in an environmental variable called meta
 meta=EKDL240001890-1A_222TKYLT4
@@ -146,6 +135,16 @@ java -jar $EBROOTPICARD/picard.jar AddOrReplaceReadGroups \
     RGPU=unit1 \
     RGSM=FLEET_2 \
     CREATE_INDEX=True
+```
+**Duplicate reads** from the sorted bams were **marked and discarded** using [Picard (version 3.0.0)](https://github.com/broadinstitute/picard/releases/tag/3.0.0) MarkDuplicates and the [070624_MarkDuplicateswithRG.sh]() script, specifying `--REMOVE_DUPLICATES true`. An example MarkDuplicates command for one of the samples can be found below.
+
+```
+##make environmental variables for the output directory (OUTDIR) and the metadata (meta)
+OUTDIR=~/220524_alignments/bam_files/duplicate_marked_bams
+meta=EKDL240001890-1A_222TKYLT4
+
+##execute MarkDuplicates on FLEET_2
+java -jar $EBROOTPICARD/picard.jar MarkDuplicates -I ./FLEET_2_${meta}.sorted.bam -O $OUTDIR/FLEET_2_${meta}.marked_duplicates.bam -M $OUTDIR/FLEET_2_${meta}.marked_dup_metrics.txt --VALIDATION_STRINGENCY SILENT --ASSUME_SORTED true --REMOVE_DUPLICATES true
 ```
 
 # Stage 5: Genotyping Individual Samples with GATK HaplotypeCaller
