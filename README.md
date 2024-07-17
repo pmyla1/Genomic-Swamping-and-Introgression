@@ -242,7 +242,7 @@ vcftools --gzvcf $OUT1 --out Depth.per.site --site-depth
 
 # Stage 9: Depth filtering and final VCF generation
 
-**GATK SelectVariants** and the [120624_DepthVariantFiltration.sh]() script was used to produce a **depth-masked VCF** (120624_depth.mask.Ion.dan.g.vcf.gz.) based on a depth **cut off of 1.6 * mean depth**. Subsequently, **GATK VariantFiltration** was used to filter the F2 best practice VCF (110624_Ion.dan.F2.best.g.vcf.gz) using the depth-masked VCF and **removing variants NOT in the masked VCF**. The **final F4** VCF (120624_Ion.dan.filtered.F4.g.vcf.gz) was produced using **GATK SelectVariants** by excluding the depth-filtered sites from the F3 VCF with the `--exclude-filtered True` command line option.
+**GATK SelectVariants** and the [120624_DepthVariantFiltration.sh](https://github.com/pmyla1/Genomic-Swamping-and-Introgression/blob/main/FinalScripts/120624_DepthVariantFiltration.sh) script was used to produce a **depth-masked VCF** (120624_depth.mask.Ion.dan.g.vcf.gz.) based on a depth **cut off of 1.6 * mean depth**. Subsequently, **GATK VariantFiltration** was used to filter the F2 best practice VCF (110624_Ion.dan.F2.best.g.vcf.gz) using the depth-masked VCF and **removing variants NOT in the masked VCF**. The **final F4** VCF (120624_Ion.dan.filtered.F4.g.vcf.gz) was produced using **GATK SelectVariants** by excluding the depth-filtered sites from the F3 VCF with the `--exclude-filtered True` command line option.
  
 
 ```
