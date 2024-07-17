@@ -120,7 +120,7 @@ samtools flagstat ./bam_files/PAR_2_${metadata}.sorted.bam > ./bam_files/PAR_2_$
 
 # Stage 4: Marking & discarding duplicate reads with Picard MarkDuplicates and Adding Read Groups with AddOrReplaceReadGroups
 
-**Read Groups were manually added** to the duplicate marked bam files and were **coordinate-sorted** and **indexed** using Picard AddOrReplaceReadGroups with the `SORT_ORDER=coordinate` and `CREATE_INDEX=True` command line options with the [070624_AddOrReplaceReadGroups.sh]() script. An example command for adding read groups can be found below.
+**Read Groups were manually added** to the duplicate marked bam files and were **coordinate-sorted** and **indexed** using Picard AddOrReplaceReadGroups with the `SORT_ORDER=coordinate` and `CREATE_INDEX=True` command line options with the [070624_AddOrReplaceReadGroups.sh](https://github.com/pmyla1/Genomic-Swamping-and-Introgression/blob/main/FinalScripts/070624_AddOrReplaceReadGroups.sh) script. An example command for adding read groups can be found below.
 ```
 ##store the metadata in an environmental variable called meta
 meta=EKDL240001890-1A_222TKYLT4
