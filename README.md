@@ -149,7 +149,7 @@ java -jar $EBROOTPICARD/picard.jar MarkDuplicates -I ./FLEET_2_${meta}.sorted.ba
 
 # Stage 5: Genotyping Individual Samples with GATK HaplotypeCaller
 
-Samples were genotyped utilising [GATK (version 4.4.0)](https://gatk.broadinstitute.org/hc/en-us/sections/13832625991067-4-4-0-0) HaplotypeCaller and the [070624_HaplotypeCaller.sh](https://github.com/pmyla1/Genomic-Swamping-and-Introgression/blob/main/FinalScripts/070624_HaplotypeCaller.sh) which specifies `--emit-ref-confidence BP_RESOLUTION`, `--minimum-mapping-quality-score 25`, `--min-base-quality-score 25`, and `--sample-ploidy 6` because the additional *C. danica* samples are hexaploid. An example command for a **single population** can be found below.
+Samples were genotyped utilising [GATK (version 4.4.0)](https://gatk.broadinstitute.org/hc/en-us/sections/13832625991067-4-4-0-0) HaplotypeCaller and the [070624_HaplotypeCaller.sh](https://github.com/pmyla1/Genomic-Swamping-and-Introgression/blob/main/FinalScripts/070624_HaplotypeCaller.sh) script which specifies `--emit-ref-confidence BP_RESOLUTION`, `--minimum-mapping-quality-score 25`, `--min-base-quality-score 25`, and `--sample-ploidy 6` because the additional *C. danica* samples are hexaploid. An example command for a **single population** can be found below.
 
 ```
 ##make environmental variables for the reference genome and for the output directory
@@ -170,7 +170,7 @@ REF=~/C_excelsa_V5_reference/C_excelsa_V5.fa
 
 # Stage 6: Combining per-sample gVCFs into a single gVCF with GATK CombineGVCFs
 
-The **individual sample gVCFs** generated in the previous stage by GATK HaplotypeCaller were combined into a **multi-sample gVCF** with `GATK CombineGVCFs`. The command used to combine all **per-sample gVCFs** into a **multi-sample gVCF** is below.
+The **individual sample gVCFs** generated in the previous stage by GATK HaplotypeCaller were combined into a **multi-sample gVCF** with `GATK CombineGVCFs` and the [090624_CombineGVCFs.sh](https://github.com/pmyla1/Genomic-Swamping-and-Introgression/blob/main/FinalScripts/090624_CombineGVCFs.sh) script. The command used to combine all **per-sample gVCFs** into a **multi-sample gVCF** is below.
 
 ```
 ###make environmental variables for the reference genome and the output directory
@@ -195,7 +195,7 @@ OUTDIR=~/300524_HaplotypeCaller_output/090624_Combined_VCF
 
 # Stage 7: Joint genotyping with GATK GenotypeGVCFs
 
-The **multi-sample gVCF** produced by GATK CombineGVCFs was **joint-genotyped** using GATK **GenotypeGVCFs** specifying `-G StandardAnnotation` and `--include-non-variant-sites True`. The command used to joint-genotype the multi-sample gVCF can be found below.
+The **multi-sample gVCF** produced by GATK CombineGVCFs was **joint-genotyped** using GATK **GenotypeGVCFs** and the [090624_GenotypeGVCFs.sh] script specifying `-G StandardAnnotation` and `--include-non-variant-sites True`. The command used to joint-genotype the multi-sample gVCF can be found below.
 
 ```
 ###make environmental variables for the reference genome, input directory, and the output directory
