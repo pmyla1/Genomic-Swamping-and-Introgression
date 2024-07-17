@@ -195,7 +195,7 @@ OUTDIR=~/300524_HaplotypeCaller_output/090624_Combined_VCF
 
 # Stage 7: Joint genotyping with GATK GenotypeGVCFs
 
-The **multi-sample gVCF** produced by GATK CombineGVCFs was **joint-genotyped** using GATK **GenotypeGVCFs** and the [090624_GenotypeGVCFs.sh] script specifying `-G StandardAnnotation` and `--include-non-variant-sites True`. The command used to joint-genotype the multi-sample gVCF can be found below.
+The **multi-sample gVCF** produced by GATK CombineGVCFs was **joint-genotyped** using GATK **GenotypeGVCFs** and the [090624_GenotypeGVCFs.sh](https://github.com/pmyla1/Genomic-Swamping-and-Introgression/blob/main/FinalScripts/090624_GenotypeGVCFs.sh) script specifying `-G StandardAnnotation` and `--include-non-variant-sites True`. The command used to joint-genotype the multi-sample gVCF can be found below.
 
 ```
 ###make environmental variables for the reference genome, input directory, and the output directory
@@ -214,7 +214,7 @@ OUTDIR=~/300524_HaplotypeCaller_output/090624_combined_genotyped
 
 # Stage 8: Filtering with GATK SelectVariants and GATK VariantFiltration
 
-GATK SelectVariants was used to **exclude insertion-deletion** mutations and **mixed SNP-indels**, and to **include only biallelic SNPs** from the multi-sample gVCF.
+GATK SelectVariants and the [100624_Filtered.Best.sh]() script was used to **exclude insertion-deletion** mutations and **mixed SNP-indels**, and to **include only biallelic SNPs** from the multi-sample gVCF.
 
 ```
 ###make environmental variables for the reference genome, input directory, and the output directory
@@ -242,7 +242,7 @@ vcftools --gzvcf $OUT1 --out Depth.per.site --site-depth
 
 # Stage 9: Depth filtering and final VCF generation
 
-**GATK SelectVariants** was used to produce a **depth-masked VCF** (120624_depth.mask.Ion.dan.g.vcf.gz.) based on a depth **cut off of 1.6 * mean depth**. Subsequently, **GATK VariantFiltration** was used to filter the F2 best practice VCF (110624_Ion.dan.F2.best.g.vcf.gz) using the depth-masked VCF and **removing variants NOT in the masked VCF**. The **final F4** VCF (120624_Ion.dan.filtered.F4.g.vcf.gz) was produced using **GATK SelectVariants** by excluding the depth-filtered sites from the F3 VCF with the `--exclude-filtered True` command line option.
+**GATK SelectVariants** and the [120624_DepthVariantFiltration.sh]() script was used to produce a **depth-masked VCF** (120624_depth.mask.Ion.dan.g.vcf.gz.) based on a depth **cut off of 1.6 * mean depth**. Subsequently, **GATK VariantFiltration** was used to filter the F2 best practice VCF (110624_Ion.dan.F2.best.g.vcf.gz) using the depth-masked VCF and **removing variants NOT in the masked VCF**. The **final F4** VCF (120624_Ion.dan.filtered.F4.g.vcf.gz) was produced using **GATK SelectVariants** by excluding the depth-filtered sites from the F3 VCF with the `--exclude-filtered True` command line option.
  
 
 ```
