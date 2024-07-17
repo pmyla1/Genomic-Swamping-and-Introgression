@@ -71,7 +71,7 @@ The Illumina paired-end sequencing data provided by Yant (2024) were processed f
 
 # Stage 1: Trimming the adapters from Illumina paired-end sequencing reads
 
-Firstly, **Nextera Transposase adapters** were trimmed from the reads with **[Trimmomatic](https://github.com/usadellab/Trimmomatic/releases/tag/v0.39)** (version 0.39), by specifying `ILLUMINACLIP:NexteraPE-PE.fa:2:40:15` on the command line. Reads with **PHRED scores < 20** and a **minimum length of 25bp** were trimmed ((`SLIDINGWINDOW:4:20` & `MINLEN:25`, respectively). An example trimmomatic command for one population (HAM_1) can be found below:
+Firstly, **Nextera Transposase adapters** were trimmed from the reads with **[Trimmomatic](https://github.com/usadellab/Trimmomatic/releases/tag/v0.39)** (version 0.39), by specifying `ILLUMINACLIP:NexteraPE-PE.fa:2:40:15` on the command line. Reads with **PHRED scores < 20** and a **minimum length of 25bp** were trimmed ((`SLIDINGWINDOW:4:20` & `MINLEN:25`, respectively). The script used to trim adapter sequences from the sequencing reads can was the [260524_trimmomatic.sh](https://github.com/pmyla1/Genomic-Swamping-and-Introgression/blob/main/FinalScripts/260524_trimmomatic.sh) script. An example trimmomatic command for one population (HAM_1) can be found below:
 
 ```
 ##Trimmomatic - trims Nextera transposase adapters from the Illumina reads
