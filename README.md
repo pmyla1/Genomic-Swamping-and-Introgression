@@ -136,7 +136,7 @@ java -jar $EBROOTPICARD/picard.jar AddOrReplaceReadGroups \
     RGSM=FLEET_2 \
     CREATE_INDEX=True
 ```
-**Duplicate reads** from the sorted bams were **marked and discarded** using [Picard (version 3.0.0)](https://github.com/broadinstitute/picard/releases/tag/3.0.0) MarkDuplicates and the [070624_MarkDuplicateswithRG.sh]() script, specifying `--REMOVE_DUPLICATES true`. An example MarkDuplicates command for one of the samples can be found below.
+**Duplicate reads** from the sorted bams were **marked and discarded** using [Picard (version 3.0.0)](https://github.com/broadinstitute/picard/releases/tag/3.0.0) MarkDuplicates and the [070624_MarkDuplicateswithRG.sh](https://github.com/pmyla1/Genomic-Swamping-and-Introgression/blob/main/FinalScripts/070624_MarkDuplicateswithRG.sh) script, specifying `--REMOVE_DUPLICATES true`. An example MarkDuplicates command for one of the samples can be found below.
 
 ```
 ##make environmental variables for the output directory (OUTDIR) and the metadata (meta)
