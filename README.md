@@ -280,7 +280,7 @@ gatk SelectVariants \
 
 # Stage 10: Manually re-headering and merging VCF files 
 
-[BCFtools (version 1.18)](https://github.com/samtools/bcftools/releases/tag/1.18) and the [120624_BCFTOOLSMERGE.sh]() script was used to **re-header** the original 133 sample **reheadered.F4_133.ann.vcf.gz** VCF and the **120624_Ion.dan.filtered.F4.g.vcf.gz** containing the additional *C. danica* and *Ionopsidium* samples. Firstly, the **original VCF file headers were viewed** using the following commands:
+[BCFtools (version 1.18)](https://github.com/samtools/bcftools/releases/tag/1.18) and the [120624_BCFTOOLSMERGE.sh](https://github.com/pmyla1/Genomic-Swamping-and-Introgression/blob/main/FinalScripts/120624_BCFTOOLSMERGE.sh) script was used to **re-header** the original 133 sample **reheadered.F4_133.ann.vcf.gz** VCF and the **120624_Ion.dan.filtered.F4.g.vcf.gz** containing the additional *C. danica* and *Ionopsidium* samples. Firstly, the **original VCF file headers were viewed** using the following commands:
 
 ```
 ##environmental variable for reheadered.F4_133.ann.vcf.gz
@@ -315,7 +315,7 @@ bcftools merge --t 8 -0 --write-index -Oz $VCF1REHEADERED $VCF2REHEADERED -o $FI
 
 # Stage 11: Selecting only UK diploids, tetraploids, and hexaploids and Ionopsidium samples
 
-The **120624.final.merged.Ion.dan.F4.vcf.gz was indexed** using `gatk IndexFeatureFile` and **all biallelic SNPs** from the **UK samples** were selected using `gatk SelectVariants` with the `--select-type-to-include SNP` and `--restrict-alleles-to BIALLELIC` flags. The `-sn` flag was used to select the individual IDs for the UK samples only (e.g. AAH_1).  
+The **120624.final.merged.Ion.dan.F4.vcf.gz was indexed** using `gatk IndexFeatureFile` and **all biallelic SNPs** from the **UK samples** were selected using `gatk SelectVariants` with the `--select-type-to-include SNP` and `--restrict-alleles-to BIALLELIC` flags using the [120624_LDPrune.sh]() script. The `-sn` flag was used to select the individual IDs for the UK samples only (e.g. AAH_1).  
 
 ```
 INVCF=~/120624_merged.133.ann.Ion.dan.F4.vcf.gz
