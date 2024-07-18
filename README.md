@@ -535,7 +535,7 @@ The following command was used to identify genes overlapping introgressed loci/w
 bedtools intersect -a danangpyr100025_bed.bed -b ./240624_bedtools/C_excelsa_V5_braker2_wRseq.gff3 -wa -wb > ./100624.danangpyr100025.overlaps.txt
 ```
 
-Custom python script `extractgeneids_improved.py` was used to **extract the gene ID column** from the 100624.danangpyr100025.overlaps.txt output file, and the `1-2-1_hits_all_gene_descriptions.tsv` file.
+Custom python script [extractgeneids_improved.py]() was used to **extract the gene ID column** from the 100624.danangpyr100025.overlaps.txt output file, and the `1-2-1_hits_all_gene_descriptions.tsv` file.
 
 # Gene Ontology (GO) Enrichment Analysis
 
@@ -553,7 +553,7 @@ grep "g50778.t1" C_excelsa_V5_braker2_wRseq.gff3 > ./g50778.JAR1.genomic.coordin
 grep "g50851.t1" C_excelsa_V5_braker2_wRseq.gff3 > ./g50851.AVI2.genomic.coordinates.tsv
 ```
 
-Next, `gatk IndexFeatureFile` was used to index the 120624_LD.Pruned.Ionops.allUKsamples.vcf.gz, and `gatk FastaAlternateReferenceMaker` was used to **extract the coding sequences (CDS)** for both JAR1 and AVI2 by using the **genomic coordinates** for the exons in both genes. A further 3 genes including the homologues for BBX11, PRR9, and GRP7 were selected to produce AlphaFold models since these genes were identified in a Gene Ontology Enrichment analysis of the *C. pyrenica*, *C. anglica*, *C. danica* trio.
+Next, `gatk IndexFeatureFile` and the [110724.extracy.cds.JAR1.AVI2.GRP7.PRR9.sh](https://github.com/pmyla1/Genomic-Swamping-and-Introgression/blob/main/FinalScripts/110724.extract.cds.JAR1.AVI2.GRP7.PRR9.sh) script was used to index the 120624_LD.Pruned.Ionops.allUKsamples.vcf.gz, and `gatk FastaAlternateReferenceMaker` was used to **extract the coding sequences (CDS)** for both JAR1 and AVI2 by using the **genomic coordinates** for the exons in both genes. A further 3 genes including the homologues for BBX11, PRR9, and GRP7 were selected to produce AlphaFold models since these genes were identified in a Gene Ontology Enrichment analysis of the *C. pyrenica*, *C. anglica*, *C. danica* trio.
 
 ```
 ##firstly index the VCF file
