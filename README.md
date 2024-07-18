@@ -535,7 +535,7 @@ The following command was used to identify genes overlapping introgressed loci/w
 bedtools intersect -a danangpyr100025_bed.bed -b ./240624_bedtools/C_excelsa_V5_braker2_wRseq.gff3 -wa -wb > ./100624.danangpyr100025.overlaps.txt
 ```
 
-Custom python script [extractgeneids_improved.py]() was used to **extract the gene ID column** from the 100624.danangpyr100025.overlaps.txt output file, and the `1-2-1_hits_all_gene_descriptions.tsv` file.
+Custom python script [extractgeneids_improved.py](https://github.com/pmyla1/Genomic-Swamping-and-Introgression/blob/main/extractgeneids_improved.py) was used to **extract the gene ID column** from the 100624.danangpyr100025.overlaps.txt output file, and the `1-2-1_hits_all_gene_descriptions.tsv` file.
 
 # Gene Ontology (GO) Enrichment Analysis
 
