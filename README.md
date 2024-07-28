@@ -503,7 +503,14 @@ SKF_009      anglica
 
 ## Dinvestigate - a window-based introgression scan in trios with significantly elevated D-statistics
 
-Dinvestigate was used to perform a **window-based scan for introgression** in trios that had **significantly elevated D-statistics** from the Dtrios output. 
+Dinvestigate was used to perform a **window-based scan for introgression** in trios that had **significantly elevated D-statistics** from the Dtrios output. For the Dinvestigate analysis, the SETs.txt file should be modified in order to only contain the species trio that you wish to calculate sliding D-statistics for, and can be changed using a text editor such as nano. You can exclude species/individuals from the SETs.txt file by doing the following, where `xxx` means exclude.
+
+```
+SKF_O02        xxx
+SKF_003        xxx
+SKF_005        xxx
+SKF_009        xxx
+```
 
 The D-statistic has **high variance** when applied to **small genomic windows**, therefore, can be a **poor estimator** of the amount of introgression between species ([Malinsky, 2021](https://onlinelibrary.wiley.com/doi/10.1111/1755-0998.13265)). The **f_d statistic** can be used to locate **genomic regions introgressed** between P2 and P3, yet, does not account for the excess sharing of derived alleles between P1 and P3 and **may take on large negative values**. [Malinsky (2015)](https://doi.org/10.1126/science.aac9927) developed a modified version of f_d, called the **f_dM statistic** which can be used account for the **excess sharing of derived alleles** between both P2 and P3 and between P1 and P3.
 
