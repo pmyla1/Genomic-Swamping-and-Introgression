@@ -545,7 +545,8 @@ Custom python script [extractgeneids_improved.py](https://github.com/pmyla1/Geno
 
 # Gene Ontology (GO) Enrichment Analysis
 
-GO enrichment analysis was performed in R using a custom script provided by Bray (2024).
+GO enrichment analysis was performed in R using a custom script provided by Bray (2024) [GO_cochlearia_analysis.R]().
+Only the terms with a significant p value (Fisher-elimination p < 0.05) were considered as significantly enriched terms in each of the categories: biological process, cellular component, and molecular function.
 
 
 # Protein Structure Prediction - AlphaFold Colab V2
